@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sznk.terrace.mapper.TbManlablelMapper" >
+  <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.TbManlablel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="label_type" property="labelType" jdbcType="VARCHAR" />
+    <result column="label_id" property="labelId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="label_name" property="labelName" jdbcType="VARCHAR" />
+    <result column="idioctonia" property="idioctonia" jdbcType="INTEGER" />
+    <result column="getAway" property="getaway" jdbcType="INTEGER" />
+    <result column="commitMurder" property="commitmurder" jdbcType="INTEGER" />
+    <result column="suddenDeath" property="suddendeath" jdbcType="INTEGER" />
+    <result column="proposal" property="proposal" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, label_type, label_id, user_id, user_name, label_name, idioctonia, getAway, commitMurder, 
+    suddenDeath, proposal, level
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbManlablelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_manlablel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_manlablel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_manlablel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.sznk.terrace.bean.TbManlablelExample" >
+    delete from tb_manlablel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.sznk.terrace.bean.TbManlablel" >
+    insert into tb_manlablel (id, label_type, label_id, 
+      user_id, user_name, label_name, 
+      idioctonia, getAway, commitMurder, 
+      suddenDeath, proposal, level
+      )
+    values (#{id,jdbcType=INTEGER}, #{labelType,jdbcType=VARCHAR}, #{labelId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, 
+      #{idioctonia,jdbcType=INTEGER}, #{getaway,jdbcType=INTEGER}, #{commitmurder,jdbcType=INTEGER}, 
+      #{suddendeath,jdbcType=INTEGER}, #{proposal,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbManlablel" >
+    insert into tb_manlablel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="labelType != null" >
+        label_type,
+      </if>
+      <if test="labelId != null" >
+        label_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="labelName != null" >
+        label_name,
+      </if>
+      <if test="idioctonia != null" >
+        idioctonia,
+      </if>
+      <if test="getaway != null" >
+        getAway,
+      </if>
+      <if test="commitmurder != null" >
+        commitMurder,
+      </if>
+      <if test="suddendeath != null" >
+        suddenDeath,
+      </if>
+      <if test="proposal != null" >
+        proposal,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="labelType != null" >
+        #{labelType,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null" >
+        #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="idioctonia != null" >
+        #{idioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="getaway != null" >
+        #{getaway,jdbcType=INTEGER},
+      </if>
+      <if test="commitmurder != null" >
+        #{commitmurder,jdbcType=INTEGER},
+      </if>
+      <if test="suddendeath != null" >
+        #{suddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="proposal != null" >
+        #{proposal,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.sznk.terrace.bean.TbManlablelExample" resultType="java.lang.Integer" >
+    select count(*) from tb_manlablel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_manlablel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.labelType != null" >
+        label_type = #{record.labelType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelId != null" >
+        label_id = #{record.labelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelName != null" >
+        label_name = #{record.labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idioctonia != null" >
+        idioctonia = #{record.idioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="record.getaway != null" >
+        getAway = #{record.getaway,jdbcType=INTEGER},
+      </if>
+      <if test="record.commitmurder != null" >
+        commitMurder = #{record.commitmurder,jdbcType=INTEGER},
+      </if>
+      <if test="record.suddendeath != null" >
+        suddenDeath = #{record.suddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="record.proposal != null" >
+        proposal = #{record.proposal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_manlablel
+    set id = #{record.id,jdbcType=INTEGER},
+      label_type = #{record.labelType,jdbcType=VARCHAR},
+      label_id = #{record.labelId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      label_name = #{record.labelName,jdbcType=VARCHAR},
+      idioctonia = #{record.idioctonia,jdbcType=INTEGER},
+      getAway = #{record.getaway,jdbcType=INTEGER},
+      commitMurder = #{record.commitmurder,jdbcType=INTEGER},
+      suddenDeath = #{record.suddendeath,jdbcType=INTEGER},
+      proposal = #{record.proposal,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sznk.terrace.bean.TbManlablel" >
+    update tb_manlablel
+    <set >
+      <if test="labelType != null" >
+        label_type = #{labelType,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null" >
+        label_name = #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="idioctonia != null" >
+        idioctonia = #{idioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="getaway != null" >
+        getAway = #{getaway,jdbcType=INTEGER},
+      </if>
+      <if test="commitmurder != null" >
+        commitMurder = #{commitmurder,jdbcType=INTEGER},
+      </if>
+      <if test="suddendeath != null" >
+        suddenDeath = #{suddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="proposal != null" >
+        proposal = #{proposal,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.TbManlablel" >
+    update tb_manlablel
+    set label_type = #{labelType,jdbcType=VARCHAR},
+      label_id = #{labelId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      label_name = #{labelName,jdbcType=VARCHAR},
+      idioctonia = #{idioctonia,jdbcType=INTEGER},
+      getAway = #{getaway,jdbcType=INTEGER},
+      commitMurder = #{commitmurder,jdbcType=INTEGER},
+      suddenDeath = #{suddendeath,jdbcType=INTEGER},
+      proposal = #{proposal,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

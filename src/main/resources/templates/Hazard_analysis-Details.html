@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/Hazard_analysis-Details.css" th:href="@{/css/Hazard_analysis-Details.css}"/>
+		<title>戒毒学员危险性分析</title>
+	</head>
+
+	<body>
+	<div th:replace="bar:: #index_header(activeUri='hazard')"></div>
+		<div class="detail">
+			<div class="detail-content content-left box">
+				<a class="back" onclick="history.back()">返回</a>
+				<img class="men-avatar" id="photo"/>
+				<ul class="info-list">
+					<li class="info-item">
+						<span class="info-title">编号：</span>
+						<span id="number" class="nowei" th:text="${session.file}? ${session.file.traineecode} : ${ ''}"></span>
+					</li>
+
+					<li class="info-item">
+						<span class="info-title">籍贯：</span>
+						<span id="native-place" class="nowei" th:text="${session.file}? ${session.file.nativeplace} : ${ ''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">床位号：</span>
+						<span id="bedID" class="nowei" th:text="${session.file}? ${session.file.bedno} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">现住址：</span>
+						<span id="address" class="nowei" th:text="${session.file}? ${session.file.homeaddress} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">姓名：</span>
+						<span id="name" class="nowei" th:text="${session.file}? ${session.file.traineename} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">健康状况：</span>
+						<span id="physical-condition" class="nowei" th:text="${session.file}? ${session.file.healthtype} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">身份证号码：</span>
+						<span id="ID-card" class="nowei" th:text="${session.file}? ${session.file.idcardno} : ${''}"></span>
+					</li>
+					<!--<li class="info-item">
+						<span class="info-title">曾用名：</span>
+						<span id="former-name"></span>
+					</li>-->
+
+					<li class="info-item">
+						<span class="info-title">毒品种类：</span>
+						<span id="Kind-of-drug" class="nowei" th:text="${session.file}? ${session.file.drugvariety} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">性别：</span>
+						<span id="sex" class="nowei" th:text="${session.file}? ${session.file.sex} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">戒毒情况：</span>
+						<span id="drug-situation" class="nowei" th:text="${session.file}? ${session.file.detoxificationsituation} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">文化程度：</span>
+						<span id="standard-of-culture" class="nowei" th:text="${session.file}? ${session.file.educationdegree} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">决定机关：</span>
+						<span id="decisive-organization" class="nowei" th:text="${session.file}? ${session.file.handlingagency} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">婚姻状况：</span>
+						<span id="marital-status" class="nowei" th:text="${session.file}? ${session.file.ismarried} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">人员来源：</span>
+						<span id="personnel-source" class="nowei" th:text="${session.file}? ${session.file.personnelsource} : ${''}"></span>
+					</li>
+					<!--<li class="info-item">
+						<span class="info-title">入所类型：</span>
+						<span id="in-the-type"></span>
+					</li>-->
+					
+					
+					<li class="info-item">
+						<span class="info-title">出生日期：</span>
+						<span id="date-of-birth" class="nowei" th:text="${session.file}? ${session.file.birthdate} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">开始日期：</span>
+						<span id="start-date" class="nowei" th:text="${session.file}? ${session.file.startdate} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">民族：</span>
+						<span id="nation" class="nowei" th:text="${session.file}? ${session.file.nationtype} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">结束日期：</span>
+						<span id="ending-date" class="nowei" th:text="${session.file}? ${session.file.enddate} : ${''}"></span>
+					</li>
+				</ul>
+
+
+				<div class="info-block">
+					<span class="info-title">标签：</span>	
+					<span id="manLabel" class="nowei">文盲、未婚、无业、初次戒毒、身份不明、身份意识差、不服从管理、多次违纪</span>
+				</div>				
+				<div class="info-block">
+					<span class="info-title">现实表现：</span>	
+					<span id="Performance" style="line-height: 28px;" class="nowei" th:text="${session.file}? ${session.file.curriculumvitae} : ${''}"></span>
+				</div>				
+				<div class="info-block">
+					<span class="info-title">入所前刑事犯罪记录：</span>	
+					<span id="Law" style="line-height: 28px;" class="nowei" th:text="${session.file}? ${session.file.criminalrecord} : ${''}"></span>
+				</div>
+				<div class="info-block">
+					<span class="info-title">吸毒史违法犯罪记录：</span>	
+					<span id="Drug" style="line-height: 28px;" class="nowei" th:text="${session.file}? ${session.file.drughistory} : ${''}"></span>
+				</div>
+				<div class="info-block fx">
+					<span class="info-title">风险系数：</span>
+					<span class="info-title">自杀</span>
+					<span id="Suicide" class="num" th:text="${session.file}? ${session.file.userIdioctonia} : ${0}"></span>
+					<span class="info-title">逃脱</span>
+					<span id="Escape"  class="num" th:text="${session.file}? ${session.file.userGetaway} : ${0}"></span>
+					<span class="info-title">行凶</span>
+					<span id="Violence"  class="num" th:text="${session.file}? ${session.file.userWound} : ${0}"></span>
+					<span class="info-title">猝死</span>
+					<span id="Sudden-death"  class="num" th:text="${session.file}? ${session.file.userSuddendeath} : ${0}"></span>
+				</div>
+			</div>
+	
+			<div class="content-right">
+				<div class="content_man">
+					<span class="hx_titlt">学员危险画像</span>
+				<!-- 人物模型区域 -->
+				<div class="men-model">
+					<!--标签1-->
+					<div class="men-attr_left kfxl treatment_menlabel0">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">康复训练</p>
+						</div>
+						<!--标签1-》小标签-->
+						<div class="kfxl_sm_lable">
+							<ul class="kfxl_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue kfxl_more">查看更多</div>
+						</div>
+					</div>
+
+					<!--标签2-->
+					<div class="men-attr_left xwbx treatment_menlabel1">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">行为表现</p>
+						</div>
+						<!--标签2-》小标签-->
+						<div class="xwbx_sm_lable">
+							<ul class="xwbx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue xwbx_more">查看更多</div>
+						</div>
+					</div>
+					<!--标签3-->
+					<div class="men-attr_left xlqx treatment_menlabel2">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">心理情绪</p>
+						</div>
+						<!--标签3-》小标签-->
+						<div class="xlqx_sm_lable">
+							<ul class="xlqx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue xlqx_more">查看更多</div>
+						</div>
+					</div>
+					<!--标签4-->
+					<div class="men-attr_right daxx  treatment_menlabel3">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head "></p>
+							<p class="men-attr-desc">档案信息</p>
+						</div>
+						<!--标签4-》小标签-->
+						<div class="daxx_sm_lable">
+							<ul class="daxx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-right smlable_blue daxx_more">查看更多</div>
+						</div>
+					</div>
+
+					<div class="men-attr_right smtz treatment_menlabel5">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head"></span>
+							</p>
+							<p class="men-attr-desc">生命体征</p>
+						</div>
+						<!--标签6-》小标签-->
+						<div class="smtz_sm_lable">
+							<ul class="smtz_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-right smlable_blue smtz_more">查看更多</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Hazard_analysis-Details.js" type="text/javascript" charset="utf-8" th:src="@{/js/Hazard_analysis-Details.js}"></script>
+				<div class="lable_iframe">
+			<div class="title_iframe">行为表现</div>
+			<div class="lables">
+				<ul>
+
+				</ul>
+			</div>
+			<a class="lightboder2 quxiao" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 198px;cursor: pointer;">取消</a>
+<!--			<a class="quxiao lightboder" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 150px;">取消</a>-->
+			<a class="lightboder" id="bj" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;right: 199px;cursor: pointer;">编辑</a>
+		</div>
+	</body>
+
+</html>

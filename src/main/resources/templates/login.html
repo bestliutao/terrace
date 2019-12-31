@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../css/login.css" th:href="@{/css/login.css}"/>
+		<title>智慧戒毒大数据平台</title>
+	</head>
+	<body>
+		<img src="../img/bg.gif" class="gifbg"/>
+		<div class="login_window">
+				<!--账号行-->
+				<div class="login_bb1">
+					<div class="name_title">账号</div>
+					<input class="login_name" placeholder="请输入账号(英文字母、数字组成)" type="text" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');" autocomplete="on" />
+				</div>
+				<!--密码行-->
+				<div class="login_bb2">
+					<div class="pwd_title">密码</div>
+					<input class="login_pwd" type="password" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');" />
+				</div>
+			<a class="but">登录</a>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../js/login.js" type="text/javascript" charset="utf-8" th:src="@{/js/login.js}"></script>
+	</body>
+
+</html>

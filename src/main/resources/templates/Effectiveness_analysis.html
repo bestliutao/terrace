@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/Effectiveness_analysis.css" th:href="@{/css/Effectiveness_analysis.css}"/>
+		<title>戒治效能分析评估</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='effectiveness')"></div>
+		<div class="content">
+			<div class="content_left">
+				<img src="../img/danger_icon.png" style="z-index: -1;position: absolute;height: 861px;width: 487px;" />
+				<div class="jcqk_center">
+					<span class="jcqk_titlt">戒毒学员奖惩情况（人数）</span>
+					<a href="/rewards">更多</a>
+				</div>
+				<div id="jcqksj" style="width: 100%;height:28%;"></div>
+				<div class="zdjzxy_center">
+					<span class="zdjzxy_titlt">戒治人员画像</span>
+				</div>
+				<div class="search_div">
+					<input class="search_input" value="请输入查找人员编号或姓名" type="text" />
+					<a class="qing lightboder" href="javascript:;">清空</a>
+				</div>
+				<div class="zdjzdx" style="width: 423px;height:475px;">
+					<table class="layui-table" id="zdjzdxtable">
+
+						<tbody>
+						</tbody>
+					</table>
+					<div class="page"></div>
+				</div>
+			</div>
+			<div class="content_man">
+				<div class="xywc_center">
+					<span class="xywc_titlt">重点戒治对象</span>
+
+				</div>
+				<!-- 人物模型区域 -->
+				<div class="men-model">
+					<!--标签1-->
+					<div class="men-attr_left  zsjl treatment_menlabel0">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">遵守纪律</p>
+						</div>
+					</div>
+
+					<!--标签2-->
+					<div class="men-attr_left  jyxx treatment_menlabel1">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">教育学习</p>
+						</div>
+					</div>
+					<!--标签3-->
+					<div class="men-attr_left  xyld treatment_menlabel2">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">习艺劳动</p>
+						</div>
+
+					</div>
+					<!--标签4-->
+					<div class="men-attr_right  jdkf treatment_menlabel3">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">戒毒康复</p>
+						</div>
+
+					</div>
+					<!--标签5-->
+					<div class="men-attr_right shws treatment_menlabel4">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head">
+								<!--<span class="xlcpgrade"></span>
+								<span style="width: 13px;height: 13px;font-family: PingFang-SC-Heavy;display: inline-block;
+	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;">分</span>-->
+							</p>
+							<p class="men-attr-desc">生活卫生</p>
+						</div>
+
+					</div>
+					<!--标签6-->
+					<div class="men-attr_right  tbjc treatment_menlabel5">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head "></span>
+							</p>
+							<p class="men-attr-desc">特别奖惩</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="content_right">
+			<div class="jzjd">
+				<img src="../img/jzjd.png" />
+				<div class="jzjd_center">
+					<span class="jzjd_titlt">戒治阶段分布（人数）</span>
+
+				</div>
+				<div id="jzjdfb" style="width: 100%;height:80%;"></div>
+			</div>
+			<div class="jzxn right_under_h">
+				<img src="../img/afjk.png" />
+				<div class="jzxn_center">
+					<span class="jzxn_titlt">戒治效能统计（人数/分数）</span>
+					<!--<a href="">更多</a>-->
+				</div>
+				<div id="jzxntj" style="width: 100%;height:85%;"></div>
+			</div>
+			<div class="xnzs right_under_h">
+				<img src="../img/afjk.png" />
+				<div class="xnzs_center">
+					<span class="xnzs_titlt">戒治效能走势（平均分）</span>
+					<a href="/efficacy">更多</a>
+				</div>
+				<div id="jzxnzs" style="width: 100%;height:74%;"></div>
+				<!--<div class="jzxn_foot"><span class="jzxn_data">8月26日</span><span class="jzxn_hbpjf">环比上周平均分</span><span class="jzxn_datalx">生理脱毒期：<img src="../img/rise_icon.png"><span class="jzxndatapjf"></span>60分</span>-->
+				</div>
+			</div>
+		</div>
+		</div>
+		
+	
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:href="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:href="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:href="@{/js/echarts.min.js}"></script>
+		<script src="../js/Effectiveness_analysis.js" type="text/javascript" charset="utf-8" th:href="@{/js/Effectiveness_analysis.js}"></script>
+
+	</body>
+
+</html>

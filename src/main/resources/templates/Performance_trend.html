@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Equipment_exception.css" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" />
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div id="index_header">
+			<div class="nav_left">
+				<ul class="menu">
+					<li class="top">
+						<a href=" " class="top_link gzt_link" target=""><span>工作台</span></a>
+					</li>
+					<li class="top">
+						<a href="intelligent-analysis.html" class="top_link znfx_link"><span>智能分析研判</span></a>
+					</li>
+					<li class="top">
+						<a href="Hazard_analysis.html" class="top_link wxxfx_link"    ><span>戒毒人员危险性分析</span></a>
+					</li>
+					<li class="top">
+						<a href="javascript:;" class="top_link zhjd_link"     style="color: #fff !important;cursor: default;
+							font-weight: normal;font-stretch: normal;line-height: 30px;letter-spacing: 4px;"><span>智慧戒毒大数据平台</li></span></a>
+						<li class="top">
+							<a href="Effectiveness_analysis.html" class="top_link jzxn_link"><span>戒治效能分析评估</span></a>
+						</li>
+						<li class="top">
+							<a href="Safety_judgment.html" class="top_link sqaq_link"><span>所情安全态势研判</span></a>
+						</li>
+						<li class="top">
+							<a href="Safety_risk.html" class="top_link aqfx_link"     style="color: #fff !important;    text-shadow: 0 0 10px rgb(250,250,250);"><span>安全风险动态预警</span></a>
+						</li>
+						<li class="nav_right">
+							<p></p><span class="administration">王警官</span><span class="administrationID">148147</span><span><a class="exit">退出</a></span></p>
+						</li>
+				</ul>
+
+			</div>
+
+		</div>
+		<div class="exception">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" onclick="history.go(-1)">返回</a>
+			<div class="exception_title">
+				<span id="Equipment_type">监控</span>设备异常<span style="font-family: PingFang-SC-Heavy;">（<span id="Equipment_num">8</span>个）</span>
+			</div>
+			<ul class="equipmenttype_ul">
+				<li class="type_li jk licolor">监控</li>
+				<li class="type_li mj">门禁</li>
+				<li class="type_li xf">消防</li>
+				<li class="type_li dw">定位</li>
+				<li class="type_li qt">其他</li>
+			</ul>
+			 <input type="text" class="layui-input" id="date_select" placeholder="yyyy-MM-dd">
+
+			<div id="date_table">
+				
+			</div>
+			<div id="date_content_table">
+				
+			</div>
+			<div class="type_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/Equipment_exception.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

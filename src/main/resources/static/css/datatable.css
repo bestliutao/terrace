@@ -1,0 +1,9 @@
+.layui-table thead tr {
+	background-color: #0f0656;
+	transition: border linear .2 s, box-shadow linear .5 s;
+	-moz-transition: border linear .2 s, -moz-box-shadow linear .5 s;
+	-webkit-transition: border linear .2 s, -webkit-box-shadow linear .5 s;
+	outline: none;
+	border-color: rgba(61, 215, 253, .75);
+	box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);
+}

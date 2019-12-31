@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="/css/intelligent-analysis.css" th:href="@{/css/intelligent-analysis.css}"/>
+		<link rel="stylesheet" type="text/css" href="/css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>智能分析研判</title>
+	</head>
+
+	<body>
+	<img src="/img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+	<div th:replace="bar:: #index_header(activeUri='intelligent')"></div>
+		<div class="content_left">
+			<div class="content_left_1">
+				<div class="zfgl_center">
+					<span class="zfgl_titlt">执法管理动态预警</span>
+					<a href="">更多</a>
+				</div>
+				<div class="zfgl_li">
+					<ul class="dynamic_list">
+						<li class="dynamic_item">
+							<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+							<span class="blue">卢志明</span>
+							<span class="blue">编号55190331</span> 因
+							<span class="red">涉嫌诬告陷害罪</span>
+							<span class="blue">拘留</span>
+
+						</li>
+
+						<li class="dynamic_item">
+							<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+							<span class="blue">张瑞雄</span>
+							<span class="blue">编号55190617</span> 因
+							<span class="red">伤病</span>
+							<span class="blue">申请所外就医</span>
+						</li>
+						<li class="dynamic_item">
+							<span>2019-08-23 09:42:41</span>&nbsp;&nbsp;
+							<span class="blue">张瑞雄</span>
+							<span class="blue">编号55190617</span> 因
+							<span class="red">伤病</span>
+							<span class="blue">申请所外就医</span>
+
+						</li>
+						<li class="dynamic_item">
+							<span>2019-08-23 09:35:04</span>&nbsp;&nbsp;
+							<span class="blue">邓坚</span>
+							<span class="blue">编号55190582</span> 因
+							<span class="red">伤病</span>
+							<span class="blue">申请所外就医</span>
+
+						</li>
+						<!--<li class="dynamic_item">
+								<span>2019-08-23 09:20:06</span>&nbsp;&nbsp;
+								<span class="blue">张瑞雄</span>
+								<span class="blue">编号55190617</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>-->
+						<!--<li class="dynamic_item">
+								<span>2019-07-26 08:55:44</span>&nbsp;&nbsp;
+								<span class="blue">李桂生</span>
+								<span class="blue">编号55190426</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>-->
+						<!--<li class="dynamic_item">
+								<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+								<span class="blue">徐志荣</span>
+								<span class="blue">编号55181077</span> 因
+								<span class="red">涉嫌合同诈骗罪</span>
+								<span class="blue">拘留</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-23 11:14:22</span>&nbsp;&nbsp;
+								<span class="blue">骆家尧</span>
+								<span class="blue">编号55190489</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-18 16:51:24</span>&nbsp;&nbsp;
+								<span class="blue">陈礼佳</span>
+								<span class="blue">编号55181272</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-11 16:24:31</span>&nbsp;&nbsp;
+								<span class="blue">骆耀常</span>
+								<span class="blue">编号55190436</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-17 08:54:20</span>&nbsp;&nbsp;
+								<span class="blue">罗丙溏</span>
+								<span class="blue">编号55190264</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-09 15:59:24</span>&nbsp;&nbsp;
+								<span class="blue">唐庆东</span>
+								<span class="blue">编号55190049</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-08 15:17:34</span>&nbsp;&nbsp;
+								<span class="blue">高凯</span>&nbsp&nbsp
+								<span class="blue">编号55190319</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-08 16:41:01</span>&nbsp;&nbsp;
+								<span class="blue">温荣光</span>
+								<span class="blue">编号55181418</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-04-12 16:37:01</span>&nbsp;&nbsp;
+								<span class="blue">苏镜辉</span>
+								<span class="blue">编号55180877</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-03-19 14:30:51</span>&nbsp;&nbsp;
+								<span class="blue">陈嘉智</span>
+								<span class="blue">编号55190133</span> 因
+								<span class="red">涉嫌贩卖毒品罪</span>
+								<span class="blue">逮捕</span>
+
+							</li>-->
+					</ul>
+				</div>
+			</div>
+			<div class="content_left_2">
+				<div class="jrjj_content">
+					<span class="jrjq_titlt">今日警情事件（起）</span>
+				</div>
+				<div id="jrjq">
+				</div>
+				<span class="qi">
+					起
+				</span>
+			</div>
+			<div class="content_left_3">
+				<div class="qyfb_content">
+					<span class="qyfb_titlt">近7天警情区域分布</span>
+					<a href="/situation">更多</a>
+				</div>
+				<div id="qyfb">
+
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="content_1">
+				<div class="xydw_center">
+					<span class="xydw_titlt">学员定位分析</span>
+				</div>
+				<div class="layui-form-item mapsel" style="width: 470px;height: 38px;">
+					<div class="lightboder3">
+						<select name="city" lay-verify="required" id="map-select">
+							<option value="1" style="background-color: #1f2568;font-size: 16px;">一大队一楼公共区域</option>
+							<option value="2" style="background-color: #1f2568;font-size: 16px;">一大队二楼宿舍</option>
+							<option value="3" style="background-color: #1f2568;font-size: 16px;">一大队三楼宿舍</option>
+							<option value="4" style="background-color: #1f2568;font-size: 16px;">一大队四楼宿舍</option>
+							<option value="5" style="background-color: #1f2568;font-size: 16px;">一大队五楼宿舍</option>
+						</select>
+					</div>
+				</div>
+				<div class="maplabs">
+					<ul class="maplabs-ul">
+						<li class="maplabs-item">
+							<img src="/img/personnel_abnormal.png" class="legend-img" />
+							<p class="maplabs-text">异常人员</p>
+						</li>
+						<li class="maplabs-item">
+							<img src="/img/personnel_a_normal.png" class="legend-img" />
+							<p class="maplabs-text">异常设备</p>
+						</li>
+					</ul>
+				</div>
+				<div class="map">
+					<img src="/img/ioc_bg.png" id="map_img" />
+				</div>
+			</div>
+			<div class="content_2">
+				<div class="ddry_content">
+					<span class="ddry_titlt">所内人数分析</span>
+				</div>
+				<div class="ddxys_num">
+					<span class="dqzrs" id="totalNumber">
+
+					</span>
+					<span class="jrjjs" id="entryNumber">
+
+					</span>
+					<span class="jrrss" id="outNumber">
+
+					</span>
+				</div>
+				<div class="ddxys_title">
+					<span>
+						当前在所人数
+					</span>
+					<span>
+						昨日入所数
+					</span>
+					<span>
+						昨日离所数
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="content_right_1">
+				<div class="wcl_content">
+					<span class="wcl_titlt">未处理警情（起）</span>
+				</div>
+				<div id="xy">
+
+				</div>
+				<div id="sb">
+
+				</div>
+				<div class="xytitle">
+					学员
+				</div>
+				<div class="sbtitle">
+					设备
+				</div>
+			</div>
+			<div class="content_right_2">
+				<div class="xq" style="width: 423px;height:475px;">
+					<table class="layui-table" id="xqtable" lay-filter="xqtable">
+						<tbody>
+						</tbody>
+					</table>
+					<div class="page"></div>
+				</div>
+			</div>
+		</div>
+		<script src="/js/jQuery.js" type="text/javascript" charset="utf-8" th:href="@{/js/jQuery.js}"></script>
+		<script src="/layui/layui.js" type="text/javascript" charset="utf-8" th:href="@{/layui/layui.js}"></script>
+		<script src="/js/echarts.min.js" type="text/javascript" charset="utf-8" th:href="@{/js/echarts.min.js}"></script>
+		<script src="/js/intelligent-analysis.js" type="text/javascript" charset="utf-8" th:href="@{/js/intelligent-analysis.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

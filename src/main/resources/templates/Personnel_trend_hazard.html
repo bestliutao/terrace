@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Personnel_trend.css" th:href="@{/css/Personnel_trend.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='hazard')"></div>
+		<div class="trend">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" th:href="@{/hazard}">返回</a>
+			<div class="lable_title">
+				<span id="Risk_type">猝死</span>风险学员<span style="font-family: PingFang-SC-Heavy;">（<span id="Risk_num">8</span>名）</span>
+			</div>
+			<ul class="risktype_ul">
+				<li class="type_li cs licolor">猝死</li>
+				<li class="type_li zs">自杀</li>
+				<li class="type_li xx">行凶</li>
+				<li class="type_li tt">逃脱</li>
+				<li class="type_li qt">其他</li>
+			</ul>
+			
+			
+			<div class="trendtype_content">
+				<ul>
+
+				</ul>
+			</div>
+			<div class="trendtype_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Personnel_trend.js" type="text/javascript" charset="utf-8" th:src="@{/js/Personnel_trend.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

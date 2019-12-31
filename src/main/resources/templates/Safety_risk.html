@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/safety_risk.css" th:href="@{/css/safety_risk.css}" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<script type="text/javascript" src="/js/vxgplayer.js" th:href="@{/js/vxgplayer.js}"></script>
+		<link href="/css/vxgplayer.css" rel="stylesheet" th:href="@{/css/vxgplayer.css}"/>
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='risk')"></div>
+		<!--上部分-->
+		<div class="content_on">
+			<!--左边----重点人员（上）+执法管理动态（下）-->
+			<div class="content_on_left" style="position: relative;">
+
+				<!--重点人员-->
+				<div class="col_on">
+					<!--背景图-->
+					<img src="../img/key_student_bg.png" class="col_bg" />
+					<div class="zdrytitle">
+						<div class="zdry_center">
+							<span class="zdry_titlt">重点人员</span>
+							<!--<a href="">更多</a>-->
+						</div>
+
+					</div>
+					<!--轮播图-->
+					<div class="layui-carousel lbtwidth" id="keyPersonnel">
+						<!-- <div class="layui-carousel" id="keyPersonnel">-->
+						<div carousel-item class="manlabbg">
+						</div>
+					</div>
+				</div>
+				<!--</div>-->
+				<div class="col_under">
+					<!--背景图-->
+					<img src="../img/law_enforcement_bg.png" class="col_bg" />
+					<div class="zfgl_center">
+						<span class="zfgl_titlt">执法管理动态预警</span>
+						<!--<a href="">更多</a>-->
+					</div>
+					<div class="zfgl_li">
+						<ul class="dynamic_list">
+							<li class="dynamic_item">
+								<span class="Warning">
+									<img src="../img/Warning.png"/>
+								</span>
+								<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+								<span class="blue">卢志明</span>
+								<span class="blue">编号55190331</span> 因
+								<span class="red">涉嫌诬告陷害罪</span>
+								<span class="blue">拘留</span>
+
+							</li>
+
+							<li class="dynamic_item">
+								<span class="Warning">
+									<img src="../img/Warning.png"/>
+								</span>
+								<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+								<span class="blue">张瑞雄</span>
+								<span class="blue">编号55190617</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span class="Warning">
+									<img src="../img/Warning.png"/>
+								</span>
+								<span>2019-08-23 09:42:41</span>&nbsp;&nbsp;
+								<span class="blue">张瑞雄</span>
+								<span class="blue">编号55190617</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span class="Warning">
+									<img src="../img/Warning.png"/>
+								</span>
+								<span>2019-08-23 09:42:41</span>&nbsp;&nbsp;
+								<span class="blue">张瑞雄</span>
+								<span class="blue">编号55190617</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<!--<li class="dynamic_item">
+								<span>2019-08-23 09:20:06</span>&nbsp;&nbsp;
+								<span class="blue">张瑞雄</span>
+								<span class="blue">编号55190617</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>-->
+							<!--<li class="dynamic_item">
+								<span>2019-07-26 08:55:44</span>&nbsp;&nbsp;
+								<span class="blue">李桂生</span>
+								<span class="blue">编号55190426</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>-->
+							<!--<li class="dynamic_item">
+								<span>2019-08-23 09:56:14</span>&nbsp;&nbsp;
+								<span class="blue">徐志荣</span>
+								<span class="blue">编号55181077</span> 因
+								<span class="red">涉嫌合同诈骗罪</span>
+								<span class="blue">拘留</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-23 11:14:22</span>&nbsp;&nbsp;
+								<span class="blue">骆家尧</span>
+								<span class="blue">编号55190489</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-18 16:51:24</span>&nbsp;&nbsp;
+								<span class="blue">陈礼佳</span>
+								<span class="blue">编号55181272</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-07-11 16:24:31</span>&nbsp;&nbsp;
+								<span class="blue">骆耀常</span>
+								<span class="blue">编号55190436</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-17 08:54:20</span>&nbsp;&nbsp;
+								<span class="blue">罗丙溏</span>
+								<span class="blue">编号55190264</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-09 15:59:24</span>&nbsp;&nbsp;
+								<span class="blue">唐庆东</span>
+								<span class="blue">编号55190049</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-08 15:17:34</span>&nbsp;&nbsp;
+								<span class="blue">高凯</span>&nbsp&nbsp
+								<span class="blue">编号55190319</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">申请所外就医</span>
+
+							</li>
+							<li class="dynamic_item">
+								<span>2019-05-08 16:41:01</span>&nbsp;&nbsp;
+								<span class="blue">温荣光</span>
+								<span class="blue">编号55181418</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-04-12 16:37:01</span>&nbsp;&nbsp;
+								<span class="blue">苏镜辉</span>
+								<span class="blue">编号55180877</span> 因
+								<span class="red">伤病</span>
+								<span class="blue">变更戒毒措施</span>
+							</li>
+							<li class="dynamic_item">
+								<span>2019-03-19 14:30:51</span>&nbsp;&nbsp;
+								<span class="blue">陈嘉智</span>
+								<span class="blue">编号55190133</span> 因
+								<span class="red">涉嫌贩卖毒品罪</span>
+								<span class="blue">逮捕</span>
+
+							</li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--中间----人员定位分析-->
+			<div class="content_in">
+				<div class="coi_on">
+					<div class="rydw_center">
+						<span class="rydw_titlt">人员定位分析</span>
+
+					</div>
+				</div>
+				<!--<div class="sel_manlb">-->
+
+				<div class="layui-form-item mapsel" style="width: 470px;height: 30px;margin-left: 1%;margin-top: 10px;">
+					<div class="lightboder" style="border: 1px solid rgba(61,215,253, .75)">
+						<select name="city" lay-verify="required" id="map-select">
+							<option value="1" style="background-color: #1f2568;font-size: 16px;">一大队一楼公共区域</option>
+							<option value="2" style="background-color: #1f2568;font-size: 16px;">一大队二楼宿舍</option>
+							<option value="3" style="background-color: #1f2568;font-size: 16px;">一大队三楼宿舍</option>
+							<option value="4" style="background-color: #1f2568;font-size: 16px;">一大队四楼宿舍</option>
+							<option value="5" style="background-color: #1f2568;font-size: 16px;">一大队五楼宿舍</option>
+						</select>
+					</div>
+				</div>
+				<div class="maplabs">
+					<ul class="maplabs-ul">
+						<li class="maplabs-item">
+							<img src="../img/personnel_abnormal.png" class="legend-img" />
+							<p class="maplabs-text">异常人员</p>
+						</li>
+						<li class="maplabs-item">
+							<img src="../img/personnel_b_normal.png" class="legend-img" />
+							<p class="maplabs-text">戒毒人员</p>
+						</li>
+						<li class="maplabs-item">
+							<img src="../img/personnel_a_normal.png" class="legend-img" />
+							<p class="maplabs-text">执勤人员</p>
+						</li>
+					</ul>
+				</div>
+				<!--</div>-->
+				<div class="coi_under">
+					<img src="../img/ioc_bg.png" id="coi_map" />
+
+				</div>
+			</div>
+			<!--右边----戒治阶段分布（上）+安防监控（下）-->
+			<div class="content_on_right" style="position: relative;">
+				<div class="cor_on">
+					<!--背景图-->
+					<img src="../img/treatment_bg.png" class="col_bg" />
+					<div class="jzjd_center">
+						<span class="jzjd_titlt">戒治阶段分布图（人数）</span>
+
+					</div>
+					<div id="jzfbt" style="width: 100%;height:80%;"></div>
+				</div>
+				<div class="cor_under">
+					<!--背景图-->
+					<img src="../img/consumption_bg.png" class="col_bg" />
+					<div class="afjk_center">
+						<span class="afjk_titlt">安防监控</span>
+						<!--<a href="">更多</a>-->
+					</div>
+					<div class="sxtselect">
+						<div class="layui-form-item">
+							<div class="sxtselect_li_1 lightboder" style="height: 20px;">
+								<select name="city" lay-verify="required" id="eq-select">
+									<option value="1" style="background-color: #1f2568;font-size: 16px;width: 100%;">一大队一楼</option>
+									<option value="2" style="background-color: #1f2568;font-size: 16px;">一大队二楼</option>
+									<option value="3" style="background-color: #1f2568;font-size: 16px;">一大队三楼</option>
+									<option value="4" style="background-color: #1f2568;font-size: 16px;">一大队四楼</option>
+									<option value="5" style="background-color: #1f2568;font-size: 16px;">一大队五楼</option>
+								</select>
+							</div>
+							<div class="sxtselect_li_2 lightboder" style="height: 20px;">
+								<select name="city" lay-verify="required" id="eq-select2">
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div id="sxt">
+						<div id="vxg_media_player0" class="vxgplayer"  url="" aspect-ratio latency="3000000" autostart controls avsync></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--下部分-->
+		<div class="content_under">
+			<!--背景图-->
+			<img src="../img/trend_bg.png" class="col_bg" />
+			<div class="ryfx_content">
+				<div class="ryfx_center">
+					<span class="ryfx_titlt">人员风险趋势走向数据（人数）</span>
+					<a href="/risk/personnel">更多</a>
+				</div>
+				<div id="ryfxqs" ></div>
+			</div>
+			<div class="rsjz_content">
+				<div class="rsjz_center">
+					<span class="rsjz_titlt">近30天入所及戒治数据对比（人数）</span>
+					<!--<a href="">更多</a>-->
+				</div>
+				<div class="under_in2" style="width:100%;height: 75%;margin: 0 auto;">
+					<div id="rsjzdb" style="width: 50%;height:100%;float: left;"></div>
+					<div id="rsjzdb_select" style="width: 50%;height:100%;float: left;"></div>
+				</div>
+
+			</div>
+			<div class="sbyc_content">
+				<div class="sbyc_center">
+					<span class="sbyc_titlt">设备异常数据（异常次数）</span>
+					<a href="" th:href="@{/riskEquipemnt}">更多</a>
+				</div>
+				<div id="sbyc" style="width: 100%;height:80%;"></div>
+
+			</div>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:href="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:href="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:href="@{/js/echarts.min.js}"></script>
+		<script src="../js/safety_risk.js" type="text/javascript" charset="utf-8" th:href="@{/js/safety_risk.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

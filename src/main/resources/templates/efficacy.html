@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/efficacy.css" th:href="@{/css/efficacy.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='effectiveness')"></div>
+		<div class="efficacy">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back lightboder3" th:href="@{/effectiveness} ">返回</a>
+			<div class="efficacy_title">
+				<span id="efficacy_type">戒治效能走势（平均分）</span>
+			</div>
+			<ul class="efficacytype_ul">
+				<li class="efficacytype_li all licolor">全部</li>
+				<li class="efficacytype_li td">生理脱毒期</li>
+				<li class="efficacytype_li oy">一年期</li>
+				<li class="efficacytype_li expire">期满</li>
+			</ul>
+			<input type="text" class="layui-input" id="efficacydate_select" placeholder="yyyy-MM-dd">
+
+			<div id="efficacydate_table">
+
+			</div>
+			<ul class="gradetype_ul">
+				<li class="gradetype_li gradeall licolor">全部</li>
+				<li class="gradetype_li grade6">60分以下</li>
+				<li class="gradetype_li grade67">60-70</li>
+				<li class="gradetype_li grade78">70-80</li>
+				<li class="gradetype_li grade89">80-90</li>
+				<li class="gradetype_li grade91">90-100</li>
+			</ul>
+			<!--<input type="text" class="layui-input" id="gradedate_select" placeholder="yyyy-MM-dd">-->
+				<div class="oederdiv">								
+				<a class="order lightboder3" id="many">加分最多</a><a class="order lightboder3" id="less">扣分最多</a>
+				</div>
+			<div id="gradedate_table">
+				<ul>
+					
+				</ul>
+			</div>
+			<div class="efficacytype_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/efficacy.js" type="text/javascript" charset="utf-8" th:src="@{/js/efficacy.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

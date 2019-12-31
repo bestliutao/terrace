@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="/css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" href="/css/Hazard_analysis.css" th:href="@{/css/Hazard_analysis.css}"/>
+		<title>戒毒学员危险性分析</title>
+	</head>
+
+	<body>
+		<div th:replace="bar:: #index_header(activeUri='hazard')"></div>
+
+		<div class="content">
+			<div class="content_left">
+				<img src="/img/danger_icon.png" style="z-index: -1;position: absolute;height: 861px;width: 487px;" />
+				<div class="xywxfx_center">
+					<span class="xywxfx_titlt">戒毒学员危险性分析</span>
+					<a href="/hazard/personnel">更多</a>
+				</div>
+				<div id="xywxfx"></div>
+				<div class="wxxjd_center">
+					<span class="wxxjd_titlt">危险戒毒学员</span>
+				</div>
+				<div class="search_div">
+					<input class="search_input lightboder" value="请输入查找人员编号或姓名" type="text" />
+					<a class="qing lightboder" href="javascript:;">清空</a>
+				</div>
+				<div class="wxxjd" style="width: 423px;height:475px;">
+					<table class="layui-table" id="wxxjdtable" lay-filter="wxxjdtable">
+						<tbody>
+						</tbody>
+					</table>
+					<div class="page"></div>
+				</div>
+			</div>
+			<div class="content_man">
+					<div class="xywc_center">
+					<span class="xywc_titlt">危险性人员画像</span>
+
+				</div>
+				<div class="fxxs lightboder2">
+					风险系数设置
+				</div>
+				<!-- 人物模型区域 -->
+				<div class="men-model">
+					<!--标签1-->
+					<div class="men-attr_left kfxl treatment_menlabel0">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">康复训练</p>
+						</div>
+						<!--标签1-》小标签-->
+						<div class="kfxl_sm_lable">
+							<ul class="kfxl_sm_lable_ul">
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue kfxl_more">查看更多</div>
+						</div>
+					</div>
+
+					<!--标签2-->
+					<div class="men-attr_left xwbx treatment_menlabel1">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head"></p>
+							<p class="men-attr-desc">行为表现</p>
+						</div>
+						<!--标签2-》小标签-->
+						<div class="xwbx_sm_lable">
+							<ul class="xwbx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue xwbx_more">查看更多</div>
+						</div>
+					</div>
+					<!--标签3-->
+					<div class="men-attr_left xlqx treatment_menlabel2">
+						<div class="men-attr-text_left">
+							<p class="men-attr-head middle"></p>
+							<p class="men-attr-desc">心理情绪</p>
+						</div>
+						<!--标签3-》小标签-->
+						<div class="xlqx_sm_lable">
+							<ul class="xlqx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-left smlable_blue xlqx_more">查看更多</div>
+						</div>
+					</div>
+					<!--标签4-->
+					<div class="men-attr_right daxx treatment_menlabel3">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head middle"></p>
+							<p class="men-attr-desc">档案信息</p>
+						</div>
+						<!--标签4-》小标签-->
+						<div class="daxx_sm_lable">
+							<ul class="daxx_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-right smlable_blue daxx_more">查看更多</div>
+						</div>
+					</div>
+					<!--标签6-->
+					<div class="men-attr_right green smtz treatment_menlabel5">
+						<div class="men-attr-text_right">
+							<p class="men-attr-head middle"></span>
+							</p>
+							<p class="men-attr-desc">生命体征</p>
+						</div>
+						<!--标签6-》小标签-->
+						<div class="smtz_sm_lable">
+							<ul class="smtz_sm_lable_ul">
+
+							</ul>
+							<div class="men-attr-list-item-right smlable_blue smtz_more">查看更多</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content_right">
+				<div class="xyts">
+					<img src="../img/jzjd.png" />
+					<div class="xyts_center">
+						<span class="xyts_titlt">学员探视数据分布</span>
+
+					</div>
+					<div id="sytssjfb" style="width: 100%;height:80%;"></div>
+				</div>
+				<div class="xywc right_under_h">
+					<img src="../img/afjk.png" />
+					<div class="xywc_center">
+						<span class="xywc_titlt">学员外出申请数据统计</span>
+						<a href="/application">更多</a>
+					</div>
+					<div id="xywcsqtj" style="width: 85%;height:85%;"></div>
+				</div>
+				<div class="xyxf right_under_h">
+					<img src="../img/afjk.png" />
+					<div class="xywc_center">
+						<span class="xywc_titlt">学员消费数据统计</span>
+						<a href="/consumption">更多</a>
+					</div>
+					<div id="xyxfsjtj" style="width: 100%;height:85%;"></div>
+				</div>
+			</div>
+		</div>
+		<script src="/js/jQuery.js" type="text/javascript" charset="utf-8" th:href="@{/js/jQuery.js}"></script>
+		<script src="/layui/layui.js" type="text/javascript" charset="utf-8" th:href="@{/layui/layui.js}"></script>
+		<script src="/js/echarts.min.js" type="text/javascript" charset="utf-8" th:href="@{/js/echarts.min.js}"></script>
+		<script src="/js/Hazard_analysis.js" type="text/javascript" charset="utf-8" th:href="@{/js/Hazard_analysis.js}"></script>
+
+		<div class="lable_iframe">
+			<div class="title_iframe">康复训练</div>
+			<div class="lables">
+				<ul>
+
+				</ul>
+			</div>
+			<a class="lightboder quxiao" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 198px;cursor: pointer;">取消</a>
+<!--			<a class="quxiao lightboder" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 150px;">取消</a>-->
+			<a class="lightboder" id="labelBj" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;right: 199px;cursor: pointer;">编辑</a>
+		</div>
+		<div class="lable_iframe1">
+			<div class="title_iframe">风险系数设置</div>
+			<div class="setting">
+				<div class="setting_tr">
+					<span class="setting_til">
+						自杀
+					</span>
+					<input type="" name="setzs" id="setzs" value="" />
+					<span class="setting_til">
+						逃脱
+					</span>
+					<input type="" name="setzs" id="settt" value="" />
+				</div>
+				<div class="setting_tr">
+					<span class="setting_til">
+						行凶
+					</span>
+					<input type="" name="setzs" id="setxx" value="" />
+					<span class="setting_til">
+						猝死
+					</span>
+					<input type="" name="setzs" id="setcs" value="" />
+				</div>
+
+			</div>
+			<a class="lightboder quxiao" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 198px;cursor: pointer;">取消</a>
+<!--			<a class="quxiao lightboder" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 150px;">取消</a>-->
+			<a class="lightboder Submit"  style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;right: 199px;cursor: pointer;">保存</a>
+		</div>
+	</body>
+
+</html>

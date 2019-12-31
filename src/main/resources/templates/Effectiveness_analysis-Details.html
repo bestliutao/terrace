@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/Hazard_analysis-Details.css" th:href="@{/css/Hazard_analysis-Details.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/Effectiveness_analysis-Details.css" th:href="@{/css/Effectiveness_analysis-Details.css}"/>
+
+		<title>戒毒学员危险性分析</title>
+	</head>
+
+	<body>
+	<div th:replace="bar:: #index_header(activeUri='effectiveness')"></div>
+		<div class="detail">
+			<div class="detail-content content-left box">
+				<a class="back" th:href="@{/effectiveness}">返回</a>
+				<img id="photo" class="men-avatar" />
+				<ul class="info-list">
+					<li class="info-item">
+						<span class="info-title">编号：</span>
+						<span id="number" class="nowei" th:text="${session.absFile}? ${session.absFile.traineecode} : ${ ''}"></span>
+					</li>
+
+					<li class="info-item">
+						<span class="info-title">籍贯：</span>
+						<span id="native-place" class="nowei" th:text="${session.absFile}? ${session.absFile.nativeplace} : ${ ''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">床位号：</span>
+						<span id="bedID" class="nowei" th:text="${session.absFile}? ${session.absFile.bedno} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">现住址：</span>
+						<span id="address" class="nowei" th:text="${session.absFile}? ${session.absFile.homeaddress} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">姓名：</span>
+						<span id="name" class="nowei" th:text="${session.absFile}? ${session.absFile.traineename} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">健康状况：</span>
+						<span id="physical-condition" class="nowei" th:text="${session.absFile}? ${session.absFile.healthtype} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">身份证号码：</span>
+						<span id="ID-card" class="nowei" th:text="${session.absFile}? ${session.absFile.idcardno} : ${''}"></span>
+					</li>
+					<!--<li class="info-item">
+						<span class="info-title">曾用名：</span>
+						<span id="former-name"></span>
+					</li>-->
+
+					<li class="info-item">
+						<span class="info-title">毒品种类：</span>
+						<span id="Kind-of-drug" class="nowei" th:text="${session.absFile}? ${session.absFile.drugvariety} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">性别：</span>
+						<span id="sex" class="nowei" th:text="${session.absFile}? ${session.absFile.sex} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">戒毒情况：</span>
+						<span id="drug-situation" class="nowei" th:text="${session.absFile}? ${session.absFile.detoxificationsituation} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">文化程度：</span>
+						<span id="standard-of-culture" class="nowei" th:text="${session.absFile}? ${session.absFile.educationdegree} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">决定机关：</span>
+						<span id="decisive-organization" class="nowei" th:text="${session.file}? ${session.file.handlingagency} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">婚姻状况：</span>
+						<span id="marital-status" class="nowei" th:text="${session.absFile}? ${session.absFile.ismarried} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">人员来源：</span>
+						<span id="personnel-source" class="nowei" th:text="${session.absFile}? ${session.absFile.personnelsource} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">出生日期：</span>
+						<span id="date-of-birth" class="nowei" th:text="${session.absFile}? ${session.absFile.birthdate} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">开始日期：</span>
+						<span id="start-date" class="nowei" th:text="${session.absFile}? ${session.absFile.startdate} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">民族：</span>
+						<span id="nation" class="nowei" th:text="${session.absFile}? ${session.absFile.nationtype} : ${''}"></span>
+					</li>
+					<li class="info-item">
+						<span class="info-title">结束日期：</span>
+						<span id="ending-date" class="nowei" th:text="${session.absFile}? ${session.absFile.enddate} : ${''}"></span>
+					</li>
+				</ul>
+
+				<div class="info-block">
+					<span class="info-title">管理建议：</span>	
+					<span class="info-title" id="proposalMan"></span>
+				</div>
+				<div class="info-block">
+					<span class="info-title">标签：</span>	
+					<span id="manLabel" class="nowei"></span>
+				</div>
+				<div class="info-block">
+					<span class="info-title">现实表现：</span>
+					<span id="Performance" style="line-height: 28px;" class="nowei" th:text="${session.absFile}? ${session.absFile.curriculumvitae} : ${''}"></span>
+				</div>
+				<div class="info-block">
+					<span class="info-title">入所前刑事犯罪记录：</span>
+					<span id="Law" style="line-height: 28px;" class="nowei" th:text="${session.absFile}? ${session.absFile.criminalrecord} : ${''}"></span>
+				</div>
+				<div class="info-block">
+					<span class="info-title">吸毒史违法犯罪记录：</span>
+					<span id="Drug" style="line-height: 28px;" class="nowei" th:text="${session.absFile}? ${session.absFile.drughistory} : ${''}"></span>
+				</div>
+			</div>
+		
+			<div class="content-right">
+				<div class="content_man">
+					<span class="hx_titlt">戒治学员画像</span>
+				<!-- 人物模型区域 -->
+					<div class="men-model">
+						<!--标签1-->
+						<div class="men-attr_left  zsjl treatment_menlabel0">
+							<div class="men-attr-text_left">
+								<p class="men-attr-head"></p>
+								<p class="men-attr-desc">遵守纪律</p>
+							</div>
+						</div>
+
+						<!--标签2-->
+						<div class="men-attr_left  jyxx treatment_menlabel1">
+							<div class="men-attr-text_left">
+								<p class="men-attr-head"></p>
+								<p class="men-attr-desc">教育学习</p>
+							</div>
+						</div>
+						<!--标签3-->
+						<div class="men-attr_left  xyld treatment_menlabel2">
+							<div class="men-attr-text_left">
+								<p class="men-attr-head"></p>
+								<p class="men-attr-desc">习艺劳动</p>
+							</div>
+
+						</div>
+						<!--标签4-->
+						<div class="men-attr_right  jdkf treatment_menlabel3">
+							<div class="men-attr-text_right">
+								<p class="men-attr-head"></p>
+								<p class="men-attr-desc">戒毒康复</p>
+							</div>
+
+						</div>
+						<!--标签5-->
+						<div class="men-attr_right shws treatment_menlabel4">
+							<div class="men-attr-text_right">
+								<p class="men-attr-head">
+									<!--<span class="xlcpgrade"></span>
+                                    <span style="width: 13px;height: 13px;font-family: PingFang-SC-Heavy;display: inline-block;
+        font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;">分</span>-->
+								</p>
+								<p class="men-attr-desc">生活卫生</p>
+							</div>
+
+						</div>
+						<!--标签6-->
+						<div class="men-attr_right  tbjc treatment_menlabel5">
+							<div class="men-attr-text_right">
+								<p class="men-attr-head "></span>
+								</p>
+								<p class="men-attr-desc">特别奖惩</p>
+							</div>
+
+						</div>
+					</div>
+			</div>
+			</div>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Effectiveness_analysis-Details.js" type="text/javascript" charset="utf-8" th:src="@{/js/Effectiveness_analysis-Details.js}"></script>
+
+	</body>
+
+</html>

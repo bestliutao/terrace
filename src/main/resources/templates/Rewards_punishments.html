@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Rewards_punishments.css" th:href="@{/css/Rewards_punishments.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='effectiveness')"></div>
+		<div class="rap">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" th:href="@{/effectiveness}">返回</a>
+			<div class="lable_title">
+				<span id="rap_Type">表扬</span>学员<span style="font-family: PingFang-SC-Heavy;">（<span id="rap_num">8</span>名）</span>
+			</div>
+			<ul class="rap_Type_ul">
+				<li class="rap_Type_li rap_Praise licolor">表扬</li>
+				<li class="rap_Type_li rap_commend">嘉奖</li>
+				<li class="rap_Type_li rap_achievement">记功</li>
+				<li class="rap_Type_li rap_Timelimit">减少期限</li>
+				<li class="rap_Type_li rap_Warning">警告</li>
+				<li class="rap_Type_li rap_Swarning">严重警告</li>
+				<li class="rap_Type_li rap_gig">记过</li>
+				<li class="rap_Type_li rap_ext_maturity">延长期限</li>				
+			</ul>
+			
+			
+			<div class="rap_Type_content">
+				<ul>
+				</ul>
+			</div>
+			<div class="rap_Type_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Rewards_punishments.js" type="text/javascript" charset="utf-8" th:src="@{/js/Rewards_punishments.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

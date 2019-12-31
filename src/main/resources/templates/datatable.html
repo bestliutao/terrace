@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>table模块快速使用</title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="datatable.css" />
+	</head>
+
+	<body>
+<div style="width: 20%;">
+		<table id="demo" lay-filter="test"></table>
+</div>
+		<script src="../layui/layui.js"></script>
+
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+
+				//第一个实例
+				table.render({
+					elem: '#demo',
+					height: 312,
+					url: '../json/s.json' //数据接口
+						,
+					page: true //开启分页
+						,
+					cols: [
+						[ //表头
+							{
+								field: 'id',
+								title: 'ID',
+								width: 80,
+								sort: true,
+								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+								fixed: 'right'
+							}, {
+								field: 'username',
+								title: '用户名',
+								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+								width: 80
+							}, {
+								field: 'sex',
+								title: '性别',
+								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+								width: 80,
+								sort: true
+							}
+//							, {
+//								field: 'city',
+//								title: '城市',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 80
+//							}, {
+//								field: 'sign',
+//								title: '签名',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 177
+//							}, {
+//								field: 'experience',
+//								title: '积分',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 80,
+//								sort: true
+//							}, {
+//								field: 'score',
+//								title: '评分',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 80,
+//								sort: true
+//							}, {
+//								field: 'classify',
+//								title: '职业',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 80
+//							}, {
+//								field: 'wealth',
+//								title: '财富',
+//								style: "background-color: #0f0656;transition: border linear .2 s,box-shadow linear .5 s; -moz-transition: border linear .2 s,-moz-box-shadow linear .5 s; -webkit-transition: border linear .2 s,-webkit-box-shadow linear .5 s;outline: none;border-color: rgba(61, 215, 253, .75);box-shadow: inset 0 0 9 px rgba(61, 215, 243, .6);",
+//								width: 135,
+//								sort: true
+//							}
+						]
+					]
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../css/Label.css" th:href="@{/css/Label.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='hazard')"></div>
+		<div class="Lable">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" onclick="history.back()">返回</a>
+			<div class="lable_title">
+				<span id="Personnel_name">[[${session.userName}]][[${session.type}]]</span>的标签<span style="font-family: PingFang-SC-Heavy;">（<span id="Lable_num">8</span>个）</span>
+			</div>
+			<ul class="coefficient_ul">
+				<li class="coefficient_li">
+					<div class='tr_level wxxfclevelA'>
+						<p class='tr_level_sc'>[[${session.modulus.idioctonia}]]</p>
+						<p class='trlevel_title'>自杀系数</p>
+					</div>
+				</li>
+				<li class="coefficient_li">
+					<div class='tr_level wxxfclevelgreen'>
+						<p class='tr_level_sc'>[[${session.modulus.getaway}]]</p>
+						<p class='trlevel_title'>逃脱系数</p>
+					</div>
+				</li>
+				<li class="coefficient_li">
+					<div class='tr_level wxxfclevelB'>
+						<p class='tr_level_sc'>[[${session.modulus.commitmurder}]]</p>
+						<p class='trlevel_title'>行凶系数</p>
+					</div>
+				</li>
+				<li class="coefficient_li">
+					<div class='tr_level wxxfclevelC'>
+						<p class='tr_level_sc'>[[${session.modulus.suddendeath}]]</p>
+						<p class='trlevel_title'>猝死系数</p>
+					</div>
+				</li>
+			</ul>
+			<div class="fxxs lightboder2">
+				风险系数设置
+			</div>
+			<div class="coefficient_content">
+				<div class="Label_already">
+					<span id="Lable_type">
+					[[${session.type}]]
+				</span>
+					<div class="Label_already_content">
+						<ul>
+
+						</ul>
+					</div>
+					<a class="lightboder lableDel_left">删除</a>
+				</div>
+				<div class="addlable">
+					<div class="add">
+					</div>
+				</div>
+				<div class="Label_add">
+					<span class="Lables">
+					[[${session.type}]]
+				</span>
+					<div class="Label_add_content">
+						<ul>
+
+						</ul>
+					</div>
+					<a class="lightboder lableDel_right">删除</a>
+					<a class="lightboder lableAdd_right">新增</a>
+				</div>
+			</div>
+		</div>
+		<!--弹窗-->
+		<div class="lablefxxs_iframe">
+			<div class="title_iframe">风险系数设置</div>
+			<div class="setting">
+				<div class="setting_tr">
+					<span class="setting_til">
+						自杀
+					</span>
+					<input type="" name="setzs" id="setzs" value="" />
+					<span class="setting_til">
+						逃脱
+					</span>
+					<input type="" name="setzs" id="settt" value="" />
+				</div>
+				<div class="setting_tr">
+					<span class="setting_til">
+						行凶
+					</span>
+					<input type="" name="setzs" id="setxx" value="" />
+					<span class="setting_til">
+						猝死
+					</span>
+					<input type="" name="setzs" id="setcs" value="" />
+				</div>
+
+			</div>
+			<a class="lightboder quxiao">取消</a>
+			<!--			<a class="quxiao lightboder" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 150px;">取消</a>-->
+			<a class="lightboder fxxsyes Submit">确认</a>
+		</div>
+
+		<div class="lablefadd_iframe">
+			<div class="title_iframe">新增标签</div>
+			<div class="setting">
+				<div class="setting_tr">
+					<span class="labname_til">
+						标签名
+					</span>
+					<input type="" name="setzs" id="lablename" value="" />
+				</div>
+				<div class="setting_tr">
+					<span class="setting_til">
+						自杀
+					</span>
+					<input type="" name="setzs" id="lablesetzs" value="" />
+					<span class="setting_til">
+						逃脱
+					</span>
+					<input type="" name="setzs" id="lablesettt" value="" />
+				</div>
+				<div class="setting_tr">
+					<span class="setting_til">
+						行凶
+					</span>
+					<input type="" name="setzs" id="lablesetxx" value="" />
+					<span class="setting_til">
+						猝死
+					</span>
+					<input type="" name="setzs" id="lablesetcs" value="" />
+				</div>
+				<div class="setting_tr">
+
+					<div class="lels">
+						<span class="lablel_til">
+						标签等级
+					</span>
+						<ul style="display: inline-block;" id="labset_level">
+							<li class="lel lelA activity lelAbg">A</li>
+							<li class="lel lelB">B</li>
+							<li class="lel lelC">C</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<a class="lightboder no">取消</a>
+			<!--			<a class="quxiao lightboder" style="display: block;height: 38px;width: 80px;text-align: center;color: #fff;line-height: 38px;position: absolute;bottom: 35px;left: 150px;">取消</a>-->
+			<a class="lightboder yes">确认</a>
+		</div>
+		<!--<div class='keyPersonnel_item'>
+		<div class='keyPersonnel_item_left'>
+		<div class='li_content lightboder2'>			
+		<div style='margin-top: 20px;margin-left: 24px;'>时间：<span class='tr_msg_time'>" + time + "</span></div>
+		<div style='margin-top: 21px;margin-left: 23px;'><span class='tr_msg_content'>" + content + "</span></div>
+		<a href=''>详细信息</a></div>
+		<div class='keyPersonnel_class blue lightboder3'>
+		<div class='keyPersonnel_class-text'>
+		<p class='score'>B</p>
+		<p class='v-desc'>风险等级</p></div></div></div></div>-->
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Label.js" type="text/javascript" charset="utf-8" th:src="@{/js/Label.js}"></script>
+		
+	</body>
+
+</html>

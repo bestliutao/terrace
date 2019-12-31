@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Situation.css" th:href="@{/css/Situation.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='intelligent')"></div>
+		<div class="Brigade">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" href="/intelligent">返回</a>
+			<div class="lable_title">
+				<span id="Brigade_Type">警情</span><span style="font-family: PingFang-SC-Heavy;">（<span id="Brigade_num">8</span>个）</span>
+			</div>
+			<ul class="Brigade_Type_ul">
+				<li class="Brigade_Type_li Brigade1 licolor">一大队</li>
+				<li class="Brigade_Type_li Brigade2">二大队</li>
+				<li class="Brigade_Type_li Brigade3">三大队</li>
+				<li class="Brigade_Type_li Brigade4">四大队</li>
+				<li class="Brigade_Type_li Brigade5">五大队</li>
+			</ul>
+
+			<div class="Brigade_Type_content">
+				<ul>
+
+				</ul>
+			</div>
+			<div class="Brigade_Type_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:href="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:href="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:href="@{/js/echarts.min.js}"></script>
+		<script src="../js/Situation.js" type="text/javascript" charset="utf-8" th:href="@{/js/Situation.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

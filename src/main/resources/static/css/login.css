@@ -1,0 +1,109 @@
+/*边距清空*/
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	
+	height: 100%;
+	margin: 0 auto;
+	
+}
+
+/*字体样式导入*/
+@font-face{
+    font-family: 'trends';
+    src: url("../font/trends.ttf")
+    /*src: url("../font/trends.eot")*/
+}
+
+body {
+	width: 100%;
+	
+	background-color: #020047;
+	position: relative;
+	height: 100%;
+}
+.gifbg {
+	z-index: -98;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.login_window{
+	height: 222px;
+	width: 336px;
+
+	position: absolute;
+	right: 13%;
+	top: 36%;
+}
+
+.but {
+	display: block;
+	text-align: center;
+	width: 336px;
+	background-color: #00a0e9;
+	border: #3DD7FD solid 1px;
+	font-weight: 500;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 73px;
+	background-color: #00a0e9;
+	border-radius: 4px;
+	font-family: TRENDS;
+	font-size: 19px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+
+.but:hover {
+	/*color: white;*/
+	border-radius: 4px;
+	color: #3DD7FD;
+	border: white solid 1px;	
+	cursor: pointer
+}
+
+.login_name,
+.login_pwd {
+	border: none;
+	outline:none;
+	background-color: rgba(0,0,0,0);
+	height: 40px;
+	line-height: 40px;
+	margin: auto;
+	color: #F6F6F6;
+	padding-left: 20px;
+	margin: 8px 0;
+	width: 278px;
+	margin: 0 !important;
+	
+}
+.name_title,.pwd_title{
+	float: left;
+	font-family: TRENDS;
+	font-size: 19px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 40px;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+.login_bb1{
+	border-bottom: #fff solid 2px;
+	padding-top: 20px;
+	padding-bottom: 5px;
+}
+.login_bb2 {
+	border-bottom: #fff solid 2px;
+	padding-top: 38px;
+	padding-bottom: 5px;
+}
+

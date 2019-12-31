@@ -1,0 +1,1270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sznk.terrace.mapper.TbTraineeMapper" >
+  <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.TbTrainee" >
+    <id column="traineeCode" property="traineecode" jdbcType="VARCHAR" />
+    <result column="traineeName" property="traineename" jdbcType="VARCHAR" />
+    <result column="traineeOldName" property="traineeoldname" jdbcType="VARCHAR" />
+    <result column="traineeAlias" property="traineealias" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthDate" property="birthdate" jdbcType="VARCHAR" />
+    <result column="nationType" property="nationtype" jdbcType="VARCHAR" />
+    <result column="educationDegree" property="educationdegree" jdbcType="VARCHAR" />
+    <result column="idCardNo" property="idcardno" jdbcType="VARCHAR" />
+    <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
+    <result column="isMarried" property="ismarried" jdbcType="VARCHAR" />
+    <result column="healthType" property="healthtype" jdbcType="VARCHAR" />
+    <result column="domicileLocation" property="domicilelocation" jdbcType="VARCHAR" />
+    <result column="homeAddress" property="homeaddress" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="deptCode" property="deptcode" jdbcType="VARCHAR" />
+    <result column="currentStatus" property="currentstatus" jdbcType="VARCHAR" />
+    <result column="entryType" property="entrytype" jdbcType="VARCHAR" />
+    <result column="managePeriod" property="manageperiod" jdbcType="VARCHAR" />
+    <result column="leaveDate" property="leavedate" jdbcType="VARCHAR" />
+    <result column="startDate" property="startdate" jdbcType="VARCHAR" />
+    <result column="endDate" property="enddate" jdbcType="VARCHAR" />
+    <result column="dutyPolice" property="dutypolice" jdbcType="VARCHAR" />
+    <result column="isAids" property="isaids" jdbcType="VARCHAR" />
+    <result column="personnelSource" property="personnelsource" jdbcType="VARCHAR" />
+    <result column="decisionNo" property="decisionno" jdbcType="VARCHAR" />
+    <result column="criminalRecord" property="criminalrecord" jdbcType="VARCHAR" />
+    <result column="isThreetype" property="isthreetype" jdbcType="VARCHAR" />
+    <result column="handlingAgency" property="handlingagency" jdbcType="VARCHAR" />
+    <result column="otherHandlingAgency" property="otherhandlingagency" jdbcType="VARCHAR" />
+    <result column="roomId" property="roomid" jdbcType="VARCHAR" />
+    <result column="roomNo" property="roomno" jdbcType="VARCHAR" />
+    <result column="bedNo" property="bedno" jdbcType="VARCHAR" />
+    <result column="deliveryDate" property="deliverydate" jdbcType="VARCHAR" />
+    <result column="recoveryDate" property="recoverydate" jdbcType="VARCHAR" />
+    <result column="drugVariety" property="drugvariety" jdbcType="VARCHAR" />
+    <result column="isKeyTrainee" property="iskeytrainee" jdbcType="VARCHAR" />
+    <result column="isControlTrainee" property="iscontroltrainee" jdbcType="VARCHAR" />
+    <result column="guaranteePolice" property="guaranteepolice" jdbcType="VARCHAR" />
+    <result column="origYear" property="origyear" jdbcType="DECIMAL" />
+    <result column="origMonth" property="origmonth" jdbcType="DECIMAL" />
+    <result column="curriculumVitae" property="curriculumvitae" jdbcType="VARCHAR" />
+    <result column="employmentSituation" property="employmentsituation" jdbcType="VARCHAR" />
+    <result column="isThreeFalse" property="isthreefalse" jdbcType="VARCHAR" />
+    <result column="disciplinaryAction" property="disciplinaryaction" jdbcType="VARCHAR" />
+    <result column="drugYears" property="drugyears" jdbcType="VARCHAR" />
+    <result column="runDate" property="rundate" jdbcType="VARCHAR" />
+    <result column="controlTrainee2" property="controltrainee2" jdbcType="VARCHAR" />
+    <result column="smokingStyle" property="smokingstyle" jdbcType="VARCHAR" />
+    <result column="detoxificationSituation" property="detoxificationsituation" jdbcType="VARCHAR" />
+    <result column="drugHistory" property="drughistory" jdbcType="VARCHAR" />
+    <result column="delayDate" property="delaydate" jdbcType="VARCHAR" />
+    <result column="reduceDate" property="reducedate" jdbcType="VARCHAR" />
+    <result column="RemoveDate" property="removedate" jdbcType="VARCHAR" />
+    <result column="user_grade" property="userGrade" jdbcType="VARCHAR" />
+    <result column="user_level" property="userLevel" jdbcType="VARCHAR" />
+    <result column="user_idioctonia" property="userIdioctonia" jdbcType="INTEGER" />
+    <result column="user_wound" property="userWound" jdbcType="INTEGER" />
+    <result column="user_suddendeath" property="userSuddendeath" jdbcType="INTEGER" />
+    <result column="user_getaway" property="userGetaway" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sznk.terrace.bean.TbTrainee" extends="BaseResultMap" >
+    <result column="image" property="image" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <!--阶段人数-->
+  <select id="stageDistribution"  resultType="cn.sznk.terrace.bean.TitileNumBean">
+    SELECT managePeriod as title,COUNT(*) as number FROM tb_trainee GROUP BY managePeriod
+  </select>
+  <!--模糊查人名-->
+  <select id="findUserByUsername" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
+    select * from tb_trainee where traineename like CONCAT('%', #{traineename}, '%')
+  </select>
+  <!--模糊查ID-->
+  <select id="findUserByUserId" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
+    select * from tb_trainee where traineecode like CONCAT('%', #{traineecode}, '%')
+  </select>
+
+  <!--查符合系数的危险性人员-->
+  <select id="findHazardMan" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
+    SELECT * FROM tb_trainee where user_idioctonia&gt;=#{user_idioctonia} or user_getaway&gt;=#{user_getaway} or user_suddendeath&gt;=#{user_suddendeath} or user_wound&gt;=#{user_wound}
+  </select>
+
+
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    traineeCode, traineeName, traineeOldName, traineeAlias, sex, birthDate, nationType, 
+    educationDegree, idCardNo, nativePlace, isMarried, healthType, domicileLocation, 
+    homeAddress, remark, deptCode, currentStatus, entryType, managePeriod, leaveDate, 
+    startDate, endDate, dutyPolice, isAids, personnelSource, decisionNo, criminalRecord, 
+    isThreetype, handlingAgency, otherHandlingAgency, roomId, roomNo, bedNo, deliveryDate, 
+    recoveryDate, drugVariety, isKeyTrainee, isControlTrainee, guaranteePolice, origYear, 
+    origMonth, curriculumVitae, employmentSituation, isThreeFalse, disciplinaryAction, 
+    drugYears, runDate, controlTrainee2, smokingStyle, detoxificationSituation, drugHistory, 
+    delayDate, reduceDate, RemoveDate, user_grade, user_level, user_idioctonia, user_wound, 
+    user_suddendeath, user_getaway
+  </sql>
+  <sql id="Blob_Column_List" >
+    image
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.sznk.terrace.bean.TbTraineeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_trainee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbTraineeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_trainee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_trainee
+    where traineeCode = #{traineecode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_trainee
+    where traineeCode = #{traineecode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.sznk.terrace.bean.TbTraineeExample" >
+    delete from tb_trainee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.sznk.terrace.bean.TbTrainee" >
+    insert into tb_trainee (traineeCode, traineeName, traineeOldName, 
+      traineeAlias, sex, birthDate, 
+      nationType, educationDegree, idCardNo, 
+      nativePlace, isMarried, healthType, 
+      domicileLocation, homeAddress, remark, 
+      deptCode, currentStatus, entryType, 
+      managePeriod, leaveDate, startDate, 
+      endDate, dutyPolice, isAids, 
+      personnelSource, decisionNo, criminalRecord, 
+      isThreetype, handlingAgency, otherHandlingAgency, 
+      roomId, roomNo, bedNo, 
+      deliveryDate, recoveryDate, drugVariety, 
+      isKeyTrainee, isControlTrainee, guaranteePolice, 
+      origYear, origMonth, curriculumVitae, 
+      employmentSituation, isThreeFalse, disciplinaryAction, 
+      drugYears, runDate, controlTrainee2, 
+      smokingStyle, detoxificationSituation, 
+      drugHistory, delayDate, reduceDate, 
+      RemoveDate, user_grade, user_level, 
+      user_idioctonia, user_wound, user_suddendeath, 
+      user_getaway, image)
+    values (#{traineecode,jdbcType=VARCHAR}, #{traineename,jdbcType=VARCHAR}, #{traineeoldname,jdbcType=VARCHAR}, 
+      #{traineealias,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR}, 
+      #{nationtype,jdbcType=VARCHAR}, #{educationdegree,jdbcType=VARCHAR}, #{idcardno,jdbcType=VARCHAR}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{ismarried,jdbcType=VARCHAR}, #{healthtype,jdbcType=VARCHAR}, 
+      #{domicilelocation,jdbcType=VARCHAR}, #{homeaddress,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deptcode,jdbcType=VARCHAR}, #{currentstatus,jdbcType=VARCHAR}, #{entrytype,jdbcType=VARCHAR}, 
+      #{manageperiod,jdbcType=VARCHAR}, #{leavedate,jdbcType=VARCHAR}, #{startdate,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{dutypolice,jdbcType=VARCHAR}, #{isaids,jdbcType=VARCHAR}, 
+      #{personnelsource,jdbcType=VARCHAR}, #{decisionno,jdbcType=VARCHAR}, #{criminalrecord,jdbcType=VARCHAR}, 
+      #{isthreetype,jdbcType=VARCHAR}, #{handlingagency,jdbcType=VARCHAR}, #{otherhandlingagency,jdbcType=VARCHAR}, 
+      #{roomid,jdbcType=VARCHAR}, #{roomno,jdbcType=VARCHAR}, #{bedno,jdbcType=VARCHAR}, 
+      #{deliverydate,jdbcType=VARCHAR}, #{recoverydate,jdbcType=VARCHAR}, #{drugvariety,jdbcType=VARCHAR}, 
+      #{iskeytrainee,jdbcType=VARCHAR}, #{iscontroltrainee,jdbcType=VARCHAR}, #{guaranteepolice,jdbcType=VARCHAR}, 
+      #{origyear,jdbcType=DECIMAL}, #{origmonth,jdbcType=DECIMAL}, #{curriculumvitae,jdbcType=VARCHAR}, 
+      #{employmentsituation,jdbcType=VARCHAR}, #{isthreefalse,jdbcType=VARCHAR}, #{disciplinaryaction,jdbcType=VARCHAR}, 
+      #{drugyears,jdbcType=VARCHAR}, #{rundate,jdbcType=VARCHAR}, #{controltrainee2,jdbcType=VARCHAR}, 
+      #{smokingstyle,jdbcType=VARCHAR}, #{detoxificationsituation,jdbcType=VARCHAR}, 
+      #{drughistory,jdbcType=VARCHAR}, #{delaydate,jdbcType=VARCHAR}, #{reducedate,jdbcType=VARCHAR}, 
+      #{removedate,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR}, 
+      #{userIdioctonia,jdbcType=INTEGER}, #{userWound,jdbcType=INTEGER}, #{userSuddendeath,jdbcType=INTEGER}, 
+      #{userGetaway,jdbcType=INTEGER}, #{image,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbTrainee" >
+    insert into tb_trainee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="traineecode != null" >
+        traineeCode,
+      </if>
+      <if test="traineename != null" >
+        traineeName,
+      </if>
+      <if test="traineeoldname != null" >
+        traineeOldName,
+      </if>
+      <if test="traineealias != null" >
+        traineeAlias,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthdate != null" >
+        birthDate,
+      </if>
+      <if test="nationtype != null" >
+        nationType,
+      </if>
+      <if test="educationdegree != null" >
+        educationDegree,
+      </if>
+      <if test="idcardno != null" >
+        idCardNo,
+      </if>
+      <if test="nativeplace != null" >
+        nativePlace,
+      </if>
+      <if test="ismarried != null" >
+        isMarried,
+      </if>
+      <if test="healthtype != null" >
+        healthType,
+      </if>
+      <if test="domicilelocation != null" >
+        domicileLocation,
+      </if>
+      <if test="homeaddress != null" >
+        homeAddress,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="deptcode != null" >
+        deptCode,
+      </if>
+      <if test="currentstatus != null" >
+        currentStatus,
+      </if>
+      <if test="entrytype != null" >
+        entryType,
+      </if>
+      <if test="manageperiod != null" >
+        managePeriod,
+      </if>
+      <if test="leavedate != null" >
+        leaveDate,
+      </if>
+      <if test="startdate != null" >
+        startDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+      <if test="dutypolice != null" >
+        dutyPolice,
+      </if>
+      <if test="isaids != null" >
+        isAids,
+      </if>
+      <if test="personnelsource != null" >
+        personnelSource,
+      </if>
+      <if test="decisionno != null" >
+        decisionNo,
+      </if>
+      <if test="criminalrecord != null" >
+        criminalRecord,
+      </if>
+      <if test="isthreetype != null" >
+        isThreetype,
+      </if>
+      <if test="handlingagency != null" >
+        handlingAgency,
+      </if>
+      <if test="otherhandlingagency != null" >
+        otherHandlingAgency,
+      </if>
+      <if test="roomid != null" >
+        roomId,
+      </if>
+      <if test="roomno != null" >
+        roomNo,
+      </if>
+      <if test="bedno != null" >
+        bedNo,
+      </if>
+      <if test="deliverydate != null" >
+        deliveryDate,
+      </if>
+      <if test="recoverydate != null" >
+        recoveryDate,
+      </if>
+      <if test="drugvariety != null" >
+        drugVariety,
+      </if>
+      <if test="iskeytrainee != null" >
+        isKeyTrainee,
+      </if>
+      <if test="iscontroltrainee != null" >
+        isControlTrainee,
+      </if>
+      <if test="guaranteepolice != null" >
+        guaranteePolice,
+      </if>
+      <if test="origyear != null" >
+        origYear,
+      </if>
+      <if test="origmonth != null" >
+        origMonth,
+      </if>
+      <if test="curriculumvitae != null" >
+        curriculumVitae,
+      </if>
+      <if test="employmentsituation != null" >
+        employmentSituation,
+      </if>
+      <if test="isthreefalse != null" >
+        isThreeFalse,
+      </if>
+      <if test="disciplinaryaction != null" >
+        disciplinaryAction,
+      </if>
+      <if test="drugyears != null" >
+        drugYears,
+      </if>
+      <if test="rundate != null" >
+        runDate,
+      </if>
+      <if test="controltrainee2 != null" >
+        controlTrainee2,
+      </if>
+      <if test="smokingstyle != null" >
+        smokingStyle,
+      </if>
+      <if test="detoxificationsituation != null" >
+        detoxificationSituation,
+      </if>
+      <if test="drughistory != null" >
+        drugHistory,
+      </if>
+      <if test="delaydate != null" >
+        delayDate,
+      </if>
+      <if test="reducedate != null" >
+        reduceDate,
+      </if>
+      <if test="removedate != null" >
+        RemoveDate,
+      </if>
+      <if test="userGrade != null" >
+        user_grade,
+      </if>
+      <if test="userLevel != null" >
+        user_level,
+      </if>
+      <if test="userIdioctonia != null" >
+        user_idioctonia,
+      </if>
+      <if test="userWound != null" >
+        user_wound,
+      </if>
+      <if test="userSuddendeath != null" >
+        user_suddendeath,
+      </if>
+      <if test="userGetaway != null" >
+        user_getaway,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="traineecode != null" >
+        #{traineecode,jdbcType=VARCHAR},
+      </if>
+      <if test="traineename != null" >
+        #{traineename,jdbcType=VARCHAR},
+      </if>
+      <if test="traineeoldname != null" >
+        #{traineeoldname,jdbcType=VARCHAR},
+      </if>
+      <if test="traineealias != null" >
+        #{traineealias,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="nationtype != null" >
+        #{nationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="educationdegree != null" >
+        #{educationdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardno != null" >
+        #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="ismarried != null" >
+        #{ismarried,jdbcType=VARCHAR},
+      </if>
+      <if test="healthtype != null" >
+        #{healthtype,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilelocation != null" >
+        #{domicilelocation,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptcode != null" >
+        #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="currentstatus != null" >
+        #{currentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytype != null" >
+        #{entrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="manageperiod != null" >
+        #{manageperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null" >
+        #{leavedate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="dutypolice != null" >
+        #{dutypolice,jdbcType=VARCHAR},
+      </if>
+      <if test="isaids != null" >
+        #{isaids,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelsource != null" >
+        #{personnelsource,jdbcType=VARCHAR},
+      </if>
+      <if test="decisionno != null" >
+        #{decisionno,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalrecord != null" >
+        #{criminalrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="isthreetype != null" >
+        #{isthreetype,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingagency != null" >
+        #{handlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhandlingagency != null" >
+        #{otherhandlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null" >
+        #{deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="recoverydate != null" >
+        #{recoverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="drugvariety != null" >
+        #{drugvariety,jdbcType=VARCHAR},
+      </if>
+      <if test="iskeytrainee != null" >
+        #{iskeytrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="iscontroltrainee != null" >
+        #{iscontroltrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteepolice != null" >
+        #{guaranteepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="origyear != null" >
+        #{origyear,jdbcType=DECIMAL},
+      </if>
+      <if test="origmonth != null" >
+        #{origmonth,jdbcType=DECIMAL},
+      </if>
+      <if test="curriculumvitae != null" >
+        #{curriculumvitae,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentsituation != null" >
+        #{employmentsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="isthreefalse != null" >
+        #{isthreefalse,jdbcType=VARCHAR},
+      </if>
+      <if test="disciplinaryaction != null" >
+        #{disciplinaryaction,jdbcType=VARCHAR},
+      </if>
+      <if test="drugyears != null" >
+        #{drugyears,jdbcType=VARCHAR},
+      </if>
+      <if test="rundate != null" >
+        #{rundate,jdbcType=VARCHAR},
+      </if>
+      <if test="controltrainee2 != null" >
+        #{controltrainee2,jdbcType=VARCHAR},
+      </if>
+      <if test="smokingstyle != null" >
+        #{smokingstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="detoxificationsituation != null" >
+        #{detoxificationsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="drughistory != null" >
+        #{drughistory,jdbcType=VARCHAR},
+      </if>
+      <if test="delaydate != null" >
+        #{delaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="reducedate != null" >
+        #{reducedate,jdbcType=VARCHAR},
+      </if>
+      <if test="removedate != null" >
+        #{removedate,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null" >
+        #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdioctonia != null" >
+        #{userIdioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="userWound != null" >
+        #{userWound,jdbcType=INTEGER},
+      </if>
+      <if test="userSuddendeath != null" >
+        #{userSuddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="userGetaway != null" >
+        #{userGetaway,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.sznk.terrace.bean.TbTraineeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_trainee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_trainee
+    <set >
+      <if test="record.traineecode != null" >
+        traineeCode = #{record.traineecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traineename != null" >
+        traineeName = #{record.traineename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traineeoldname != null" >
+        traineeOldName = #{record.traineeoldname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traineealias != null" >
+        traineeAlias = #{record.traineealias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        birthDate = #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nationtype != null" >
+        nationType = #{record.nationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationdegree != null" >
+        educationDegree = #{record.educationdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcardno != null" >
+        idCardNo = #{record.idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplace != null" >
+        nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismarried != null" >
+        isMarried = #{record.ismarried,jdbcType=VARCHAR},
+      </if>
+      <if test="record.healthtype != null" >
+        healthType = #{record.healthtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilelocation != null" >
+        domicileLocation = #{record.domicilelocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeaddress != null" >
+        homeAddress = #{record.homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptcode != null" >
+        deptCode = #{record.deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentstatus != null" >
+        currentStatus = #{record.currentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entrytype != null" >
+        entryType = #{record.entrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manageperiod != null" >
+        managePeriod = #{record.manageperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavedate != null" >
+        leaveDate = #{record.leavedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startdate != null" >
+        startDate = #{record.startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null" >
+        endDate = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutypolice != null" >
+        dutyPolice = #{record.dutypolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isaids != null" >
+        isAids = #{record.isaids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnelsource != null" >
+        personnelSource = #{record.personnelsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decisionno != null" >
+        decisionNo = #{record.decisionno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.criminalrecord != null" >
+        criminalRecord = #{record.criminalrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isthreetype != null" >
+        isThreetype = #{record.isthreetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlingagency != null" >
+        handlingAgency = #{record.handlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherhandlingagency != null" >
+        otherHandlingAgency = #{record.otherhandlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomid != null" >
+        roomId = #{record.roomid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomno != null" >
+        roomNo = #{record.roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bedno != null" >
+        bedNo = #{record.bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverydate != null" >
+        deliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recoverydate != null" >
+        recoveryDate = #{record.recoverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugvariety != null" >
+        drugVariety = #{record.drugvariety,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iskeytrainee != null" >
+        isKeyTrainee = #{record.iskeytrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscontroltrainee != null" >
+        isControlTrainee = #{record.iscontroltrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guaranteepolice != null" >
+        guaranteePolice = #{record.guaranteepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origyear != null" >
+        origYear = #{record.origyear,jdbcType=DECIMAL},
+      </if>
+      <if test="record.origmonth != null" >
+        origMonth = #{record.origmonth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.curriculumvitae != null" >
+        curriculumVitae = #{record.curriculumvitae,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employmentsituation != null" >
+        employmentSituation = #{record.employmentsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isthreefalse != null" >
+        isThreeFalse = #{record.isthreefalse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disciplinaryaction != null" >
+        disciplinaryAction = #{record.disciplinaryaction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugyears != null" >
+        drugYears = #{record.drugyears,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rundate != null" >
+        runDate = #{record.rundate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controltrainee2 != null" >
+        controlTrainee2 = #{record.controltrainee2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smokingstyle != null" >
+        smokingStyle = #{record.smokingstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detoxificationsituation != null" >
+        detoxificationSituation = #{record.detoxificationsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drughistory != null" >
+        drugHistory = #{record.drughistory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delaydate != null" >
+        delayDate = #{record.delaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reducedate != null" >
+        reduceDate = #{record.reducedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.removedate != null" >
+        RemoveDate = #{record.removedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userGrade != null" >
+        user_grade = #{record.userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLevel != null" >
+        user_level = #{record.userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdioctonia != null" >
+        user_idioctonia = #{record.userIdioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="record.userWound != null" >
+        user_wound = #{record.userWound,jdbcType=INTEGER},
+      </if>
+      <if test="record.userSuddendeath != null" >
+        user_suddendeath = #{record.userSuddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="record.userGetaway != null" >
+        user_getaway = #{record.userGetaway,jdbcType=INTEGER},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_trainee
+    set traineeCode = #{record.traineecode,jdbcType=VARCHAR},
+      traineeName = #{record.traineename,jdbcType=VARCHAR},
+      traineeOldName = #{record.traineeoldname,jdbcType=VARCHAR},
+      traineeAlias = #{record.traineealias,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthDate = #{record.birthdate,jdbcType=VARCHAR},
+      nationType = #{record.nationtype,jdbcType=VARCHAR},
+      educationDegree = #{record.educationdegree,jdbcType=VARCHAR},
+      idCardNo = #{record.idcardno,jdbcType=VARCHAR},
+      nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
+      isMarried = #{record.ismarried,jdbcType=VARCHAR},
+      healthType = #{record.healthtype,jdbcType=VARCHAR},
+      domicileLocation = #{record.domicilelocation,jdbcType=VARCHAR},
+      homeAddress = #{record.homeaddress,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deptCode = #{record.deptcode,jdbcType=VARCHAR},
+      currentStatus = #{record.currentstatus,jdbcType=VARCHAR},
+      entryType = #{record.entrytype,jdbcType=VARCHAR},
+      managePeriod = #{record.manageperiod,jdbcType=VARCHAR},
+      leaveDate = #{record.leavedate,jdbcType=VARCHAR},
+      startDate = #{record.startdate,jdbcType=VARCHAR},
+      endDate = #{record.enddate,jdbcType=VARCHAR},
+      dutyPolice = #{record.dutypolice,jdbcType=VARCHAR},
+      isAids = #{record.isaids,jdbcType=VARCHAR},
+      personnelSource = #{record.personnelsource,jdbcType=VARCHAR},
+      decisionNo = #{record.decisionno,jdbcType=VARCHAR},
+      criminalRecord = #{record.criminalrecord,jdbcType=VARCHAR},
+      isThreetype = #{record.isthreetype,jdbcType=VARCHAR},
+      handlingAgency = #{record.handlingagency,jdbcType=VARCHAR},
+      otherHandlingAgency = #{record.otherhandlingagency,jdbcType=VARCHAR},
+      roomId = #{record.roomid,jdbcType=VARCHAR},
+      roomNo = #{record.roomno,jdbcType=VARCHAR},
+      bedNo = #{record.bedno,jdbcType=VARCHAR},
+      deliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      recoveryDate = #{record.recoverydate,jdbcType=VARCHAR},
+      drugVariety = #{record.drugvariety,jdbcType=VARCHAR},
+      isKeyTrainee = #{record.iskeytrainee,jdbcType=VARCHAR},
+      isControlTrainee = #{record.iscontroltrainee,jdbcType=VARCHAR},
+      guaranteePolice = #{record.guaranteepolice,jdbcType=VARCHAR},
+      origYear = #{record.origyear,jdbcType=DECIMAL},
+      origMonth = #{record.origmonth,jdbcType=DECIMAL},
+      curriculumVitae = #{record.curriculumvitae,jdbcType=VARCHAR},
+      employmentSituation = #{record.employmentsituation,jdbcType=VARCHAR},
+      isThreeFalse = #{record.isthreefalse,jdbcType=VARCHAR},
+      disciplinaryAction = #{record.disciplinaryaction,jdbcType=VARCHAR},
+      drugYears = #{record.drugyears,jdbcType=VARCHAR},
+      runDate = #{record.rundate,jdbcType=VARCHAR},
+      controlTrainee2 = #{record.controltrainee2,jdbcType=VARCHAR},
+      smokingStyle = #{record.smokingstyle,jdbcType=VARCHAR},
+      detoxificationSituation = #{record.detoxificationsituation,jdbcType=VARCHAR},
+      drugHistory = #{record.drughistory,jdbcType=VARCHAR},
+      delayDate = #{record.delaydate,jdbcType=VARCHAR},
+      reduceDate = #{record.reducedate,jdbcType=VARCHAR},
+      RemoveDate = #{record.removedate,jdbcType=VARCHAR},
+      user_grade = #{record.userGrade,jdbcType=VARCHAR},
+      user_level = #{record.userLevel,jdbcType=VARCHAR},
+      user_idioctonia = #{record.userIdioctonia,jdbcType=INTEGER},
+      user_wound = #{record.userWound,jdbcType=INTEGER},
+      user_suddendeath = #{record.userSuddendeath,jdbcType=INTEGER},
+      user_getaway = #{record.userGetaway,jdbcType=INTEGER},
+      image = #{record.image,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_trainee
+    set traineeCode = #{record.traineecode,jdbcType=VARCHAR},
+      traineeName = #{record.traineename,jdbcType=VARCHAR},
+      traineeOldName = #{record.traineeoldname,jdbcType=VARCHAR},
+      traineeAlias = #{record.traineealias,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthDate = #{record.birthdate,jdbcType=VARCHAR},
+      nationType = #{record.nationtype,jdbcType=VARCHAR},
+      educationDegree = #{record.educationdegree,jdbcType=VARCHAR},
+      idCardNo = #{record.idcardno,jdbcType=VARCHAR},
+      nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
+      isMarried = #{record.ismarried,jdbcType=VARCHAR},
+      healthType = #{record.healthtype,jdbcType=VARCHAR},
+      domicileLocation = #{record.domicilelocation,jdbcType=VARCHAR},
+      homeAddress = #{record.homeaddress,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deptCode = #{record.deptcode,jdbcType=VARCHAR},
+      currentStatus = #{record.currentstatus,jdbcType=VARCHAR},
+      entryType = #{record.entrytype,jdbcType=VARCHAR},
+      managePeriod = #{record.manageperiod,jdbcType=VARCHAR},
+      leaveDate = #{record.leavedate,jdbcType=VARCHAR},
+      startDate = #{record.startdate,jdbcType=VARCHAR},
+      endDate = #{record.enddate,jdbcType=VARCHAR},
+      dutyPolice = #{record.dutypolice,jdbcType=VARCHAR},
+      isAids = #{record.isaids,jdbcType=VARCHAR},
+      personnelSource = #{record.personnelsource,jdbcType=VARCHAR},
+      decisionNo = #{record.decisionno,jdbcType=VARCHAR},
+      criminalRecord = #{record.criminalrecord,jdbcType=VARCHAR},
+      isThreetype = #{record.isthreetype,jdbcType=VARCHAR},
+      handlingAgency = #{record.handlingagency,jdbcType=VARCHAR},
+      otherHandlingAgency = #{record.otherhandlingagency,jdbcType=VARCHAR},
+      roomId = #{record.roomid,jdbcType=VARCHAR},
+      roomNo = #{record.roomno,jdbcType=VARCHAR},
+      bedNo = #{record.bedno,jdbcType=VARCHAR},
+      deliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      recoveryDate = #{record.recoverydate,jdbcType=VARCHAR},
+      drugVariety = #{record.drugvariety,jdbcType=VARCHAR},
+      isKeyTrainee = #{record.iskeytrainee,jdbcType=VARCHAR},
+      isControlTrainee = #{record.iscontroltrainee,jdbcType=VARCHAR},
+      guaranteePolice = #{record.guaranteepolice,jdbcType=VARCHAR},
+      origYear = #{record.origyear,jdbcType=DECIMAL},
+      origMonth = #{record.origmonth,jdbcType=DECIMAL},
+      curriculumVitae = #{record.curriculumvitae,jdbcType=VARCHAR},
+      employmentSituation = #{record.employmentsituation,jdbcType=VARCHAR},
+      isThreeFalse = #{record.isthreefalse,jdbcType=VARCHAR},
+      disciplinaryAction = #{record.disciplinaryaction,jdbcType=VARCHAR},
+      drugYears = #{record.drugyears,jdbcType=VARCHAR},
+      runDate = #{record.rundate,jdbcType=VARCHAR},
+      controlTrainee2 = #{record.controltrainee2,jdbcType=VARCHAR},
+      smokingStyle = #{record.smokingstyle,jdbcType=VARCHAR},
+      detoxificationSituation = #{record.detoxificationsituation,jdbcType=VARCHAR},
+      drugHistory = #{record.drughistory,jdbcType=VARCHAR},
+      delayDate = #{record.delaydate,jdbcType=VARCHAR},
+      reduceDate = #{record.reducedate,jdbcType=VARCHAR},
+      RemoveDate = #{record.removedate,jdbcType=VARCHAR},
+      user_grade = #{record.userGrade,jdbcType=VARCHAR},
+      user_level = #{record.userLevel,jdbcType=VARCHAR},
+      user_idioctonia = #{record.userIdioctonia,jdbcType=INTEGER},
+      user_wound = #{record.userWound,jdbcType=INTEGER},
+      user_suddendeath = #{record.userSuddendeath,jdbcType=INTEGER},
+      user_getaway = #{record.userGetaway,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sznk.terrace.bean.TbTrainee" >
+    update tb_trainee
+    <set >
+      <if test="traineename != null" >
+        traineeName = #{traineename,jdbcType=VARCHAR},
+      </if>
+      <if test="traineeoldname != null" >
+        traineeOldName = #{traineeoldname,jdbcType=VARCHAR},
+      </if>
+      <if test="traineealias != null" >
+        traineeAlias = #{traineealias,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        birthDate = #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="nationtype != null" >
+        nationType = #{nationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="educationdegree != null" >
+        educationDegree = #{educationdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardno != null" >
+        idCardNo = #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="ismarried != null" >
+        isMarried = #{ismarried,jdbcType=VARCHAR},
+      </if>
+      <if test="healthtype != null" >
+        healthType = #{healthtype,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilelocation != null" >
+        domicileLocation = #{domicilelocation,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        homeAddress = #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptcode != null" >
+        deptCode = #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="currentstatus != null" >
+        currentStatus = #{currentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytype != null" >
+        entryType = #{entrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="manageperiod != null" >
+        managePeriod = #{manageperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null" >
+        leaveDate = #{leavedate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        startDate = #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        endDate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="dutypolice != null" >
+        dutyPolice = #{dutypolice,jdbcType=VARCHAR},
+      </if>
+      <if test="isaids != null" >
+        isAids = #{isaids,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelsource != null" >
+        personnelSource = #{personnelsource,jdbcType=VARCHAR},
+      </if>
+      <if test="decisionno != null" >
+        decisionNo = #{decisionno,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalrecord != null" >
+        criminalRecord = #{criminalrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="isthreetype != null" >
+        isThreetype = #{isthreetype,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingagency != null" >
+        handlingAgency = #{handlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhandlingagency != null" >
+        otherHandlingAgency = #{otherhandlingagency,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        roomId = #{roomid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        roomNo = #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        bedNo = #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null" >
+        deliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="recoverydate != null" >
+        recoveryDate = #{recoverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="drugvariety != null" >
+        drugVariety = #{drugvariety,jdbcType=VARCHAR},
+      </if>
+      <if test="iskeytrainee != null" >
+        isKeyTrainee = #{iskeytrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="iscontroltrainee != null" >
+        isControlTrainee = #{iscontroltrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteepolice != null" >
+        guaranteePolice = #{guaranteepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="origyear != null" >
+        origYear = #{origyear,jdbcType=DECIMAL},
+      </if>
+      <if test="origmonth != null" >
+        origMonth = #{origmonth,jdbcType=DECIMAL},
+      </if>
+      <if test="curriculumvitae != null" >
+        curriculumVitae = #{curriculumvitae,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentsituation != null" >
+        employmentSituation = #{employmentsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="isthreefalse != null" >
+        isThreeFalse = #{isthreefalse,jdbcType=VARCHAR},
+      </if>
+      <if test="disciplinaryaction != null" >
+        disciplinaryAction = #{disciplinaryaction,jdbcType=VARCHAR},
+      </if>
+      <if test="drugyears != null" >
+        drugYears = #{drugyears,jdbcType=VARCHAR},
+      </if>
+      <if test="rundate != null" >
+        runDate = #{rundate,jdbcType=VARCHAR},
+      </if>
+      <if test="controltrainee2 != null" >
+        controlTrainee2 = #{controltrainee2,jdbcType=VARCHAR},
+      </if>
+      <if test="smokingstyle != null" >
+        smokingStyle = #{smokingstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="detoxificationsituation != null" >
+        detoxificationSituation = #{detoxificationsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="drughistory != null" >
+        drugHistory = #{drughistory,jdbcType=VARCHAR},
+      </if>
+      <if test="delaydate != null" >
+        delayDate = #{delaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="reducedate != null" >
+        reduceDate = #{reducedate,jdbcType=VARCHAR},
+      </if>
+      <if test="removedate != null" >
+        RemoveDate = #{removedate,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null" >
+        user_grade = #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        user_level = #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdioctonia != null" >
+        user_idioctonia = #{userIdioctonia,jdbcType=INTEGER},
+      </if>
+      <if test="userWound != null" >
+        user_wound = #{userWound,jdbcType=INTEGER},
+      </if>
+      <if test="userSuddendeath != null" >
+        user_suddendeath = #{userSuddendeath,jdbcType=INTEGER},
+      </if>
+      <if test="userGetaway != null" >
+        user_getaway = #{userGetaway,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where traineeCode = #{traineecode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sznk.terrace.bean.TbTrainee" >
+    update tb_trainee
+    set traineeName = #{traineename,jdbcType=VARCHAR},
+      traineeOldName = #{traineeoldname,jdbcType=VARCHAR},
+      traineeAlias = #{traineealias,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthDate = #{birthdate,jdbcType=VARCHAR},
+      nationType = #{nationtype,jdbcType=VARCHAR},
+      educationDegree = #{educationdegree,jdbcType=VARCHAR},
+      idCardNo = #{idcardno,jdbcType=VARCHAR},
+      nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      isMarried = #{ismarried,jdbcType=VARCHAR},
+      healthType = #{healthtype,jdbcType=VARCHAR},
+      domicileLocation = #{domicilelocation,jdbcType=VARCHAR},
+      homeAddress = #{homeaddress,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      deptCode = #{deptcode,jdbcType=VARCHAR},
+      currentStatus = #{currentstatus,jdbcType=VARCHAR},
+      entryType = #{entrytype,jdbcType=VARCHAR},
+      managePeriod = #{manageperiod,jdbcType=VARCHAR},
+      leaveDate = #{leavedate,jdbcType=VARCHAR},
+      startDate = #{startdate,jdbcType=VARCHAR},
+      endDate = #{enddate,jdbcType=VARCHAR},
+      dutyPolice = #{dutypolice,jdbcType=VARCHAR},
+      isAids = #{isaids,jdbcType=VARCHAR},
+      personnelSource = #{personnelsource,jdbcType=VARCHAR},
+      decisionNo = #{decisionno,jdbcType=VARCHAR},
+      criminalRecord = #{criminalrecord,jdbcType=VARCHAR},
+      isThreetype = #{isthreetype,jdbcType=VARCHAR},
+      handlingAgency = #{handlingagency,jdbcType=VARCHAR},
+      otherHandlingAgency = #{otherhandlingagency,jdbcType=VARCHAR},
+      roomId = #{roomid,jdbcType=VARCHAR},
+      roomNo = #{roomno,jdbcType=VARCHAR},
+      bedNo = #{bedno,jdbcType=VARCHAR},
+      deliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      recoveryDate = #{recoverydate,jdbcType=VARCHAR},
+      drugVariety = #{drugvariety,jdbcType=VARCHAR},
+      isKeyTrainee = #{iskeytrainee,jdbcType=VARCHAR},
+      isControlTrainee = #{iscontroltrainee,jdbcType=VARCHAR},
+      guaranteePolice = #{guaranteepolice,jdbcType=VARCHAR},
+      origYear = #{origyear,jdbcType=DECIMAL},
+      origMonth = #{origmonth,jdbcType=DECIMAL},
+      curriculumVitae = #{curriculumvitae,jdbcType=VARCHAR},
+      employmentSituation = #{employmentsituation,jdbcType=VARCHAR},
+      isThreeFalse = #{isthreefalse,jdbcType=VARCHAR},
+      disciplinaryAction = #{disciplinaryaction,jdbcType=VARCHAR},
+      drugYears = #{drugyears,jdbcType=VARCHAR},
+      runDate = #{rundate,jdbcType=VARCHAR},
+      controlTrainee2 = #{controltrainee2,jdbcType=VARCHAR},
+      smokingStyle = #{smokingstyle,jdbcType=VARCHAR},
+      detoxificationSituation = #{detoxificationsituation,jdbcType=VARCHAR},
+      drugHistory = #{drughistory,jdbcType=VARCHAR},
+      delayDate = #{delaydate,jdbcType=VARCHAR},
+      reduceDate = #{reducedate,jdbcType=VARCHAR},
+      RemoveDate = #{removedate,jdbcType=VARCHAR},
+      user_grade = #{userGrade,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=VARCHAR},
+      user_idioctonia = #{userIdioctonia,jdbcType=INTEGER},
+      user_wound = #{userWound,jdbcType=INTEGER},
+      user_suddendeath = #{userSuddendeath,jdbcType=INTEGER},
+      user_getaway = #{userGetaway,jdbcType=INTEGER},
+      image = #{image,jdbcType=LONGVARCHAR}
+    where traineeCode = #{traineecode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.TbTrainee" >
+    update tb_trainee
+    set traineeName = #{traineename,jdbcType=VARCHAR},
+      traineeOldName = #{traineeoldname,jdbcType=VARCHAR},
+      traineeAlias = #{traineealias,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthDate = #{birthdate,jdbcType=VARCHAR},
+      nationType = #{nationtype,jdbcType=VARCHAR},
+      educationDegree = #{educationdegree,jdbcType=VARCHAR},
+      idCardNo = #{idcardno,jdbcType=VARCHAR},
+      nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      isMarried = #{ismarried,jdbcType=VARCHAR},
+      healthType = #{healthtype,jdbcType=VARCHAR},
+      domicileLocation = #{domicilelocation,jdbcType=VARCHAR},
+      homeAddress = #{homeaddress,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      deptCode = #{deptcode,jdbcType=VARCHAR},
+      currentStatus = #{currentstatus,jdbcType=VARCHAR},
+      entryType = #{entrytype,jdbcType=VARCHAR},
+      managePeriod = #{manageperiod,jdbcType=VARCHAR},
+      leaveDate = #{leavedate,jdbcType=VARCHAR},
+      startDate = #{startdate,jdbcType=VARCHAR},
+      endDate = #{enddate,jdbcType=VARCHAR},
+      dutyPolice = #{dutypolice,jdbcType=VARCHAR},
+      isAids = #{isaids,jdbcType=VARCHAR},
+      personnelSource = #{personnelsource,jdbcType=VARCHAR},
+      decisionNo = #{decisionno,jdbcType=VARCHAR},
+      criminalRecord = #{criminalrecord,jdbcType=VARCHAR},
+      isThreetype = #{isthreetype,jdbcType=VARCHAR},
+      handlingAgency = #{handlingagency,jdbcType=VARCHAR},
+      otherHandlingAgency = #{otherhandlingagency,jdbcType=VARCHAR},
+      roomId = #{roomid,jdbcType=VARCHAR},
+      roomNo = #{roomno,jdbcType=VARCHAR},
+      bedNo = #{bedno,jdbcType=VARCHAR},
+      deliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      recoveryDate = #{recoverydate,jdbcType=VARCHAR},
+      drugVariety = #{drugvariety,jdbcType=VARCHAR},
+      isKeyTrainee = #{iskeytrainee,jdbcType=VARCHAR},
+      isControlTrainee = #{iscontroltrainee,jdbcType=VARCHAR},
+      guaranteePolice = #{guaranteepolice,jdbcType=VARCHAR},
+      origYear = #{origyear,jdbcType=DECIMAL},
+      origMonth = #{origmonth,jdbcType=DECIMAL},
+      curriculumVitae = #{curriculumvitae,jdbcType=VARCHAR},
+      employmentSituation = #{employmentsituation,jdbcType=VARCHAR},
+      isThreeFalse = #{isthreefalse,jdbcType=VARCHAR},
+      disciplinaryAction = #{disciplinaryaction,jdbcType=VARCHAR},
+      drugYears = #{drugyears,jdbcType=VARCHAR},
+      runDate = #{rundate,jdbcType=VARCHAR},
+      controlTrainee2 = #{controltrainee2,jdbcType=VARCHAR},
+      smokingStyle = #{smokingstyle,jdbcType=VARCHAR},
+      detoxificationSituation = #{detoxificationsituation,jdbcType=VARCHAR},
+      drugHistory = #{drughistory,jdbcType=VARCHAR},
+      delayDate = #{delaydate,jdbcType=VARCHAR},
+      reduceDate = #{reducedate,jdbcType=VARCHAR},
+      RemoveDate = #{removedate,jdbcType=VARCHAR},
+      user_grade = #{userGrade,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=VARCHAR},
+      user_idioctonia = #{userIdioctonia,jdbcType=INTEGER},
+      user_wound = #{userWound,jdbcType=INTEGER},
+      user_suddendeath = #{userSuddendeath,jdbcType=INTEGER},
+      user_getaway = #{userGetaway,jdbcType=INTEGER}
+    where traineeCode = #{traineecode,jdbcType=VARCHAR}
+  </update>
+</mapper>

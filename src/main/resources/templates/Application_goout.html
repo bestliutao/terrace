@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Application_goout.css" th:href="@{/css/Application_goout.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}" />
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='hazard')"></div>
+		<div class="goout">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" th:href="@{/hazard}">返回</a>
+			<div class="lable_title">
+				<span id="goout_type">家庭变故</span>外出申请学员<span style="font-family: PingFang-SC-Heavy;">（<span id="Risk_num">8</span>名）</span>
+			</div>
+			<ul class="goouttype_ul">
+				<li class="type_li jtbg licolor">家庭变故</li>
+				<li class="type_li wcjy">外出就医</li>
+				<li class="type_li sfcx">司法程序</li>
+			</ul>
+			
+			
+			<div class="goouttype_content">
+				<ul>
+					<!--<li>
+						<div class="keyPersonnel_item">
+							<div class="keyPersonnel_item_left">
+								<div class="zdry_img lightboder3">
+									<img src="../img/photo_img.png" />
+								</div>
+								<div class="info lightboder3">
+									<p>姓名:<span>阿依阿扎</span></p>
+									<p>编号:<span>55190228</span></p>
+									<p>阶段：<span>康复巩固期</span></p>
+									<p>
+										<a>详细信息</a>
+									</p>
+								</div>
+								<div class="keyPersonnel_class red lightboder3">
+									<div class="keyPersonnel_class-text">
+										<p class="score">A</p>
+										<p class="v-desc">风险等级</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="keyPersonnel_item">
+							<div class="keyPersonnel_item_left">
+								<div class="zdry_img lightboder3">
+									<img src="../img/photo_img.png" />
+								</div>
+								<div class="info lightboder3">
+									<p>姓名:<span>阿依阿扎</span></p>
+									<p>编号:<span>55190228</span></p>
+									<p>阶段：<span>康复巩固期</span></p>
+									<p>
+										<a>详细信息</a>
+									</p>
+								</div>
+								<div class="keyPersonnel_class red lightboder3">
+									<div class="keyPersonnel_class-text">
+										<p class="score">A</p>
+										<p class="v-desc">风险等级</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="keyPersonnel_item">
+							<div class="keyPersonnel_item_left">
+								<div class="zdry_img lightboder3">
+									<img src="../img/photo_img.png" />
+								</div>
+								<div class="info lightboder3">
+									<p>姓名:<span>阿依阿扎</span></p>
+									<p>编号:<span>55190228</span></p>
+									<p>阶段：<span>康复巩固期</span></p>
+									<p>
+										<a>详细信息</a>
+									</p>
+								</div>
+								<div class="keyPersonnel_class red lightboder3">
+									<div class="keyPersonnel_class-text">
+										<p class="score">A</p>
+										<p class="v-desc">风险等级</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="keyPersonnel_item">
+							<div class="keyPersonnel_item_left">
+								<div class="zdry_img lightboder3">
+									<img src="../img/photo_img.png" />
+								</div>
+								<div class="info lightboder3">
+									<p>姓名:<span>阿依阿扎</span></p>
+									<p>编号:<span>55190228</span></p>
+									<p>阶段：<span>康复巩固期</span></p>
+									<p>
+										<a>详细信息</a>
+									</p>
+								</div>
+								<div class="keyPersonnel_class red lightboder3">
+									<div class="keyPersonnel_class-text">
+										<p class="score">A</p>
+										<p class="v-desc">风险等级</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="keyPersonnel_item">
+							<div class="keyPersonnel_item_left">
+								<div class="zdry_img lightboder3">
+									<img src="../img/photo_img.png" />
+								</div>
+								<div class="info lightboder3">
+									<p>姓名:<span>阿依阿扎</span></p>
+									<p>编号:<span>55190228</span></p>
+									<p>阶段：<span>康复巩固期</span></p>
+									<p>
+										<a>详细信息</a>
+									</p>
+								</div>
+								<div class="keyPersonnel_class red lightboder3">
+									<div class="keyPersonnel_class-text">
+										<p class="score">A</p>
+										<p class="v-desc">风险等级</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			<div class="goouttype_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8"  th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Application_goout.js" type="text/javascript" charset="utf-8" th:src="@{/js/Application_goout.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

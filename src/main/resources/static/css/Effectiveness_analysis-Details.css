@@ -1,0 +1,36 @@
+.men-attr_left.yellow:hover{
+    background-image: url(../img/risk_icon_b_122x96.png) !important;
+    cursor: default !important;
+}
+.men-attr_left.red:hover{
+    background-image: url(../img/risk_icon_a_122x96.png); !important;
+    cursor: default !important;
+}
+.men-attr_left.blue:hover{
+    background-image: url(../img/risk_icon_c_122x96.png) !important;
+    cursor: default !important;
+}
+.men-attr_left.green:hover{
+    background-image: url(../img/risk_icon_d_122x96.png) !important;
+    cursor: default !important;
+}
+
+.men-attr_right.yellow:hover{
+    background-image: url(../img/risk_icon_b_122x96.png) !important;
+    cursor: default !important;
+}
+.men-attr_right.red:hover{
+    background-image: url(../img/risk_icon_a_122x96.png); !important;
+    cursor: default !important;
+}
+.men-attr_right.blue:hover{
+    background-image: url(../img/risk_icon_c_122x96.png) !important;
+    cursor: default !important;
+}
+.men-attr_right.green:hover{
+    background-image: url(../img/risk_icon_d_122x96.png) !important;
+    cursor: default !important;
+}
+.men-attr_left,.men-attr_right{
+    cursor: default !important;
+}

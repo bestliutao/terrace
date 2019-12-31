@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Console.css" th:href="@{/css/Console.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<title>控制台</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='console')"></div>
+		<div class="content_left">
+			<div class="content_left_upper">
+				<div class="title1">
+					<span class="title_left1">
+						CPU 使用率
+					</span>
+					<span class="title_right1">
+						<span class="clock"></span>
+					</span>
+				</div>
+				<!--<div class="zqbtns1">
+					<a href="javascript:;" class="lightboder" id="cpu24">24 小时</a>
+					<a href="javascript:;" class="lightboder2" id="cpu60">60 分钟</a>					
+				</div>-->
+				<div id="cpu_table" value='0'>
+					
+				</div>
+			</div>
+			<div class="content_left_below">
+				<div class="title1">
+					<span class="title_left1">
+						内存使用率
+					</span>
+					<span class="title_right1">
+						<span class="clock"></span>
+					</span>
+		 		</div>
+		 		<!--<div class="zqbtns1">
+					<a href="javascript:;" class="lightboder" id="nc24">24 小时</a>
+					<a href="javascript:;" class="lightboder2" id="nc60">60 分钟</a>					
+				</div>-->
+
+		 		<div id="nc_table">
+					
+				</div>
+			</div>
+		</div>
+		<div class="content_in">
+			<div class="content_in_on">
+				<p class="kzt_title">智慧戒毒所分布</p>
+				<img src="../img/CS4.png" />
+				<div class="men-attr_left CPU_lab">
+					<div class="men-attr-text_left">
+						<p class="men-attr-head middle"></p>
+						<p class="men-attr-desc">CPU</p>
+					</div>
+				</div>
+				<div class="men-attr_left  yp_lab">
+					<div class="men-attr-text_left">
+						<p class="men-attr-head middle"></p>
+						<p class="men-attr-desc">硬盘</p>
+					</div>
+				</div>
+				<div class="men-attr_left  nc_lab">
+					<div class="men-attr-text_left">
+						<p class="men-attr-head middle"></p>
+						<p class="men-attr-desc">内存</p>
+					</div>
+				</div>
+				<div class="men-attr_left  wl_lab">
+					<div class="men-attr-text_left">
+						<p class="men-attr-head middle"></p>
+						<p class="men-attr-desc">网络</p>
+					</div>
+				</div>
+			</div>
+			<div class="content_in_under">
+				<p class="kzt_cs_title">控制台</p>
+				<div class="sbs">
+					<div id="zt"></div>
+					<div class="csbtn">
+						<div class="btn">
+							<button id="start" class="lightboder2"  style="cursor: pointer;">开启</button>
+							<button id="stop" class="lightboder2"  style="cursor: pointer;">停止</button>
+						<a href="javascript:;" id="refresh" class="lightboder2">刷新</a>
+						</div>
+					</div>
+					<div id="yc" value='0'></div>
+				</div>
+				<div class="sbs_title">
+					<div class="zt_title">状态</div>
+					<div class="csbtn_title"></div>
+					<div class="yc_title">异常</div>
+				</div>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="content_right_upper">
+				<div class="title2">
+					<span class="title_left2">
+						硬盘使用率
+					</span>
+					<span class="title_right2">
+						<span class="clock"></span>
+					</span>
+		 		</div>
+		 		<!--<div class="zqbtns">
+					<a href="javascript:;" class="lightboder" id="yp24">24 小时</a>
+					<a href="javascript:;" class="lightboder2" id="yp60">60 分钟</a>					
+				</div>-->
+		 		<div id="yp_table">
+					
+				</div>
+			</div>
+			<div class="content_right_below">
+				<div class="title2">
+					<span class="title_left2">
+						网络流入流出速率
+					</span>
+					<span class="title_right2">
+						<span class="clock"></span>
+					</span>
+		 		</div>
+		 		<!--<div class="zqbtns">
+					<a href="javascript:;" class="lightboder" id="wl24">24 小时</a>
+					<a href="javascript:;" class="lightboder2" id="wl60">60 分钟</a>					
+				</div>-->
+		 		<div id="speed_table">
+					
+				</div>
+			</div>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Console.js" type="text/javascript" charset="utf-8" th:src="@{/js/Console.js}"></script>
+		<script type="text/javascript" id="ztycpd">
+		</script>
+	</body>
+
+</html>

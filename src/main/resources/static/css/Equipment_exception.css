@@ -1,0 +1,145 @@
+/*边距清空*/
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	
+	height: 100%;
+	margin: 0 auto;
+	min-width: 1920px;
+}
+
+body {
+	width: 100%;
+	min-width: 1920px;
+	background-color: #020047;
+}
+
+.exception{
+	width: 1890px;
+	height: 862px;
+	background-size: 100% 100%;
+	margin-left: 15px;
+	position: relative;
+	display: block;
+}
+.back {
+	display: inline-block;
+	position: absolute;
+	top: 23px;
+	left: 21px;
+	color: #fff;
+	cursor: pointer;
+	width: 78px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	font-family: trends;
+	border: solid 1px #3dd7fd;
+}
+.exception_title{
+	display: inline-block;
+	font-family: TRENDS;
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 1px;
+	color: #ffffff;
+	position: absolute;
+	left: 121px;
+	top: 32px;
+}
+.equipmenttype_ul{
+	height: 17px;
+	width: auto;
+	display: inline-block;
+	position: absolute;
+	left: 765px;
+	top: 33px;
+}
+.type_li{
+	height: 17px;
+	width: auto;
+	float: left;
+	font-family: TRENDS;
+	text-decoration: underline;
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #80a7e9;
+	margin-right: 45px;
+	cursor: pointer;
+}
+.type_page{
+	width: 440px;
+	height: 38px;
+	position: absolute;
+
+	display: inline-block;
+	bottom: 18px;
+	right: 21px;
+}
+.licolor{
+	color: #fff;
+}
+#date_select{
+	width: 160px;
+	height: 38px;
+	position: absolute;
+	top: 23px;
+	right: 21px;
+}
+.layui-input{
+    background-color: rgba(0,0,0,0) !important;
+    border: solid 1px #3dd7fd !important;
+    color: #ffffff;
+    padding-left: 20px !important;
+}
+#date_table{
+	width: 1890px;
+	height: 200px;
+
+	position: absolute;
+	top: 84px;
+}
+.date_content_table{
+	width: 1823px;
+	height: 530px;	
+	position: absolute;
+	top: 310px;
+	left: 45px;
+}
+.layui-table tr,.layui-table-header{
+    height: 44px !important;
+}
+.layui-table-header,.layui-table th{
+	border-style: solid;
+    border-color: #3DD7FD !important;
+    background-color: #3365ae !important;
+    text-align: center;
+    color: #fff;
+}
+.layui-table-cell{
+	 text-align: center;
+    color: #fff;
+}
+.layui-table-page{
+	border: none !important;
+}
+/*.layui-table-view{
+	border: none !important;
+}*/
+.layui-form.layui-border-box.layui-table-view{
+	   border-color: #3DD7FD !important;
+	   height: 442px !important;
+}
+.layui-laypage-skip .layui-input{
+	    padding-left: 0 !important;
+}
+.layui-form.layui-border-box.layui-table-view .layui-table-page{
+	padding: 15px 7px 0 !important;
+
+}

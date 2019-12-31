@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sznk.terrace.mapper.EnvirOidMapper" >
+  <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.EnvirOid" >
+    <id column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="var_name" property="varName" jdbcType="VARCHAR" />
+    <result column="var_desc" property="varDesc" jdbcType="VARCHAR" />
+    <result column="min_value" property="minValue" jdbcType="DOUBLE" />
+    <result column="init_value" property="initValue" jdbcType="DOUBLE" />
+    <result column="max_value" property="maxValue" jdbcType="DOUBLE" />
+    <result column="lower_bound" property="lowerBound" jdbcType="DOUBLE" />
+    <result column="upper_bound" property="upperBound" jdbcType="DOUBLE" />
+    <result column="normal_value" property="normalValue" jdbcType="DOUBLE" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oid, var_name, var_desc, min_value, init_value, max_value, lower_bound, upper_bound, 
+    normal_value, ip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.EnvirOidExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from envir_oid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from envir_oid
+    where oid = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from envir_oid
+    where oid = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.sznk.terrace.bean.EnvirOidExample" >
+    delete from envir_oid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.sznk.terrace.bean.EnvirOid" >
+    insert into envir_oid (oid, var_name, var_desc, 
+      min_value, init_value, max_value, 
+      lower_bound, upper_bound, normal_value, 
+      ip)
+    values (#{oid,jdbcType=VARCHAR}, #{varName,jdbcType=VARCHAR}, #{varDesc,jdbcType=VARCHAR}, 
+      #{minValue,jdbcType=DOUBLE}, #{initValue,jdbcType=DOUBLE}, #{maxValue,jdbcType=DOUBLE}, 
+      #{lowerBound,jdbcType=DOUBLE}, #{upperBound,jdbcType=DOUBLE}, #{normalValue,jdbcType=DOUBLE}, 
+      #{ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.EnvirOid" >
+    insert into envir_oid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="varName != null" >
+        var_name,
+      </if>
+      <if test="varDesc != null" >
+        var_desc,
+      </if>
+      <if test="minValue != null" >
+        min_value,
+      </if>
+      <if test="initValue != null" >
+        init_value,
+      </if>
+      <if test="maxValue != null" >
+        max_value,
+      </if>
+      <if test="lowerBound != null" >
+        lower_bound,
+      </if>
+      <if test="upperBound != null" >
+        upper_bound,
+      </if>
+      <if test="normalValue != null" >
+        normal_value,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="varName != null" >
+        #{varName,jdbcType=VARCHAR},
+      </if>
+      <if test="varDesc != null" >
+        #{varDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="minValue != null" >
+        #{minValue,jdbcType=DOUBLE},
+      </if>
+      <if test="initValue != null" >
+        #{initValue,jdbcType=DOUBLE},
+      </if>
+      <if test="maxValue != null" >
+        #{maxValue,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerBound != null" >
+        #{lowerBound,jdbcType=DOUBLE},
+      </if>
+      <if test="upperBound != null" >
+        #{upperBound,jdbcType=DOUBLE},
+      </if>
+      <if test="normalValue != null" >
+        #{normalValue,jdbcType=DOUBLE},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.sznk.terrace.bean.EnvirOidExample" resultType="java.lang.Integer" >
+    select count(*) from envir_oid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update envir_oid
+    <set >
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varName != null" >
+        var_name = #{record.varName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varDesc != null" >
+        var_desc = #{record.varDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minValue != null" >
+        min_value = #{record.minValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.initValue != null" >
+        init_value = #{record.initValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxValue != null" >
+        max_value = #{record.maxValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lowerBound != null" >
+        lower_bound = #{record.lowerBound,jdbcType=DOUBLE},
+      </if>
+      <if test="record.upperBound != null" >
+        upper_bound = #{record.upperBound,jdbcType=DOUBLE},
+      </if>
+      <if test="record.normalValue != null" >
+        normal_value = #{record.normalValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update envir_oid
+    set oid = #{record.oid,jdbcType=VARCHAR},
+      var_name = #{record.varName,jdbcType=VARCHAR},
+      var_desc = #{record.varDesc,jdbcType=VARCHAR},
+      min_value = #{record.minValue,jdbcType=DOUBLE},
+      init_value = #{record.initValue,jdbcType=DOUBLE},
+      max_value = #{record.maxValue,jdbcType=DOUBLE},
+      lower_bound = #{record.lowerBound,jdbcType=DOUBLE},
+      upper_bound = #{record.upperBound,jdbcType=DOUBLE},
+      normal_value = #{record.normalValue,jdbcType=DOUBLE},
+      ip = #{record.ip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sznk.terrace.bean.EnvirOid" >
+    update envir_oid
+    <set >
+      <if test="varName != null" >
+        var_name = #{varName,jdbcType=VARCHAR},
+      </if>
+      <if test="varDesc != null" >
+        var_desc = #{varDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="minValue != null" >
+        min_value = #{minValue,jdbcType=DOUBLE},
+      </if>
+      <if test="initValue != null" >
+        init_value = #{initValue,jdbcType=DOUBLE},
+      </if>
+      <if test="maxValue != null" >
+        max_value = #{maxValue,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerBound != null" >
+        lower_bound = #{lowerBound,jdbcType=DOUBLE},
+      </if>
+      <if test="upperBound != null" >
+        upper_bound = #{upperBound,jdbcType=DOUBLE},
+      </if>
+      <if test="normalValue != null" >
+        normal_value = #{normalValue,jdbcType=DOUBLE},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.EnvirOid" >
+    update envir_oid
+    set var_name = #{varName,jdbcType=VARCHAR},
+      var_desc = #{varDesc,jdbcType=VARCHAR},
+      min_value = #{minValue,jdbcType=DOUBLE},
+      init_value = #{initValue,jdbcType=DOUBLE},
+      max_value = #{maxValue,jdbcType=DOUBLE},
+      lower_bound = #{lowerBound,jdbcType=DOUBLE},
+      upper_bound = #{upperBound,jdbcType=DOUBLE},
+      normal_value = #{normalValue,jdbcType=DOUBLE},
+      ip = #{ip,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,329 @@
+/*边距清空*/
+* {
+	padding: 0;
+	margin: 0;
+}
+html {
+	height: 100%;
+	margin: 0 auto;
+	min-width: 1920px;
+}
+body {
+	width: 100%;
+	min-width: 1920px;
+	background-color: #020047;
+}
+.lightboder4{
+	background-color: rgba(0,0,0,0);
+	outline: none;
+	border: 1px solid #7a8b8e;
+	box-shadow: inset 0 0  6px rgb(68, 80, 82);
+	-webkit-box-shadow: inset 0 0 16px rgb(68, 80, 82);
+	color: #7a8b8e !important;
+	cursor: not-allowed;
+}
+.men-attr_left.yellow:hover{
+	background-image: url(../img/risk_icon_b_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_left.red:hover{
+	background-image: url(../img/risk_icon_a_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_left.blue:hover{
+	background-image: url(../img/risk_icon_c_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_left.green:hover{
+	background-image: url(../img/risk_icon_d_122x96.png) !important;
+	cursor: default !important;
+}
+
+.men-attr_right.yellow:hover{
+	background-image: url(../img/risk_icon_b_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_right.red:hover{
+	background-image: url(../img/risk_icon_a_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_right.blue:hover{
+	background-image: url(../img/risk_icon_c_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_right.green:hover{
+	background-image: url(../img/risk_icon_d_122x96.png) !important;
+	cursor: default !important;
+}
+.men-attr_left,.men-attr_right{
+	cursor: default !important;
+}
+/*3部分高度*/
+.content_left,
+.content_in,
+.content_right {
+	height: 864px;
+	float: left;
+}
+/*左右部分宽度*/
+.content_left,
+.content_right {
+	width: 487px;
+}
+/*左边距*/
+.content_left {
+	margin-left: 15px;
+}
+/*中间部分左右边距---右边不需要设置，剩余15px*/
+.content_in {
+	width: 884px;
+	margin: 0 16px;
+}
+/*左部分*/
+.content_left_upper,.content_left_below{
+	width: 100%;
+	height: 426px;
+	background-image: url(../img/CS2.png);
+    background-repeat: no-repeat;
+    background-size: 100% 426px;
+   
+    
+}
+/*右部分*/
+.content_right_upper,.content_right_below{
+	width: 100%;
+	height: 426px;
+	background-image: url(../img/CS3.png);
+    background-repeat: no-repeat;
+    background-size: 100% 426px;
+}
+/*左右部分下模块上边距*/
+.content_left_below,.content_right_below{
+	margin-top: 12px;
+}
+/*中间部分*/
+
+.content_in_on {
+	width: 884px;
+	height: 622px;
+	position: relative;
+}
+
+.content_in_under {
+	width: 884px;
+	height: 242px;
+	background-image: url(../img/4.png);
+	background-repeat: no-repeat;
+	background-size: 884px 242px;
+	position: relative;
+}
+.content_in_on .kzt_title {
+	width: auto;
+	height: 13px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 1px;
+	color: #ffffff;
+}
+.kzt_cs_title {
+	width: 198px;
+	height: 13px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 13px;
+	letter-spacing: 1px;
+	color: #ffffff;
+	position: absolute;
+	top: 37px;
+	left: 17px;
+}
+.sbs {
+	width: 80%;
+	margin-left: 10%;
+	height: 148px;
+	position: absolute;
+	top: 50px;
+	display: flex;
+}
+.sbs_title {
+	width: 80%;
+	height: 34px;
+	margin-left: 10%;
+	display: flex;
+	position: absolute;
+	top: 198px;
+	text-align: center;
+	font-family: PingFang-SC-Regular;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+.zt_title,#zt,.yc_title,#yc{
+	flex: 1;
+}
+.csbtn_title,.csbtn{
+	flex: 2;
+}
+.csbtn{
+	text-align: center;
+	position: relative;
+}
+.CPU_lab {
+	position: absolute !important;
+	top: 108px;
+	left: 61px;
+}
+
+.yp_lab {
+	position: absolute !important;
+	top: 108px;
+	right: 32px;
+}
+
+.nc_lab {
+	position: absolute !important;
+	top: 444px;
+	left: 61px;
+}
+
+.wl_lab {
+	position: absolute !important;
+	top: 444px;
+	right: 32px;
+}
+.content_in_on img {
+    width: 549px;
+    height: 271px;
+    position: absolute;
+    top: 173px;
+    left: 167px;
+}
+.men-attr_left.red,.men-attr_left.green,.men-attr_left.blue,.men-attr_left.yellow{
+    background-size: 131px 110px !important;
+}
+.men-attr_left, .men-attr_right{
+	width: 134px !important;
+}
+.title1{
+	width: 428px;
+	height: auto;
+	padding-top: 20px;
+	margin-left: 20px;
+	font-family: PingFang-SC-Regular;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #fff;
+}
+.title_left1{
+	float: left;
+}
+.title_right1{
+	float: right;
+}
+.title2{
+	width: 428px;
+	height: auto;
+	padding-top: 20px;
+	margin-left: 37px;
+	font-family: PingFang-SC-Regular;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #fff;
+}
+.title_left2{
+	float: left;
+}
+.title_right2{
+	float: right;
+}
+#start,#stop,#refresh{
+	display: inline-block;
+	width: 85px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	margin: 0 8px;
+}
+.btn{
+	height: 30px;
+	line-height: 30px;
+	width: 100%;
+	position: absolute;
+	top: 59px;
+}
+.btn a:hover{
+	text-shadow: 0 0 10px #00FFFF;
+}
+#cpu_table,#nc_table{
+	width: 87%;
+	height: 60%;
+	padding-top: 60px;
+	margin-left: 21px;
+}
+#yp_table{
+	width: 87%;
+	height: 60%;
+	padding-top: 60px;
+	margin-left: 40px;
+}
+#speed_table{
+	width: 87%;
+	height: 70%;
+	padding-top: 60px;
+	margin-left: 40px;
+}
+.men-attr-head.middle {
+    font-size: 30px !important;
+   
+}
+.zqbtns1{
+	height: 30px;
+	width: 428px;
+	margin-top: 56px;
+	margin-left: 20px;
+	
+}
+.zqbtns1 a{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	width: 85px;
+	float: right;
+	font-family: trends;
+	text-align: center;
+	color: #fff;
+}
+.zqbtns1 a:hover{
+	color: #fff;
+}
+.zqbtns{
+	height: 30px;
+	width: 428px;
+	margin-top: 56px;
+	margin-left: 34px;
+	
+}
+.zqbtns a{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	width: 85px;
+	float: right;
+	font-family: trends;
+	text-align: center;
+	color: #fff;
+}
+.zqbtns a:hover{
+	color: #fff;
+}
+.lightboder{
+	height: 32px !important;
+}

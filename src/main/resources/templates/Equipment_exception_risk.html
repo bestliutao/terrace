@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/Equipment_exception.css" th:href="@{/css/Equipment_exception.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+
+		<title>安全风险动态预警</title>
+	</head>
+
+	<body>
+		<img src="../img/bg.png" style="z-index: -99;position: absolute;display: block;width: 1920px;height: 100%;" />
+		<div th:replace="bar:: #index_header(activeUri='risk')"></div>
+		<div class="exception">
+			<!--<img src="../img/bg2.png" />-->
+			<img src="../img/bg2.png" style="z-index: -98;position: absolute;display: block;width: 1890px;height: 862px;" />
+			<a class="back" th:href="@{/risk}">返回</a>
+			<div class="exception_title">
+				<span id="Equipment_type">监控</span>设备异常<span style="font-family: PingFang-SC-Heavy;">（<span id="Equipment_num">8</span>个）</span>
+			</div>
+			<ul class="equipmenttype_ul">
+				<li class="type_li jk licolor">监控</li>
+				<li class="type_li mj">门禁</li>
+				<li class="type_li xf">环控</li>
+				<li class="type_li dw">定位</li>
+				<li class="type_li qt">其他</li>
+			</ul>
+			<input type="text" class="layui-input" id="date_select" placeholder="yyyy 年 MM 月">
+
+			<div id="date_table">
+
+			</div>
+			<div class="date_content_table">
+				<table id="date_content_table" lay-filter="cont-equi"></table>
+			</div>
+			<div class="type_page"></div>
+		</div>
+
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Equipment_exception.js" type="text/javascript" charset="utf-8" th:src="@{/js/Equipment_exception.js}"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

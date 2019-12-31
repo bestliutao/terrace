@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/gloas.css" th:href="@{/css/gloas.css}"/>
+
+</head>
+<body>
+<div id="index_header" th:fragment="topbar">
+    <div class="nav_left">
+        <ul class="menu">
+            <li class="top">
+                <a href="/console" th:href="@{/console}" target="_self" class="top_link gzt_link" th:class="${activeUri=='console'?'top_link gzt_link bar':'top_link gzt_link'}"><span>工作台</span></a>
+            </li>
+            <li class="top">
+                <a href="/intelligent" th:href="@{/intelligent}" target="_self" class="top_link znfx_link" th:class="${activeUri=='intelligent'?'top_link znfx_link bar':'top_link znfx_link'}"><span>智能分析研判</span></a>
+            </li>
+            <li class="top">
+                <a href="/hazard" th:href="@{/hazard}" class="top_link wxxfx_link bar" target="_self" th:class="${activeUri=='hazard'?'top_link wxxfx_link bar':'top_link wxxfx_link'}"><span>戒毒人员危险性分析</span></a>
+            </li>
+            <li class="top">
+                <a href="javascript:;" class="top_link zhjd_link" target="index_iframe" style="color: #fff !important;cursor: default;font-weight: normal;font-stretch: normal;line-height: 30px;letter-spacing: 4px;"><span>智慧戒毒大数据平台</li></span></a>
+            <li class="top">
+                <a href="/effectiveness"  th:href="@{/effectiveness}" target="_self" th:class="${activeUri=='effectiveness'?'top_link jzxn_link bar':'top_link jzxn_link'}" class="top_link jzxn_link"><span>戒治效能分析评估</span></a>
+            </li>
+            <li class="top">
+                <a href="/judgment" th:href="@{/judgment}" class="top_link sqaq_link" target="_self" th:class="${activeUri=='judgment'?'top_link sqaq_link bar':'top_link sqaq_link'}"><span>所情安全态势研判</span></a>
+            </li>
+            <li class="top">
+                <a href="/risk" th:href="@{/risk}" class="top_link aqfx_link" target="_self" th:class="${activeUri=='risk'?'top_link aqfx_link bar':'top_link aqfx_link'}"><span>安全风险动态预警</span></a>
+            </li>
+            <li class="nav_right">
+                <p></p><span class="administration">[[${session.username}]]</span><span class="administrationID">[[${session.userId}]]</span><span><a class="exit" th:href="@{/}">退出</a></span></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
