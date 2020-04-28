@@ -2,16 +2,14 @@ package cn.sznk.terrace.mapper;
 
 import cn.sznk.terrace.bean.TbConsumption;
 import cn.sznk.terrace.bean.TbConsumptionExample;
-
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-
 public interface TbConsumptionMapper {
+    int consumptionNumber(@Param("ltMoney") String ltMoney, @Param("gtMoney") String gtMoney, @Param("date") String date,@Param("code") String code);
+    int consumptionNumberTwo(@Param("ltMoney") String ltMoney, @Param("date") String date,@Param("code") String code);
 
-    int consumptionNumber(@Param("ltMoney") String ltMoney,@Param("gtMoney") String gtMoney,@Param("date") String date);
-    int consumptionNumberTwo(@Param("ltMoney") String ltMoney,@Param("date") String date);
     int countByExample(TbConsumptionExample example);
 
     int deleteByExample(TbConsumptionExample example);

@@ -11,6 +11,8 @@ public class TbModulus {
 
     private Integer suddendeath;
 
+    private String deptCode;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class TbModulus {
 
     public void setSuddendeath(Integer suddendeath) {
         this.suddendeath = suddendeath;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

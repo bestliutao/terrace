@@ -13,6 +13,8 @@ public class TbConsumption {
 
     private Date consumptionTime;
 
+    private String deptCode;
+
     public Integer getConsumptionId() {
         return consumptionId;
     }
@@ -51,5 +53,13 @@ public class TbConsumption {
 
     public void setConsumptionTime(Date consumptionTime) {
         this.consumptionTime = consumptionTime;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

@@ -26,20 +26,26 @@ public class LoginController {
     @GetMapping(value = "/user/login")
     public E3Result login(String username, String password,
                           Map<String,Object> map, HttpSession session){
+        System.out.println(username+"  "+password);
         TbUserExample example = new TbUserExample();
-        example.createCriteria().andUserIdEqualTo(Integer.valueOf(username)).andUserPasswordEqualTo(password);
+        example.createCriteria().andUserIdEqualTo(username.trim()).andUserPasswordEqualTo(password);
         List<TbUser> tbUsers = tbUserMapper.selectByExample(example);
         String name = null;
-        for (TbUser tb :
-                tbUsers) {
-            name=tb.getUserName();
-        }
+        String dept=null;
         //System.out.println(username+""+password+"file"+" "+tbUsers.size());
         if(tbUsers.size()>0){
+            for (TbUser tb : tbUsers) {
+                name=tb.getUserName();
+                dept=tb.getDeptCode();
+            }
            // System.out.println("success");
             //登陆成功，防止表单重复提交，可以重定向到主页
             session.setAttribute("username",name);
             session.setAttribute("userId",username);
+            session.setAttribute("deptCode",dept);
+            if (dept.equals("0000")){
+                return E3Result.build(201,"");
+            }
             return E3Result.ok();
         }else{
             //登陆失败

@@ -23,8 +23,9 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     private TbEnvirmsgMapper tbEnvirmsgMapper;
 
     //全部视频接口
-    public E3Result allVideoSurveillance(){
+    public E3Result allVideoSurveillance(String dept){
         TbCameraExample example = new TbCameraExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
         List<TbCamera> tbCameras = tbCameraMapper.selectByExample(example);
         for (TbCamera tbCamera:tbCameras) {
             tbCamera.setIp("rtsp://admin:12345678a@"+tbCamera.getIp()+":554/cam/realmonitor?channel=1&subtype=0");
@@ -33,9 +34,9 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     }
 
     //视频监控
-    public E3Result videoSurveillance(Integer id){
+    public E3Result videoSurveillance(Integer id,String dept){
         TbCameraExample example = new TbCameraExample();
-        example.createCriteria().andSortIdEqualTo(1).andFloorEqualTo(id);
+        example.createCriteria().andSortIdEqualTo(1).andFloorEqualTo(id).andDeptCodeEqualTo(dept);
         List<TbCamera> selectByExample = tbCameraMapper.selectByExample(example);
         if(selectByExample.size()>0) {
             return E3Result.ok(selectByExample);
@@ -44,7 +45,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
         }
     }
     //7天监控异常设备数量接口
-    public List<TitileNumBean> safeRiskMonitorNum(String date){
+    public List<TitileNumBean> safeRiskMonitorNum(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         String[] dd=date.split("-");
         if(Integer.valueOf(dd[2])>=7){
@@ -52,7 +53,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                 String today = dd[0]+"-"+dd[1]+"-"+(Integer.valueOf(dd[2])-i);
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle(dd[1]+"/"+(Integer.valueOf(dd[2])-i));
-                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today);
+                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -65,7 +66,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                 String today=dd[0]+"-"+(Integer.valueOf(dd[1])-1)+"-"+(30-i);
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle((Integer.valueOf(dd[1])-1)+"/"+(30-i));
-                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today);
+                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -77,7 +78,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                String today = dd[0]+"-"+dd[1]+"-"+i;
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle(dd[1]+"/"+i);
-                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today);
+                int i1 = tbMonitorabnormalMapper.todayBadMonitorNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -90,7 +91,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     }
 
     //7天环控异常设备数量接口
-    public List<TitileNumBean> safeRiskEnvirNum(String date){
+    public List<TitileNumBean> safeRiskEnvirNum(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         String[] dd=date.split("-");
         if(Integer.valueOf(dd[2])>=7){
@@ -98,7 +99,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                 String today = dd[0]+"-"+dd[1]+"-"+(Integer.valueOf(dd[2])-i);
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle(dd[1]+"/"+(Integer.valueOf(dd[2])-i));
-                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today);
+                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -111,7 +112,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                 String today=dd[0]+"-"+(Integer.valueOf(dd[1])-1)+"-"+(30-i);
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle((Integer.valueOf(dd[1])-1)+"/"+(30-i));
-                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today);
+                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -123,7 +124,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
                 String today = dd[0]+"-"+dd[1]+"-"+i;
                 TitileNumBean titileNumBean = new TitileNumBean();
                 titileNumBean.setTitle(dd[1]+"/"+i);
-                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today);
+                int i1 = tbEnvirmsgMapper.todayBadEnvirNum(today,dept);
                 if (String.valueOf(i1)==null||i1==0){
                     titileNumBean.setNumber("0");
                 }else {
@@ -136,7 +137,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     }
 
     //设备异常详细页 线性图表接口
-    public List<TitileNumBean> safeRiskDetilsNum(String date){
+    public List<TitileNumBean> safeRiskDetilsNum(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         String[] dd=date.split("-");
         for (int i=1;i<=30;i++){
@@ -144,9 +145,9 @@ public class SafeRiskServiceImpl implements SafeRiskService{
             titileNumBean.setTitle(dd[1]+"/"+i);
             int i1=0;
             if (i<10){
-                i1= tbMonitorabnormalMapper.todayBadMonitorNum(dd[0] + "-0" + dd[1] + "-" + i);
+                i1= tbMonitorabnormalMapper.todayBadMonitorNum(dd[0] + "-0" + dd[1] + "-" + i,dept);
             }else {
-                i1= tbMonitorabnormalMapper.todayBadMonitorNum(dd[0] + "-" + dd[1] + "-" + i);
+                i1= tbMonitorabnormalMapper.todayBadMonitorNum(dd[0] + "-" + dd[1] + "-" + i,dept);
             }
             if (String.valueOf(i1)==null||i1==0){
                 titileNumBean.setNumber("0");
@@ -159,7 +160,7 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     }
 
     //设备异常详细页 线性图表接口 环控
-    public List<TitileNumBean> safeRiskEnvir(String date){
+    public List<TitileNumBean> safeRiskEnvir(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         String[] dd=date.split("-");
         for (int i=1;i<=30;i++){
@@ -167,9 +168,9 @@ public class SafeRiskServiceImpl implements SafeRiskService{
             titileNumBean.setTitle(dd[1]+"/"+i);
             int i1=0;
             if (i<10){
-                i1= tbEnvirmsgMapper.todayBadEnvirNum(dd[0] + "-0" + dd[1] + "-" + i);
+                i1= tbEnvirmsgMapper.todayBadEnvirNum(dd[0] + "-0" + dd[1] + "-" + i,dept);
             }else {
-                i1= tbEnvirmsgMapper.todayBadEnvirNum(dd[0] + "-" + dd[1] + "-" + i);
+                i1= tbEnvirmsgMapper.todayBadEnvirNum(dd[0] + "-" + dd[1] + "-" + i,dept);
             }
             if (String.valueOf(i1)==null||i1==0){
                 titileNumBean.setNumber("0");
@@ -183,8 +184,8 @@ public class SafeRiskServiceImpl implements SafeRiskService{
 
 
     //设备异常详细页 说明图表接口
-    public UserTable safeRiskDetilsData(String pageNo, String pageSize, String date){
-        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitor(date);
+    public UserTable safeRiskDetilsData(String pageNo, String pageSize, String date,String dept){
+        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitor(date,dept);
 
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -206,8 +207,8 @@ public class SafeRiskServiceImpl implements SafeRiskService{
     }
 
     //环控设备异常详细页 说明图表接口
-    public UserTable safeRiskEnvirData(String pageNo,String pageSize,String date){
-        List<TbEnvirmsg> tbEnvirmsgs = tbEnvirmsgMapper.todayBadEnvir(date);
+    public UserTable safeRiskEnvirData(String pageNo,String pageSize,String date,String dept){
+        List<TbEnvirmsg> tbEnvirmsgs = tbEnvirmsgMapper.todayBadEnvir(date,dept);
 
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -230,19 +231,19 @@ public class SafeRiskServiceImpl implements SafeRiskService{
 
 
     //当天设备异常个数接口
-    public BadEuiqment safeRiskTodayBadNum(String date){
-        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitor(date);
+    public BadEuiqment safeRiskTodayBadNum(String date,String dept){
+        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitor(date,dept);
         BadEuiqment euiqment = new BadEuiqment();
         euiqment.setMonitor(tbMonitorabnormals.size());
         euiqment.setDoor(0);
-        euiqment.setEnvironmen(tbEnvirmsgMapper.todayBadEnvirNum(date));
+        euiqment.setEnvironmen(tbEnvirmsgMapper.todayBadEnvirNum(date,dept));
         euiqment.setLocation(0);
         return euiqment;
     }
 
     //当天监控设备状态接口
-    public UserTable todayMonitorStatus(String pageNo,String pageSize,String date,String group){
-        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitorMsg(group, date);
+    public UserTable todayMonitorStatus(String pageNo,String pageSize,String date,String group,String dept){
+        List<TbMonitorabnormal> tbMonitorabnormals = tbMonitorabnormalMapper.todayBadMonitorMsg(group, date,dept);
 
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -265,8 +266,8 @@ public class SafeRiskServiceImpl implements SafeRiskService{
         return userTable;
     }
     //当天环控设备状态接口
-    public UserTable todayEnvirStatus(String pageNo,String pageSize,String date){
-        List<TbEnvirmsg> tbEnvirmsg = tbEnvirmsgMapper.todayBadEnvir(date);
+    public UserTable todayEnvirStatus(String pageNo,String pageSize,String date,String dept){
+        List<TbEnvirmsg> tbEnvirmsg = tbEnvirmsgMapper.todayBadEnvir(date,dept);
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
         if (tbEnvirmsg.size()>0){
@@ -290,8 +291,9 @@ public class SafeRiskServiceImpl implements SafeRiskService{
 
 
     //重点危险性人员展示
-    public List<TbKeyman> safeRiskKeyMan(){
+    public List<TbKeyman> safeRiskKeyMan(String dept){
         TbKeymanExample example = new TbKeymanExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
         List<TbKeyman> tbKeymen = tbKeymanMapper.selectByExample(example);
         return tbKeymen;
     }

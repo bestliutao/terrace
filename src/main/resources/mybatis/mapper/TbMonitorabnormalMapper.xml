@@ -9,20 +9,21 @@
     <result column="monitor_group" property="monitorGroup" jdbcType="VARCHAR" />
     <result column="monitor_area" property="monitorArea" jdbcType="VARCHAR" />
     <result column="monitor_type" property="monitorType" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <!--根据日期查当天的异常设备信息-->
   <select id="todayBadMonitor" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbMonitorabnormal">
-   SELECT * FROM tb_monitorabnormal where monitor_time like CONCAT(#{monitor_time}, '%')
+    SELECT * FROM tb_monitorabnormal where monitor_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
   <!--根据日期查当天的异常设备个数-->
   <select id="todayBadMonitorNum" parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM tb_monitorabnormal where monitor_time like CONCAT(#{monitor_time}, '%')
+    SELECT COUNT(*) FROM tb_monitorabnormal where monitor_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
   <!--根据日期和大队  查当天的异常设备信息-->
   <select id="todayBadMonitorMsg" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbMonitorabnormal">
-    SELECT * FROM tb_monitorabnormal where monitor_group=#{monitor_group} and monitor_time like CONCAT(#{monitor_time}, '%')
+    SELECT * FROM tb_monitorabnormal where monitor_group=#{monitor_group} and monitor_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
   <sql id="Example_Where_Clause" >
@@ -85,7 +86,7 @@
   </sql>
   <sql id="Base_Column_List" >
     monitor_ip, monitor_time, monitor_state, monitor_level, monitor_group, monitor_area, 
-    monitor_type
+    monitor_type, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbMonitorabnormalExample" >
     select
@@ -120,10 +121,10 @@
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbMonitorabnormal" >
     insert into tb_monitorabnormal (monitor_ip, monitor_time, monitor_state, 
       monitor_level, monitor_group, monitor_area, 
-      monitor_type)
+      monitor_type, dept_code)
     values (#{monitorIp,jdbcType=VARCHAR}, #{monitorTime,jdbcType=TIMESTAMP}, #{monitorState,jdbcType=INTEGER}, 
       #{monitorLevel,jdbcType=VARCHAR}, #{monitorGroup,jdbcType=VARCHAR}, #{monitorArea,jdbcType=VARCHAR}, 
-      #{monitorType,jdbcType=VARCHAR})
+      #{monitorType,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbMonitorabnormal" >
     insert into tb_monitorabnormal
@@ -149,6 +150,9 @@
       <if test="monitorType != null" >
         monitor_type,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="monitorIp != null" >
@@ -171,6 +175,9 @@
       </if>
       <if test="monitorType != null" >
         #{monitorType,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -204,6 +211,9 @@
       <if test="record.monitorType != null" >
         monitor_type = #{record.monitorType,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -217,7 +227,8 @@
       monitor_level = #{record.monitorLevel,jdbcType=VARCHAR},
       monitor_group = #{record.monitorGroup,jdbcType=VARCHAR},
       monitor_area = #{record.monitorArea,jdbcType=VARCHAR},
-      monitor_type = #{record.monitorType,jdbcType=VARCHAR}
+      monitor_type = #{record.monitorType,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,6 +254,9 @@
       <if test="monitorType != null" >
         monitor_type = #{monitorType,jdbcType=VARCHAR},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where monitor_ip = #{monitorIp,jdbcType=VARCHAR}
   </update>
@@ -253,7 +267,8 @@
       monitor_level = #{monitorLevel,jdbcType=VARCHAR},
       monitor_group = #{monitorGroup,jdbcType=VARCHAR},
       monitor_area = #{monitorArea,jdbcType=VARCHAR},
-      monitor_type = #{monitorType,jdbcType=VARCHAR}
+      monitor_type = #{monitorType,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where monitor_ip = #{monitorIp,jdbcType=VARCHAR}
   </update>
 </mapper>

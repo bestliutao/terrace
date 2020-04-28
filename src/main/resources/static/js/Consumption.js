@@ -81,10 +81,11 @@ $(document).ready(function() {
 					total = tableData.total;
 					last = tableData.last;
 					data = tableData.data;
+
 					//左上角
 					$("#Range_num").text(total);
 					for(var i = 0; i < data.length; i++) {
-						var li = cretable(data[i].userName, data[i].userId, data[i].consumptionMoney,"A");
+						var li = cretable(data[i].userName, data[i].userId, data[i].consumptionMoney,"A","/photo/"+data[i].userId+".jpg");
 						$('.csp_Range_content ul').append(li);
 					}
                     dateadd(pageUrl,pageType);
@@ -111,7 +112,7 @@ $(document).ready(function() {
                     //左上角
                     $("#Range_num").text(total);
                     for(var i = 0; i < data.length; i++) {
-                        var li = cretable(data[i].userName, data[i].userId, data[i].consumptionMoney,"A");
+                        var li = cretable(data[i].userName, data[i].userId, data[i].consumptionMoney,"A","/photo/"+data[i].userId+".jpg");
                         $('.csp_Range_content ul').append(li);
                     }
                 } else {
@@ -164,14 +165,21 @@ $(document).ready(function() {
 	}
 
 
-	/*数据判断，在获取到时样式添加填充*/
-	function cretable(name, id, type, level) {
-		var li;
-		if(level === 'A') {
-			li = $("<li><div class='keyPersonnel_item'>\
+
+
+})
+function imgerror(img){
+    img.src="../img/photo_img.png";
+    img.onerror=null;   //控制不要一直跳动
+}
+/*数据判断，在获取到时样式添加填充*/
+function cretable(name, id, type, level,src) {
+    var li;
+    if(level === 'A') {
+        li = $("<li><div class='keyPersonnel_item'>\
 							<div class='keyPersonnel_item_left'>\
 								<div class='zdry_img lightboder3'>\
-									<img src='../img/photo_img.png' />\
+									<img src='" + src + "' onerror='imgerror(this)'/>\
 								</div>\
 								<div class='info lightboder3'>\
 									<p>姓名:<span>" + name + "</span></p>\
@@ -184,11 +192,11 @@ $(document).ready(function() {
 										<p class='score'>" + level + "</p>\
 										<p class='v-desc'>风险等级</p>\
 									</div></div></div></div></li>");
-		} else if(level === 'B') {
-			li = $("<li><div class='keyPersonnel_item'>\
+    } else if(level === 'B') {
+        li = $("<li><div class='keyPersonnel_item'>\
 							<div class='keyPersonnel_item_left'>\
 								<div class='zdry_img lightboder3'>\
-									<img src='../img/photo_img.png' />\
+									<img src='" + src + "' onerror='imgerror(this)'/>\
 								</div>\
 								<div class='info lightboder3'>\
 									<p>姓名:<span>" + name + "</span></p>\
@@ -201,11 +209,11 @@ $(document).ready(function() {
 										<p class='score'>" + level + "</p>\
 										<p class='v-desc'>风险等级</p>\
 									</div></div></div></div></li>");
-		} else if(level === 'C') {
-			li = $("<li><div class='keyPersonnel_item'>\
+    } else if(level === 'C') {
+        li = $("<li><div class='keyPersonnel_item'>\
 							<div class='keyPersonnel_item_left'>\
 								<div class='zdry_img lightboder3'>\
-									<img src='../img/photo_img.png' />\
+									<img src='" + src + "' onerror='imgerror(this)'/>\
 								</div>\
 								<div class='info lightboder3'>\
 									<p>姓名:<span>" + name + "</span></p>\
@@ -218,11 +226,11 @@ $(document).ready(function() {
 										<p class='score'>" + level + "</p>\
 										<p class='v-desc'>风险等级</p>\
 									</div></div></div></div></li>");
-		} else if(level === '正常') {
-			li = $("<li><div class='keyPersonnel_item'>\
+    } else if(level === '正常') {
+        li = $("<li><div class='keyPersonnel_item'>\
 							<div class='keyPersonnel_item_left'>\
 								<div class='zdry_img lightboder3'>\
-									<img src='../img/photo_img.png' />\
+									<img src='" + src + "' onerror='imgerror(this)'/>\
 								</div>\
 								<div class='info lightboder3'>\
 									<p>姓名:<span>" + name + "</span></p>\
@@ -235,8 +243,6 @@ $(document).ready(function() {
 										<p class='score middle'>" + level + "</p>\
 										<p class='v-desc'>风险等级</p>\
 									</div></div></div></div></li>");
-		}
-		return li
-	}
-
-})
+    }
+    return li
+}

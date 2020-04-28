@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/gloas.css" th:href="@{/css/gloas.css}"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/Provincial_platform.css" th:href="@{/css/Provincial_platform.css}"/>
+		<title>戒毒学员危险性分析</title>
+	</head>
+
+	<body>
+
+		<div id="index_header">
+			<div class="nav_left">
+				<ul class="menu">
+					<li class="top">
+						<a href="javascript:;" class="top_link zhjd_link" style="color: #fff !important;cursor: default;font-weight: normal;font-stretch: normal;line-height: 30px;letter-spacing: 4px;"><span>智慧戒毒大数据平台</span></a>
+					</li>
+					<li class="nav_right">
+							<p></p><span class="administration">[[${session.username}]]</span><span class="administrationID">[[${session.userId}]]</span><span><a class="exit" th:href="@{/}">退出</a></span></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<div class="content_left">
+				<!--背景图-->
+				<img src="../img/danger_icon.png" style="z-index: -1;position: absolute;height: 861px;width: 487px;" />
+				<!--危险性分析-->
+				<div class="xywxfx_center">
+					<span class="xywxfx_titlt">全省戒毒学员危险性分析</span>
+				</div>
+				<div id="xywxfx"></div>
+
+				<!--设备状态-->
+				<div class="wxxjd_center">
+					<span class="wxxjd_titlt">全省设备状态 （异常设备个数）</span>
+					<a href="/provincialEquip">更多</a>
+				</div>
+				<div id="sbzt">
+					<div>
+						<div class="jksbdiv">
+							<div id="jksb">
+
+							</div>
+							<span>
+								监控设备
+							</span>
+						</div>
+						<div class="mjsbdiv">
+							<div id="mjsb">
+
+							</div>
+							<span>
+								门禁设备
+							</span>
+						</div>
+					</div>
+					<div>
+						<div class="xfsbdiv">
+							<div id="xfsb">
+
+							</div>
+							<span>
+								消防设备
+							</span>
+						</div>
+						<div class="dwsbdiv">
+							<div id="dwsb">
+
+							</div>
+							<span>
+								定位设备
+							</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--中间部分-->
+			<div class="content_man">
+				<div class="content_1">
+					<div class="map">
+						<img src="../img/Pmap.png" alt="Planets" usemap="#planetmap" id="GDmap">
+						<map name="planetmap">
+ 							<area shape="poly" id="guangzhou" coords="" alt="Sun">
+						</map>
+					</div>
+					<div class="map_li">
+						<ul class="addmapli">
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="content_2">
+					<div class="ddry_content">
+						<span class="ddry_titlt">全省学员数</span>
+
+
+					</div>
+
+					<div class="ddxys_num">
+						<span class="dqzrs">
+						
+					</span>
+						<span class="zrlss">
+						
+					</span>
+						<span class="jrrss">
+						
+					</span>
+					</div>
+					<div class="ddxys_title">
+						<span>
+						当前总人数
+					</span>
+						<span>
+						昨日离所数
+					</span>
+						<span>
+						今日入所数
+					</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="content_right">
+				<!--戒治阶段分布-->
+				<div class="xyts">
+					<img src="../img/jzjd.png" />
+					<div class="xyts_center">
+						<span class="xyts_titlt">全省戒治阶段分布图（人数）</span>
+					</div>
+					<div id="jzfbt" style="width: 100%;height:80%;"></div>
+				</div>
+				<!--戒治效能统计-->
+				<div class="xywc right_under_h">
+					<img src="../img/afjk.png" />
+					<div class="xywc_center">
+						<span class="xywc_titlt">全省戒治效能统计（人数/分数）</span>
+					</div>
+					<div id="jzxntj" style="width: 100%;height:85%;"></div>
+				</div>
+				<!--戒治效能走势-->
+				<div class="xyxf right_under_h">
+					<img src="../img/afjk.png" />
+					<div class="xywc_center">
+						<span class="xywc_titlt">全省戒治效能走势（平均分）</span>
+					</div>
+					<div id="jzxnzs" style="width: 100%;height:74%;"></div>
+				</div>
+
+			</div>
+		</div>
+		<script src="../js/jQuery.js" type="text/javascript" charset="utf-8" th:src="@{/js/jQuery.js}"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8" th:src="@{/js/echarts.min.js}"></script>
+		<script src="../js/Provincial_platform.js" type="text/javascript" charset="utf-8" th:src="@{/js/Provincial_platform.js}"></script>
+	</body>
+
+</html>

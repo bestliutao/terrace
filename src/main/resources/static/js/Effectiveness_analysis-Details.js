@@ -49,23 +49,7 @@ function biglabget(msg_id){
     );
 }
 //头像展示
-$.ajax({
-    type: "get",
-    url: "/hazard/manPhoto?id="+id,
-    async: true,
-    dataType: 'json',
-    success: function (d) {
-        var tableData = d.data;
-        // console.log(tableData)
-        if(tableData == null) {
-            var imgsrc = '../img/photo_img.png'
-            $('#photo').attr('src',imgsrc);
-        } else {
-            var imgsrc = 'data:image/png;base64,' + tableData;
-            $('#photo').attr('src',imgsrc);
-        }
-    }
-});
+
 //6个等级类判断显示
 function labadd(lel, csss, lels) {
     if(parseInt(lel) < 60) {
@@ -186,3 +170,20 @@ function labadd(lel, csss, lels) {
 		}, 'json')
 
 	})
+
+var imgsrc = '/photo/'+id+'.jpg';
+CheckImgExists(imgsrc);
+function CheckImgExists(imgurl) {
+    var ImgObj = new Image(); //判断图片是否存在
+    ImgObj.src = imgurl;
+    //没有图片，则返回-1
+    if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+        $('#photo').attr('src',imgsrc);
+    } else {
+        $('#photo').attr('src',"../img/photo_img.png");
+    }
+}
+// function imgerror(img){
+//     img.src="../img/photo_img.png";
+//     img.onerror=null;   //控制不要一直跳动
+// }

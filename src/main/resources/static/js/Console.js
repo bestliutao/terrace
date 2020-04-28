@@ -1244,7 +1244,7 @@ function yctablecre(num) {
 		/*CPU*/
 		$.ajax({
 			type: "get",
-			url: "cpuzyl.json", //+state
+			url: "/server/getCpu", //+state
 			async: false,
 			dataType: 'json',
 			success: function(d) {
@@ -1261,7 +1261,7 @@ function yctablecre(num) {
 		/*内存*/
 		$.ajax({
 			type: "get",
-			url: "cpuzyl.json", //+state
+			url: "/server/getMemory", //+state
 			async: false,
 			dataType: 'json',
 			success: function(d) {
@@ -1278,7 +1278,7 @@ function yctablecre(num) {
 		/*硬盘*/
 		$.ajax({
 			type: "get",
-			url: "cpuzyl.json", //+state
+			url: "/server/getDisk", //+state
 			async: false,
 			dataType: 'json',
 			success: function(d) {
@@ -1295,7 +1295,7 @@ function yctablecre(num) {
 		/*网流速*/
 		$.ajax({
 			type: "get",
-			url: "speed.json", //+state
+			url: "/server/getIntent", //+state
 			async: false,
 			dataType: 'json',
 			success: function(d) {

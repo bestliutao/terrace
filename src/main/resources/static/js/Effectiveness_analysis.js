@@ -620,34 +620,19 @@ $(document).ready(function() {
                     last = tableData.last;
                     data = tableData.data;
                     // console.log(data);
-                    var imageSrc;
                     for(var i = 0; i < data.length; i++) {
                         var id=data[i].traineecode;
                         var name=data[i].traineename;
                         var stage=data[i].manageperiod.split('[')[0];
                         var grade=data[i].userGrade;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imageSrc = '../img/photo_img.png'
-                                } else {
-                                    imageSrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(name,id ,stage ,grade ,imageSrc);
-                                if (i == 0) {
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                } else {
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
+                        var imageSrc="/photo/"+id+".jpg";
+                        var td = cretable(name,id ,stage ,grade ,imageSrc);
+                        if (i == 0) {
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        } else {
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
                     tableOne();
                 } else {
@@ -670,34 +655,19 @@ $(document).ready(function() {
                     total = tableData.total;
                     last = tableData.last;
                     data = tableData.data;
-                    var imageSrc;
                     for(var i = 0; i < data.length; i++) {
                         var id=data[i].traineecode;
                         var name=data[i].traineename;
                         var stage=data[i].manageperiod.split('[')[0];
                         var grade=data[i].userGrade;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imageSrc = '../img/photo_img.png'
-                                } else {
-                                    imageSrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(name,id ,stage ,grade ,imageSrc);
-                                if (i == 0) {
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                } else {
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
+                        var imageSrc="/photo/"+id+".jpg";
+                        var td = cretable(name,id ,stage ,grade ,imageSrc);
+                        if (i == 0) {
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        } else {
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
 
                 } else {
@@ -721,34 +691,19 @@ $(document).ready(function() {
                     total = tableData.total;
                     last = tableData.last;
                     data = tableData.data;
-                    var imageSrc;
                     for(var i = 0; i < data.length; i++) {
                         var id=data[i].traineecode;
                         var name=data[i].traineename;
                         var stage=data[i].manageperiod.split('[')[0];
                         var grade=data[i].userGrade;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imageSrc = '../img/photo_img.png'
-                                } else {
-                                    imageSrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(name,id ,stage ,grade ,imageSrc);
-                                if (i == 0) {
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                } else {
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
+                        var imageSrc="/photo/"+id+".jpg";
+                        var td = cretable(name,id ,stage ,grade ,imageSrc);
+                        if (i == 0) {
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        } else {
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
                     tableTwo(inputValue);
                 } else {
@@ -773,34 +728,19 @@ $(document).ready(function() {
                     total = tableData.total;
                     last = tableData.last;
                     data = tableData.data;
-                    var imageSrc;
                     for(var i = 0; i < data.length; i++) {
                         var id=data[i].traineecode;
                         var name=data[i].traineename;
                         var stage=data[i].manageperiod.split('[')[0];
                         var grade=data[i].userGrade;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imageSrc = '../img/photo_img.png'
-                                } else {
-                                    imageSrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(name,id ,stage ,grade ,imageSrc);
-                                if (i == 0) {
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                } else {
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
+                        var imageSrc="/photo/"+id+".jpg";
+                        var td = cretable(name,id ,stage ,grade ,imageSrc);
+                        if (i == 0) {
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        } else {
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
                 } else {
                     alert("数据出错");
@@ -979,17 +919,21 @@ $(document).ready(function() {
 
 
 
-	function cretable(name, id, type, grade,src) {
-    	if(grade==null){
-    		grade = parseInt(80);
-		}
-		grade = parseInt(grade);
-		var td;
-		if(grade < 60) {
-			td = $("<td class='' style='width:100%;height:134px;'>\
+
+
+
+})
+function cretable(name, id, type, grade,src) {
+    if(grade==null){
+        grade = parseInt(80);
+    }
+    grade = parseInt(grade);
+    var td;
+    if(grade < 60) {
+        td = $("<td class='' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph '>\
-					<img src='" + src + "'></div><div class='tr_msg '>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
 					<div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
 					<div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -997,11 +941,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelA'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></td>");
-		} else if((grade >= 60) && (grade < 70)) {
-			td = $("<td class='' style='width:100%;height:134px;'>\
+    } else if((grade >= 60) && (grade < 70)) {
+        td = $("<td class='' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph '>\
-					<img src='" + src + "'></div><div class='tr_msg '>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
 					<div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
 					<div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -1009,11 +953,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelB'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></td>");
-		} else if((grade >= 70) && (grade < 80)) {
-			td = $("<td class='' style='width:100%;height:134px;'>\
+    } else if((grade >= 70) && (grade < 80)) {
+        td = $("<td class='' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph '>\
-					<img src='" + src + "'></div><div class='tr_msg '>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
 					<div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
 					<div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -1021,11 +965,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelC'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></td>");
-		} else if(grade >= 80) {
-			td = $("<td class='' style='width:100%;height:134px;'>\
+    } else if(grade >= 80) {
+        td = $("<td class='' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph '>\
-					<img src='" + src + "'></div><div class='tr_msg'>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg'>\
 					<div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
 					<div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -1033,9 +977,10 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelgreen'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></td>");
-		}
-		return td
-	}
-
-
-})
+    }
+    return td
+}
+function imgerror(img){
+    img.src="../img/photo_img.png";
+    img.onerror=null;   //控制不要一直跳动
+}

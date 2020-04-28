@@ -1,6 +1,5 @@
 package cn.sznk.terrace.mapper;
 
-
 import cn.sznk.terrace.bean.TbTrainee;
 import cn.sznk.terrace.bean.TbTraineeExample;
 import cn.sznk.terrace.bean.TitileNumBean;
@@ -9,12 +8,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbTraineeMapper {
-    List<TitileNumBean> stageDistribution();
-    List<TbTrainee> findHazardMan(@Param("user_idioctonia") String user_idioctonia, @Param("user_getaway") String user_getaway, @Param("user_suddendeath") String user_suddendeath, @Param("user_wound") String user_wound);
 
-    List<TbTrainee> findUserByUsername(String traineename);
-    List<TbTrainee> findUserByUserId(String traineecode);
+    List<TitileNumBean> stageDistributionAll();
+    List<TitileNumBean> stageDistribution(String code);
+    List<TbTrainee> findHazardMan(@Param("user_idioctonia") String user_idioctonia, @Param("user_getaway") String user_getaway, @Param("user_suddendeath") String user_suddendeath, @Param("user_wound") String user_wound,@Param("code")String code);
 
+    List<TbTrainee> findUserByUsername(@Param("traineename")String traineename,@Param("code")String code);
+    List<TbTrainee> findUserByUserId(@Param("traineecode")String traineecode,@Param("code")String code);
 
     int countByExample(TbTraineeExample example);
 

@@ -3,6 +3,7 @@
 <mapper namespace="cn.sznk.terrace.mapper.TbGrademonthMapper" >
   <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.TbGrademonth" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
     <result column="statge" property="statge" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -18,7 +19,7 @@
   </resultMap>
   <!--扣分最多-->
   <select id="deductPointsMore"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
     <if test="statge!= null">
       and statge= #{statge}
     </if>
@@ -28,17 +29,17 @@
     <if test="ltGrade!= null">
       and user_grade &lt; #{ltGrade}
     </if>
-      and grade_poor &lt;'0' ORDER BY (grade_poor+0) ASC
+    and grade_poor &lt;'0' ORDER BY (grade_poor+0) ASC
   </select>
   <!--扣分最多 补充-->
   <select id="deductPointsMoreOne"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
-      and statge= #{statge}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
+    and statge= #{statge}
     and grade_poor &lt;'0' ORDER BY (grade_poor+0) ASC
   </select>
   <!--扣分最多 补充-->
   <select id="deductPointsMoreTwo"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
     <if test="gtGrade!= null">
       and user_grade &gt; #{gtGrade}
     </if>
@@ -50,7 +51,7 @@
   </select>
   <!--扣分最多 补充-->
   <select id="deductPointsMoreThree"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
     and grade_poor &lt;'0'
     ORDER BY (grade_poor+0) ASC
   </select>
@@ -58,7 +59,7 @@
 
   <!--加分最多-->
   <select id="bonusPointsMore"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}  and statge = #{statge}
+    SELECT * FROM tb_grademonth where time=#{time}  and statge = #{statge} and dept_code=#{code}
     <if test="gtGrade!= null">
       and user_grade &gt; #{gtGrade}
     </if>
@@ -71,7 +72,7 @@
   </select>
   <!--加分最多 补充-->
   <select id="bonusPointsMoreTwo"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
     <if test="gtGrade!= null">
       and user_grade &gt; #{gtGrade}
     </if>
@@ -83,14 +84,14 @@
   </select>
   <!--加分最多 补充-->
   <select id="bonusPointsMoreOne"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}  and statge = #{statge}
+    SELECT * FROM tb_grademonth where time=#{time}  and statge = #{statge} and dept_code=#{code}
     and grade_poor &gt;'0'
     ORDER BY (grade_poor+0) DESC
   </select>
 
   <!--加分最多 补充-->
   <select id="bonusPointsMoreThree"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbGrademonth">
-    SELECT * FROM tb_grademonth where time=#{time}
+    SELECT * FROM tb_grademonth where time=#{time} and dept_code=#{code}
     and grade_poor &gt;'0'
     ORDER BY (grade_poor+0) DESC
   </select>
@@ -99,19 +100,19 @@
 
   <!--60分以下-->
   <select id="gradeMonthOne"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
-    SELECT statge as title,COUNT(*) as number FROM tb_grademonth where user_grade &lt; 60 and time=#{time} GROUP BY statge
+    SELECT statge as title,COUNT(*) as number FROM tb_grademonth where user_grade &lt; 60 and time=#{time} and dept_code=#{code} GROUP BY statge
   </select>
   <!--分段以内-->
   <select id="gradeMonthTwo"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
-    SELECT statge as title,COUNT(*) as number FROM tb_grademonth where user_grade &gt; #{ltGrade} and user_grade &lt; #{gtGrade} and time=#{time} GROUP BY statge
+    SELECT statge as title,COUNT(*) as number FROM tb_grademonth where user_grade &gt; #{ltGrade} and user_grade &lt; #{gtGrade} and time=#{time} and dept_code=#{code} GROUP BY statge
   </select>
   <!--几个月平均分-->
   <select id="sixMonth"  parameterType="java.lang.String" resultType="java.lang.String">
-    SELECT AVG(user_grade) from tb_grademonth where time = #{time}
+    SELECT AVG(user_grade) from tb_grademonth where time = #{time} and dept_code=#{code}
   </select>
 
   <select id="sixMonthOther"  parameterType="java.lang.String" resultType="java.lang.String">
-    SELECT AVG(user_grade) from tb_grademonth where time =#{time} and statge=#{statge}
+    SELECT AVG(user_grade) from tb_grademonth where time =#{time} and statge=#{statge} and dept_code=#{code}
   </select>
 
   <sql id="Example_Where_Clause" >
@@ -173,8 +174,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, statge, time, user_id, user_name, user_grade, grade_poor, zsjl_grade, jdkf_grade, 
-    jyxx, shws, xynd, tbjc
+    id, dept_code, statge, time, user_id, user_name, user_grade, grade_poor, zsjl_grade, 
+    jdkf_grade, jyxx, shws, xynd, tbjc
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbGrademonthExample" >
     select
@@ -207,22 +208,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbGrademonth" >
-    insert into tb_grademonth (id, statge, time, 
-      user_id, user_name, user_grade, 
-      grade_poor, zsjl_grade, jdkf_grade, 
-      jyxx, shws, xynd, tbjc
-      )
-    values (#{id,jdbcType=INTEGER}, #{statge,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, 
-      #{gradePoor,jdbcType=VARCHAR}, #{zsjlGrade,jdbcType=VARCHAR}, #{jdkfGrade,jdbcType=VARCHAR}, 
-      #{jyxx,jdbcType=VARCHAR}, #{shws,jdbcType=VARCHAR}, #{xynd,jdbcType=VARCHAR}, #{tbjc,jdbcType=VARCHAR}
-      )
+    insert into tb_grademonth (id, dept_code, statge, 
+      time, user_id, user_name, 
+      user_grade, grade_poor, zsjl_grade, 
+      jdkf_grade, jyxx, shws, 
+      xynd, tbjc)
+    values (#{id,jdbcType=INTEGER}, #{deptCode,jdbcType=VARCHAR}, #{statge,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userGrade,jdbcType=VARCHAR}, #{gradePoor,jdbcType=VARCHAR}, #{zsjlGrade,jdbcType=VARCHAR}, 
+      #{jdkfGrade,jdbcType=VARCHAR}, #{jyxx,jdbcType=VARCHAR}, #{shws,jdbcType=VARCHAR}, 
+      #{xynd,jdbcType=VARCHAR}, #{tbjc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbGrademonth" >
     insert into tb_grademonth
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="deptCode != null" >
+        dept_code,
       </if>
       <if test="statge != null" >
         statge,
@@ -264,6 +268,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
       <if test="statge != null" >
         #{statge,jdbcType=VARCHAR},
@@ -315,6 +322,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.statge != null" >
         statge = #{record.statge,jdbcType=VARCHAR},
       </if>
@@ -359,6 +369,7 @@
   <update id="updateByExample" parameterType="map" >
     update tb_grademonth
     set id = #{record.id,jdbcType=INTEGER},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR},
       statge = #{record.statge,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -378,6 +389,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sznk.terrace.bean.TbGrademonth" >
     update tb_grademonth
     <set >
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
       <if test="statge != null" >
         statge = #{statge,jdbcType=VARCHAR},
       </if>
@@ -419,7 +433,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.TbGrademonth" >
     update tb_grademonth
-    set statge = #{statge,jdbcType=VARCHAR},
+    set dept_code = #{deptCode,jdbcType=VARCHAR},
+      statge = #{statge,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},

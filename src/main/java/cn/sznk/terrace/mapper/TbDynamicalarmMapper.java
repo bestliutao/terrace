@@ -8,11 +8,11 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbDynamicalarmMapper {
-    int findTodayPoliceNum(String date);
-    List<TitileNumBean> findPoliceDistribution(@Param("ltTime")String ltTime,@Param("gtTime")String gtTime,@Param("alarm_group")String group);
-    List<TbDynamicalarm> findUntreatedPolice(String date);
-    int equipmentPolice(String date);
-    int peoplePolice(String date);
+    int findTodayPoliceNum(@Param("date")String date,@Param("code")String code);
+    List<TitileNumBean> findPoliceDistribution(@Param("ltTime") String ltTime, @Param("gtTime") String gtTime,@Param("alarm_group") String group,@Param("code") String code);
+    List<TbDynamicalarm> findUntreatedPolice(@Param("date")String date,@Param("code") String code);
+    int equipmentPolice(@Param("date")String date,@Param("code") String code);
+    int peoplePolice(@Param("date")String date,@Param("code") String code);
 
     int countByExample(TbDynamicalarmExample example);
 

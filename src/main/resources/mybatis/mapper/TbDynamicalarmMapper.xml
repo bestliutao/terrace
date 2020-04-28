@@ -11,29 +11,28 @@
     <result column="alarm_group" property="alarmGroup" jdbcType="VARCHAR" />
     <result column="alarm_area" property="alarmArea" jdbcType="VARCHAR" />
     <result column="alarm_type" property="alarmType" jdbcType="INTEGER" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
-
   <!-- 当日警情数量-->
   <select id="findTodayPoliceNum"  parameterType="java.lang.String" resultType="java.lang.Integer">
-   SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{alarm_time}
+    SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{date} and dept_code=#{code}
   </select>
   <!--近七天警情分布-->
   <select id="findPoliceDistribution"  parameterType="java.lang.String" resultType="java.lang.Integer">
-    select COUNT(*) as number from tb_dynamicalarm  where alarm_time &gt;=#{gtTime} and alarm_time &lt;=#{ltTime} and alarm_group=#{alarm_group} GROUP BY alarm_group
+    select COUNT(*) as number from tb_dynamicalarm  where  dept_code=#{code} and alarm_time &gt;=#{gtTime} and alarm_time &lt;=#{ltTime} and alarm_group=#{alarm_group} GROUP BY alarm_group
   </select>
   <!--当天未处理的警情-->
   <select id="findUntreatedPolice"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbDynamicalarm">
-    SELECT * FROM tb_dynamicalarm WHERE alarm_time>#{alarm_time} and alarm_state='0'
+    SELECT * FROM tb_dynamicalarm WHERE alarm_time>#{date} and alarm_state='0' and dept_code=#{code}
   </select>
   <!--当天未处理的设备警情-->
   <select id="equipmentPolice"  parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{alarm_time} and alarm_state='0' and alarm_type='1'
+    SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{date} and alarm_state='0' and alarm_type='1' and dept_code=#{code}
   </select>
   <!--当天未处理的人员警情-->
   <select id="peoplePolice"  parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{alarm_time} and alarm_state='0' and alarm_type='0'
+    SELECT COUNT(*) FROM tb_dynamicalarm WHERE alarm_time>#{date} and alarm_state='0' and alarm_type='0' and dept_code=#{code}
   </select>
-
 
   <sql id="Example_Where_Clause" >
     <where >
@@ -95,7 +94,7 @@
   </sql>
   <sql id="Base_Column_List" >
     alarm_id, alarm_time, alarm_state, alarm_title, alarm_detils, alarm_level, alarm_group, 
-    alarm_area, alarm_type
+    alarm_area, alarm_type, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbDynamicalarmExample" >
     select
@@ -130,12 +129,12 @@
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbDynamicalarm" >
     insert into tb_dynamicalarm (alarm_id, alarm_time, alarm_state, 
       alarm_title, alarm_detils, alarm_level, 
-      alarm_group, alarm_area, alarm_type
-      )
+      alarm_group, alarm_area, alarm_type, 
+      dept_code)
     values (#{alarmId,jdbcType=INTEGER}, #{alarmTime,jdbcType=TIMESTAMP}, #{alarmState,jdbcType=INTEGER}, 
       #{alarmTitle,jdbcType=VARCHAR}, #{alarmDetils,jdbcType=VARCHAR}, #{alarmLevel,jdbcType=VARCHAR}, 
-      #{alarmGroup,jdbcType=VARCHAR}, #{alarmArea,jdbcType=VARCHAR}, #{alarmType,jdbcType=INTEGER}
-      )
+      #{alarmGroup,jdbcType=VARCHAR}, #{alarmArea,jdbcType=VARCHAR}, #{alarmType,jdbcType=INTEGER}, 
+      #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbDynamicalarm" >
     insert into tb_dynamicalarm
@@ -167,6 +166,9 @@
       <if test="alarmType != null" >
         alarm_type,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="alarmId != null" >
@@ -195,6 +197,9 @@
       </if>
       <if test="alarmType != null" >
         #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -234,6 +239,9 @@
       <if test="record.alarmType != null" >
         alarm_type = #{record.alarmType,jdbcType=INTEGER},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -249,7 +257,8 @@
       alarm_level = #{record.alarmLevel,jdbcType=VARCHAR},
       alarm_group = #{record.alarmGroup,jdbcType=VARCHAR},
       alarm_area = #{record.alarmArea,jdbcType=VARCHAR},
-      alarm_type = #{record.alarmType,jdbcType=INTEGER}
+      alarm_type = #{record.alarmType,jdbcType=INTEGER},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -281,6 +290,9 @@
       <if test="alarmType != null" >
         alarm_type = #{alarmType,jdbcType=INTEGER},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where alarm_id = #{alarmId,jdbcType=INTEGER}
   </update>
@@ -293,7 +305,8 @@
       alarm_level = #{alarmLevel,jdbcType=VARCHAR},
       alarm_group = #{alarmGroup,jdbcType=VARCHAR},
       alarm_area = #{alarmArea,jdbcType=VARCHAR},
-      alarm_type = #{alarmType,jdbcType=INTEGER}
+      alarm_type = #{alarmType,jdbcType=INTEGER},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where alarm_id = #{alarmId,jdbcType=INTEGER}
   </update>
 </mapper>

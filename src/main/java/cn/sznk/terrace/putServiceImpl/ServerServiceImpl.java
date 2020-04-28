@@ -38,22 +38,20 @@ public class ServerServiceImpl implements ServerServices {
 		oidList.add("1.3.6.1.4.1.2021.11.61.0");
         List<String> strings = snmpTest.testGetList(ip, community, oidList);
         double cpuRatio=0;
-        if (strings!=null){
-            if (strings.get(0)==null||strings.get(1)==null||strings.get(2)==null||strings.get(3)==null||strings.get(4)==null||
-                    strings.get(5)==null||strings.get(6)==null){
-                return E3Result.ok();
-            }
-            double ssCpuRawUser =Double.parseDouble(strings.get(0));
-            double ssCpuRawNice =Double.parseDouble(strings.get(1));
-            double ssCpuRawSystem = Double.parseDouble(strings.get(2));
-            double ssCpuRawIdle =Double.parseDouble(strings.get(3));
-            double ssCpuRawWait =Double.parseDouble(strings.get(4));
-            double ssCpuRawInterrupt =Double.parseDouble(strings.get(5));
-            double ssCpuRawSoftIRQ = Double.parseDouble(strings.get(6));
-            cpuRatio = 100*(ssCpuRawUser+ssCpuRawNice+ssCpuRawSystem+
-                    ssCpuRawWait+ssCpuRawInterrupt+ssCpuRawSoftIRQ)/(ssCpuRawUser+ssCpuRawNice
-                    +ssCpuRawSystem+ssCpuRawIdle+ssCpuRawWait+ssCpuRawInterrupt+ssCpuRawSoftIRQ);
+        if (strings.size()<=0||strings.get(0)==null||strings.get(1)==null||strings.get(2)==null||strings.get(3)==null||strings.get(4)==null||
+                strings.get(5)==null||strings.get(6)==null){
+            return E3Result.ok();
         }
+        double ssCpuRawUser =Double.parseDouble(strings.get(0));
+        double ssCpuRawNice =Double.parseDouble(strings.get(1));
+        double ssCpuRawSystem = Double.parseDouble(strings.get(2));
+        double ssCpuRawIdle =Double.parseDouble(strings.get(3));
+        double ssCpuRawWait =Double.parseDouble(strings.get(4));
+        double ssCpuRawInterrupt =Double.parseDouble(strings.get(5));
+        double ssCpuRawSoftIRQ = Double.parseDouble(strings.get(6));
+        cpuRatio = 100*(ssCpuRawUser+ssCpuRawNice+ssCpuRawSystem+
+                ssCpuRawWait+ssCpuRawInterrupt+ssCpuRawSoftIRQ)/(ssCpuRawUser+ssCpuRawNice
+                +ssCpuRawSystem+ssCpuRawIdle+ssCpuRawWait+ssCpuRawInterrupt+ssCpuRawSoftIRQ);
 		return E3Result.ok(cpuRatio);
     }
     //获取内存使用率
@@ -65,16 +63,13 @@ public class ServerServiceImpl implements ServerServices {
         oidList.add(".1.3.6.1.2.1.25.2.3.1.6.1");
         List<String> strings = snmpTest.testGetList(ip, community, oidList);
         double memoryRatio = 0;
-        if (strings!=null){
-            if (strings.get(0)==null||strings.get(1)==null){
-                return E3Result.ok();
-            }
-            double allMemory =Double.parseDouble(strings.get(0));
-            double useMemory =Double.parseDouble(strings.get(1));
-//        System.out.println(allMemory+"    "+useMemory);
-            memoryRatio= 100*(useMemory)/(allMemory);
+        if (strings.size()<=0||strings.get(0)==null||strings.get(1)==null){
+            return E3Result.ok();
         }
-       
+        double allMemory =Double.parseDouble(strings.get(0));
+        double useMemory =Double.parseDouble(strings.get(1));
+//        System.out.println(allMemory+"    "+useMemory);
+        memoryRatio= 100*(useMemory)/(allMemory);
         return E3Result.ok(memoryRatio);
     }
     //获取磁盘使用率
@@ -84,13 +79,10 @@ public class ServerServiceImpl implements ServerServices {
         oidList.add(".1.3.6.1.4.1.2021.9.1.9.1");
         List<String> strings = snmpTest.testGetList(ip, community, oidList);
         double diskRatio = 0;
-        if(strings!=null){
-            if (strings.get(0)==null){
-                return E3Result.ok();
-            }
-            diskRatio=Double.parseDouble(strings.get(0));
+        if (strings.size()<=0||strings.get(0)==null){
+            return E3Result.ok();
         }
-        
+        diskRatio=Double.parseDouble(strings.get(0));
         return E3Result.ok(diskRatio);
     }
 
@@ -103,23 +95,20 @@ public class ServerServiceImpl implements ServerServices {
         oidList.add(".1.3.6.1.2.1.31.1.1.1.10.2");
         List<String> strings = snmpTest.testGetList(ip, community, oidList);
         long in = 0,out = 0;
-        if (strings!=null){
-            if (strings.get(0)==null||strings.get(1)==null){
-                return E3Result.ok();
-            }
-            if(upOutSd==null&&upInSd==null){
-                upInSd=strings.get(0);
-                upOutSd=strings.get(1);
-                return E3Result.ok();
-            }
-            in = (Long.valueOf(strings.get(0)) - Long.valueOf(upInSd)) / 5;
-            out=(Long.valueOf(strings.get(1)) - Long.valueOf(upOutSd)) / 5;
-
+        if (strings.size()<=0||strings.get(0)==null||strings.get(1)==null){
+            return E3Result.ok();
+        }
+        if(upOutSd==null&&upInSd==null){
             upInSd=strings.get(0);
             upOutSd=strings.get(1);
-            System.out.println(upInSd+""+upOutSd);
+            return E3Result.ok();
         }
-        
+        in = (Long.valueOf(strings.get(0)) - Long.valueOf(upInSd)) / 5;
+        out=(Long.valueOf(strings.get(1)) - Long.valueOf(upOutSd)) / 5;
+
+        upInSd=strings.get(0);
+        upOutSd=strings.get(1);
+        System.out.println(upInSd+""+upOutSd);
         return E3Result.ok(in+"+"+out);
     }
 
@@ -161,7 +150,7 @@ public class ServerServiceImpl implements ServerServices {
     //服务 start
     public E3Result serviceStart(){
         Process p;
-        String cmd="/home/colins/project/start.sh";
+        String cmd="sh /data/startCenter.sh";
         String result=null;
         try
         {
@@ -191,7 +180,7 @@ public class ServerServiceImpl implements ServerServices {
     //服务stop
     public E3Result serivceStop(){
         Process p;
-        String cmd="/home/colins/project/stop.sh";
+        String cmd="sh /data/stopCenter.sh";
         String result=null;
         try
         {

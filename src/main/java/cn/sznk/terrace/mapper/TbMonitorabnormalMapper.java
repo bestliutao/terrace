@@ -6,12 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-
 public interface TbMonitorabnormalMapper {
-
-    List<TbMonitorabnormal> todayBadMonitorMsg(@Param("monitor_group") String monitor_group,@Param("monitor_time") String monitor_time);
-    int todayBadMonitorNum(String date);
-    List<TbMonitorabnormal> todayBadMonitor(String date);
+    List<TbMonitorabnormal> todayBadMonitorMsg(@Param("monitor_group") String monitor_group, @Param("date") String monitor_time,@Param("code")String code);
+    int todayBadMonitorNum(@Param("date")String date,@Param("code")String code);
+    List<TbMonitorabnormal> todayBadMonitor(@Param("date")String date,@Param("code")String code);
 
     int countByExample(TbMonitorabnormalExample example);
 

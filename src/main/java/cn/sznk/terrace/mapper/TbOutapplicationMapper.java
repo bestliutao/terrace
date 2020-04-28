@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbOutapplicationMapper {
+    List<TitileNumBean> outTypeNumberCensus(@Param("date")String date,@Param("code")String code);
 
-    List<TitileNumBean> outTypeNumberCensus(String date);
     int countByExample(TbOutapplicationExample example);
 
     int deleteByExample(TbOutapplicationExample example);

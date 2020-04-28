@@ -3,11 +3,11 @@
 <mapper namespace="cn.sznk.terrace.mapper.TbUserMapper" >
   <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.TbUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, user_name, user_password
+    id, user_id, user_name, user_password, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbUserExample" >
     select
@@ -101,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbUser" >
     insert into tb_user (id, user_id, user_name, 
-      user_password)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
-      #{userPassword,jdbcType=VARCHAR})
+      user_password, dept_code)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbUser" >
     insert into tb_user
@@ -120,19 +120,25 @@
       <if test="userPassword != null" >
         user_password,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,13 +155,16 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.userPassword != null" >
         user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,9 +174,10 @@
   <update id="updateByExample" parameterType="map" >
     update tb_user
     set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      user_password = #{record.userPassword,jdbcType=VARCHAR}
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -176,7 +186,7 @@
     update tb_user
     <set >
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
@@ -184,14 +194,18 @@
       <if test="userPassword != null" >
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.TbUser" >
     update tb_user
-    set user_id = #{userId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
-      user_password = #{userPassword,jdbcType=VARCHAR}
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

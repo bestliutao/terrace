@@ -349,7 +349,7 @@ $(document).ready(function() {
 					for(var i = 0; i < data.length; i++) {
 						//alert(data[i].userName+"  "+data[i].userPassword);	
 
-						var li = cretable(data[i].userName, data[i].userId, data[i].statge, data[i].userGrade,data[i].gradePoor);
+						var li = cretable(data[i].userName, data[i].userId, data[i].statge, data[i].userGrade,data[i].gradePoor,"/photo/"+data[i].userId+".jpg");
 						$('#gradedate_table ul').append(li);
 
 					}
@@ -437,26 +437,33 @@ $(document).ready(function() {
 
 	//初始化数据获取
 
-	/*数据判断，在获取到时样式添加填充*/
-	function cretable(name, id, type, grade,gradePoor) {
-		grade = parseInt(grade);
-		var li;
-        var poor;
-        if(gradePoor<0){
-            src="../img/fall_icon.png"
-            poor = gradePoor.match(/\d+/g)[0]+"分";
-        }else if(gradePoor>0){
-            src="../img/rise_icon.png"
-            poor = gradePoor.match(/\d+/g)[0]+"分";
-        }else{
-            src=""
-            poor = "";
-        }
-		if(grade < 60) {
-			li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
+
+
+})
+function imgerror(img){
+    img.src="../img/photo_img.png";
+    img.onerror=null;   //控制不要一直跳动
+}
+/*数据判断，在获取到时样式添加填充*/
+function cretable(name, id, type, grade,gradePoor,src) {
+    grade = parseInt(grade);
+    var li;
+    var poor;
+    if(gradePoor<0){
+        src="../img/fall_icon.png"
+        poor = gradePoor.match(/\d+/g)[0]+"分";
+    }else if(gradePoor>0){
+        src="../img/rise_icon.png"
+        poor = gradePoor.match(/\d+/g)[0]+"分";
+    }else{
+        src=""
+        poor = "";
+    }
+    if(grade < 60) {
+        li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph lightboder3'>\
-					<img src='../img/photo_img.png'></div><div class='tr_msg lightboder3'>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg lightboder3'>\
 					<div style='position: relative;'>姓名：<span class='tr_msg_name'>" + name + "</span><span class='Lift'><img src='"+src+"'/>"+poor+"</span></div>\
 					<div>编号：<span class='tr_msg_name' id='manId'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -464,11 +471,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelA lightboder3'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></div></li>");
-		} else if((grade >= 60) && (grade < 70)) {
-			li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
+    } else if((grade >= 60) && (grade < 70)) {
+        li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph lightboder3'>\
-					<img src='../img/photo_img.png'></div><div class='tr_msg lightboder3'>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg lightboder3'>\
 					<div style='position: relative;'>姓名：<span class='tr_msg_name'>" + name + "</span><span class='Lift'><img src='"+src+"'/>"+poor+"</span></div>\
 					<div>编号：<span class='tr_msg_name' id='manId'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -476,11 +483,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelB lightboder3'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></div></li>");
-		} else if((grade >= 70) && (grade < 80)) {
-			li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
+    } else if((grade >= 70) && (grade < 80)) {
+        li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph lightboder3'>\
-					<img src='../img/photo_img.png'></div><div class='tr_msg lightboder3'>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg lightboder3'>\
 					<div style='position: relative;'>姓名：<span class='tr_msg_name'>" + name + "</span><span class='Lift'><img src='"+src+"'/>"+poor+"</span></div>\
 					<div>编号：<span class='tr_msg_name' id='manId'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -488,11 +495,11 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelC lightboder3'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></div></li>");
-		} else if(grade >= 80) {
-			li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
+    } else if(grade >= 80) {
+        li = $("<li><div class='lightboder3' style='width:100%;height:134px;'>\
 					<div class='tabtrdiv '>\
 					<div class='tr_ph lightboder3'>\
-					<img src='../img/photo_img.png'></div><div class='tr_msg lightboder3'>\
+					<img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg lightboder3'>\
 					<div style='position: relative;'>姓名：<span class='tr_msg_name'>" + name + "</span><span class='Lift'><img src='"+src+"'/>"+poor+"</span></div>\
 					<div>编号：<span class='tr_msg_name' id='manId'>" + id + "</span></div>\
 					<div>戒治阶段：<span class='tr_msg_name'>" + type + "</span></div>\
@@ -500,8 +507,6 @@ $(document).ready(function() {
 					<div class='tr_level  wxxfclevelgreen lightboder3'><p class='tr_level_sc'>" + grade + "<span style='width: 13px;height: 13px;font-family: PingFang-SC-Heavy;\
 	font-size: 13px;font-weight: normal;font-stretch: normal;line-height: 16px;letter-spacing: 0px;color: #ffffff;'>分</span></p>\
 				</div></div></div></li>");
-		}
-		return li
-	}
-
-})
+    }
+    return li
+}

@@ -744,30 +744,14 @@ $(document).ready(function() {
                             default:
                                 userDangerous="无";
                         }
-                        var imgsrc;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imgsrc = '../img/photo_img.png'
-                                } else {
-                                    imgsrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
-                                if(i==0){
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
-                                }else{
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
-
+                        var imgsrc="/photo/"+id+".jpg";
+                        var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
+                        if(i==0){
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
+                        }else{
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
                     tableOne();
 
@@ -822,30 +806,14 @@ $(document).ready(function() {
                             default:
                                 userDangerous="无";
                         }
-                        var imgsrc;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imgsrc = '../img/photo_img.png'
-                                } else {
-                                    imgsrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
-                                if(i==0){
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
-                                }else{
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
-
+                        var imgsrc="/photo/"+id+".jpg";
+                        var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
+                        if(i==0){
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
+                        }else{
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
 
                 } else {
@@ -855,6 +823,7 @@ $(document).ready(function() {
             "json"
         );
     }
+
     function showReocrd1(pageNo, pageSize,inputValue) {
         $.get("/hazard/allStudentShow", {
                 pageNo: pageNo,
@@ -900,29 +869,14 @@ $(document).ready(function() {
                             default:
                                 userDangerous="无";
                         }
-                        var imgsrc;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imgsrc = '../img/photo_img.png'
-                                } else {
-                                    imgsrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
-                                if(i==0){
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
-                                }else{
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
+                        var imgsrc="/photo/"+id+".jpg";
+                        var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
+                        if(i==0){
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
+                        }else{
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
 
                     }
                     tableTwo(inputValue);
@@ -979,30 +933,14 @@ $(document).ready(function() {
                             default:
                                 userDangerous="无";
                         }
-                        var imgsrc;
-                        $.ajax({
-                            type: "get",
-                            url: "/hazard/manPhoto?id="+id,
-                            async: false,
-                            dataType: 'json',
-                            success: function (d) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imgsrc = '../img/photo_img.png'
-                                } else {
-                                    imgsrc = 'data:image/png;base64,' + tableData;
-                                }
-                                var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
-                                if(i==0){
-                                    tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
-                                }else{
-                                    tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
-                                }
-                                $('tbody').append(tr);
-                            }
-                        });
-
+                        var imgsrc="/photo/"+id+".jpg";
+                        var td = cretable(traineename,id,userDangerous,userLevel,imgsrc);
+                        if(i==0){
+                            tr = $("<tr class='lightboder2' style='width:423px;height:134px;' id='" + data[i].traineecode + "' ></tr>").append(td);
+                        }else{
+                            tr = $("<tr class='' style='width:423px;height:134px;' id='" + data[i].traineecode + "'></tr>").append(td);
+                        }
+                        $('tbody').append(tr);
                     }
                 } else {
                     alert("数据出错");
@@ -1158,6 +1096,10 @@ $(document).ready(function() {
         )
     })
 
+    function imgerror(img){
+    img.src="../img/photo_img.png";
+    img.onerror=null;   //控制不要一直跳动
+}
 
     /*表格生成前，样式提前填充*/
     function cretable(name, id, type, level,src) {
@@ -1166,7 +1108,7 @@ $(document).ready(function() {
                 td = $("<td class='' style='width:100%;height:134px;'>\
                         <div class='tabtrdiv '>\
                         <div class='tr_ph '>\
-                        <img src='" + src + "'></div><div class='tr_msg '>\
+                        <img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
                         <div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
                         <div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
                         <div>风险分析：<span class='tr_msg_fx'>" + type + "</span></div>\
@@ -1177,7 +1119,7 @@ $(document).ready(function() {
                 td = $("<td class='' style='width:100%;height:134px;'>\
                         <div class='tabtrdiv '>\
                         <div class='tr_ph '>\
-                        <img src='" + src + "'></div><div class='tr_msg '>\
+                        <img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
                         <div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
                         <div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
                         <div>风险分析：<span class='tr_msg_fx'>" + type + "</span></div>\
@@ -1188,7 +1130,7 @@ $(document).ready(function() {
                 td = $("<td class='' style='width:100%;height:134px;'>\
                         <div class='tabtrdiv '>\
                         <div class='tr_ph '>\
-                        <img src='" + src + "'></div><div class='tr_msg '>\
+                        <img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
                         <div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
                         <div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
                         <div>风险分析：<span class='tr_msg_fx'>" + type + "</span></div>\
@@ -1199,7 +1141,7 @@ $(document).ready(function() {
                 td = $("<td class='' style='width:100%;height:134px;'>\
                         <div class='tabtrdiv '>\
                         <div class='tr_ph lightboder'>\
-                        <img src='" + src + "'></div><div class='tr_msg '>\
+                        <img src='" + src + "' onerror='imgerror(this)'></div><div class='tr_msg '>\
                         <div>姓名：<span class='tr_msg_name'>" + name + "</span></div>\
                         <div>编号：<span class='tr_msg_id'>" + id + "</span></div>\
                         <div>风险分析：<span class='tr_msg_fx'>" + type + "</span></div>\

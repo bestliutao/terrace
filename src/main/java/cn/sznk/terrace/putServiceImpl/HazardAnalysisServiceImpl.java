@@ -30,9 +30,16 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
 
 
     //危险性学员展示
-    public UserTable hazardStudentShow(String pageNo,String pageSize){
-        TbModulus tbModulus = tbModulusMapper.selectByPrimaryKey(1);
-        List<TbTrainee> hazardMan = tbTraineeMapper.findHazardMan(String.valueOf(tbModulus.getIdioctonia()), String.valueOf(tbModulus.getGetaway()), String.valueOf(tbModulus.getSuddendeath()), String.valueOf(tbModulus.getCommitmurder()));
+    public UserTable hazardStudentShow(String pageNo,String pageSize,String dept){
+        TbModulus tbModulus=new TbModulus();
+        TbModulusExample example = new TbModulusExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
+        List<TbModulus> tbModuluses = tbModulusMapper.selectByExample(example);
+        for (TbModulus tbModulus1:tbModuluses){
+            tbModulus=tbModulus1;
+        }
+
+        List<TbTrainee> hazardMan = tbTraineeMapper.findHazardMan(String.valueOf(tbModulus.getIdioctonia()), String.valueOf(tbModulus.getGetaway()), String.valueOf(tbModulus.getSuddendeath()), String.valueOf(tbModulus.getCommitmurder()),dept);
 
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -54,11 +61,11 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
     }
 
     //全部人员搜索
-    public UserTable allStudentShow(String pageNo,String pageSize,String value){
+    public UserTable allStudentShow(String pageNo,String pageSize,String value,String dept){
         List<TbTrainee> tbTrainees;
-        tbTrainees = tbTraineeMapper.findUserByUserId(value);
+        tbTrainees = tbTraineeMapper.findUserByUserId(value,dept);
         if (tbTrainees.size()<=0){
-            tbTrainees = tbTraineeMapper.findUserByUsername(value);
+            tbTrainees = tbTraineeMapper.findUserByUsername(value,dept);
         }
 //        List<TbTrainee> tbTrainees=new ArrayList<>();
 //        for (TbTrainee trainee:trainees){
@@ -87,53 +94,76 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
     }
 
     //三类外出申请人数统计
-    public List<TitileNumBean> outNumStatistics(String date){
-        List<TitileNumBean> titileNumBeans = tbOutapplicationMapper.outTypeNumberCensus(date);
+    public List<TitileNumBean> outNumStatistics(String date,String dept){
+        List<TitileNumBean> titileNumBeans = tbOutapplicationMapper.outTypeNumberCensus(date,dept);
+        if (titileNumBeans.size()<=0){
+            TitileNumBean titileNumBean1=new TitileNumBean();
+            titileNumBean1.setTitle("司法程序");
+            titileNumBean1.setNumber("0");
+            titileNumBeans.add(titileNumBean1);
+
+            TitileNumBean titileNumBean2=new TitileNumBean();
+            titileNumBean2.setTitle("外出就医");
+            titileNumBean2.setNumber("0");
+            titileNumBeans.add(titileNumBean2);
+
+            TitileNumBean titileNumBean3=new TitileNumBean();
+            titileNumBean3.setTitle("家庭变故");
+            titileNumBean3.setNumber("0");
+            titileNumBeans.add(titileNumBean3);
+        }
         return titileNumBeans;
     }
 
     //学员消费金额人数统计
-    public List<TitileNumBean> consumeMoneyNum(String date){
+    public List<TitileNumBean> consumeMoneyNum(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         TitileNumBean titileNumBean1 = new TitileNumBean();
         titileNumBean1.setTitle("0-100");
-        titileNumBean1.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("0","100",date)));
+        titileNumBean1.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("0","100",date,dept)));
         titileNumBeans.add(titileNumBean1);
 
         TitileNumBean titileNumBean2 = new TitileNumBean();
         titileNumBean2.setTitle("100-500");
-        titileNumBean2.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("100","500",date)));
+        titileNumBean2.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("100","500",date,dept)));
         titileNumBeans.add(titileNumBean2);
 
         TitileNumBean titileNumBean3 = new TitileNumBean();
         titileNumBean3.setTitle("500-1000");
-        titileNumBean3.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("500","1000",date)));
+        titileNumBean3.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("500","1000",date,dept)));
         titileNumBeans.add(titileNumBean3);
 
         TitileNumBean titileNumBean4 = new TitileNumBean();
         titileNumBean4.setTitle("1000-1500");
-        titileNumBean4.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("1000","1500",date)));
+        titileNumBean4.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("1000","1500",date,dept)));
         titileNumBeans.add(titileNumBean4);
 
         TitileNumBean titileNumBean5 = new TitileNumBean();
         titileNumBean5.setTitle("1500-2000");
-        titileNumBean5.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("1500","2000",date)));
+        titileNumBean5.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumber("1500","2000",date,dept)));
         titileNumBeans.add(titileNumBean5);
 
         TitileNumBean titileNumBean6 = new TitileNumBean();
         titileNumBean6.setTitle(">2000");
-        titileNumBean6.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumberTwo("2000",date)));
+        titileNumBean6.setNumber(String.valueOf(tbConsumptionMapper.consumptionNumberTwo("2000",date,dept)));
         titileNumBeans.add(titileNumBean6);
 
         return  titileNumBeans;
     }
 
     //人员危险性分析人数统计
-    public List<TitileNumBean> hazardPeopleNum(){
-        TbModulus tbModulus = tbModulusMapper.selectByPrimaryKey(1);
+    public List<TitileNumBean> hazardPeopleNum(String dept){
+        TbModulus tbModulus=new TbModulus();
+        TbModulusExample example = new TbModulusExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
+        List<TbModulus> tbModuluses = tbModulusMapper.selectByExample(example);
+        for (TbModulus tbModulus1:tbModuluses){
+            tbModulus=tbModulus1;
+        }
+
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         TbTraineeExample example1 = new TbTraineeExample();
-        example1.createCriteria().andUserIdioctoniaGreaterThan(tbModulus.getIdioctonia());
+        example1.createCriteria().andUserIdioctoniaGreaterThan(tbModulus.getIdioctonia()).andDeptCodeEqualTo(dept);
         List<TbTrainee> tbTrainees = tbTraineeMapper.selectByExample(example1);
         TitileNumBean titileNumBean1 = new TitileNumBean();
         titileNumBean1.setTitle("自杀");
@@ -141,7 +171,7 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
         titileNumBeans.add(titileNumBean1);
 
         TbTraineeExample example2 = new TbTraineeExample();
-        example2.createCriteria().andUserWoundGreaterThan(tbModulus.getCommitmurder());
+        example2.createCriteria().andUserWoundGreaterThan(tbModulus.getCommitmurder()).andDeptCodeEqualTo(dept);
         List<TbTrainee> tbTrainees2 = tbTraineeMapper.selectByExample(example2);
         TitileNumBean titileNumBean2 = new TitileNumBean();
         titileNumBean2.setTitle("行凶");
@@ -149,7 +179,7 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
         titileNumBeans.add(titileNumBean2);
 
         TbTraineeExample example3 = new TbTraineeExample();
-        example3.createCriteria().andUserSuddendeathGreaterThan(tbModulus.getSuddendeath());
+        example3.createCriteria().andUserSuddendeathGreaterThan(tbModulus.getSuddendeath()).andDeptCodeEqualTo(dept);
         List<TbTrainee> tbTrainees3 = tbTraineeMapper.selectByExample(example3);
         TitileNumBean titileNumBean3 = new TitileNumBean();
         titileNumBean3.setTitle("猝死");
@@ -157,7 +187,7 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
         titileNumBeans.add(titileNumBean3);
 
         TbTraineeExample example4 = new TbTraineeExample();
-        example4.createCriteria().andUserGetawayGreaterThan(tbModulus.getGetaway());
+        example4.createCriteria().andUserGetawayGreaterThan(tbModulus.getGetaway()).andDeptCodeEqualTo(dept);
         List<TbTrainee> tbTrainees4 = tbTraineeMapper.selectByExample(example4);
         TitileNumBean titileNumBean4 = new TitileNumBean();
         titileNumBean4.setTitle("逃脱");
@@ -172,25 +202,32 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
     }
 
     //人员危险性细节页
-    public UserTable hazardDetilsMan(String pageNo,String pageSize,String type){
-        TbModulus tbModulus = tbModulusMapper.selectByPrimaryKey(1);
+    public UserTable hazardDetilsMan(String pageNo,String pageSize,String type,String dept){
+        TbModulus tbModulus=new TbModulus();
+        TbModulusExample modulusExample = new TbModulusExample();
+        modulusExample.createCriteria().andDeptCodeEqualTo(dept);
+        List<TbModulus> tbModuluses = tbModulusMapper.selectByExample(modulusExample);
+        for (TbModulus tbModulus1:tbModuluses){
+            tbModulus=tbModulus1;
+        }
+
         TbTraineeExample example = new TbTraineeExample();
         List<TbTrainee> tbTrainees = new ArrayList<>();
         switch (type){
             case "自杀":
-                example.createCriteria().andUserIdioctoniaGreaterThan(tbModulus.getIdioctonia());
+                example.createCriteria().andUserIdioctoniaGreaterThan(tbModulus.getIdioctonia()).andDeptCodeEqualTo(dept);
                 tbTrainees = tbTraineeMapper.selectByExample(example);
                 break;
             case "猝死":
-                example.createCriteria().andUserSuddendeathGreaterThan(tbModulus.getSuddendeath());
+                example.createCriteria().andUserSuddendeathGreaterThan(tbModulus.getSuddendeath()).andDeptCodeEqualTo(dept);
                 tbTrainees = tbTraineeMapper.selectByExample(example);
                 break;
             case "行凶":
-                example.createCriteria().andUserWoundGreaterThan(tbModulus.getCommitmurder());
+                example.createCriteria().andUserWoundGreaterThan(tbModulus.getCommitmurder()).andDeptCodeEqualTo(dept);
                 tbTrainees = tbTraineeMapper.selectByExample(example);
                 break;
             case "逃脱":
-                example.createCriteria().andUserGetawayGreaterThan(tbModulus.getGetaway());
+                example.createCriteria().andUserGetawayGreaterThan(tbModulus.getGetaway()).andDeptCodeEqualTo(dept);
                 tbTrainees = tbTraineeMapper.selectByExample(example);
                 break;
             default:
@@ -217,9 +254,9 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
     }
 
     //外出申请细节页
-    public UserTable outDetilsMan(String pageNo,String pageSize,String type){
+    public UserTable outDetilsMan(String pageNo,String pageSize,String type,String dept){
         TbOutapplicationExample example = new TbOutapplicationExample();
-        example.createCriteria().andOutTypeEqualTo(type);
+        example.createCriteria().andOutTypeEqualTo(type).andDeptCodeEqualTo(dept);
         List<TbOutapplication> tbOutapplications = tbOutapplicationMapper.selectByExample(example);
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -242,13 +279,13 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
     }
 
     //人员消费细节页
-    public UserTable consumeMoneyDetils(String pageNo,String pageSize,String type){
+    public UserTable consumeMoneyDetils(String pageNo,String pageSize,String type,String dept){
         String[] money=type.split("-");
         TbConsumptionExample example = new TbConsumptionExample();
         if (Integer.valueOf(money[0])>=2000){
-            example.createCriteria().andConsumptionMoneyGreaterThan(Integer.valueOf(money[0]));
+            example.createCriteria().andConsumptionMoneyGreaterThan(Integer.valueOf(money[0])).andDeptCodeEqualTo(dept);
         }else {
-            example.createCriteria().andConsumptionMoneyBetween(Integer.valueOf(money[0]),Integer.valueOf(money[1]));
+            example.createCriteria().andConsumptionMoneyBetween(Integer.valueOf(money[0]),Integer.valueOf(money[1])).andDeptCodeEqualTo(dept);
         }
         List<TbConsumption> tbConsumptions = tbConsumptionMapper.selectByExample(example);
         List<Object> list = new ArrayList<>();
@@ -282,23 +319,31 @@ public class HazardAnalysisServiceImpl implements HazardAnalysiService {
 
 
     //探访次数统计
-    public E3Result visitNumber(){
-        List<String> strings = traineeVisitMapper.visitNumber(5);
-        List<String> strings1 = traineeVisitMapper.visitNumber(10);
-        List<String> strings2 = traineeVisitMapper.visitNumber(20);
-        List<String> strings3 = traineeVisitMapper.visitNumber(300);
+    public E3Result visitNumber(String dept){
+        List<String> strings = traineeVisitMapper.visitNumber("5",dept);
+        List<String> strings1 = traineeVisitMapper.visitNumber("10",dept);
+        List<String> strings2 = traineeVisitMapper.visitNumber("20",dept);
+        List<String> strings3 = traineeVisitMapper.visitNumber("300",dept);
         VisitBean visitBean = new VisitBean();
         if (strings.size()>0){
             visitBean.setLessThanFive(String.valueOf(strings.size()));
+        }else {
+            visitBean.setLessThanFive(String.valueOf(0));
         }
         if (strings1.size()-strings.size()>0){
             visitBean.setLessThanTen(String.valueOf(strings1.size()-strings.size()));
+        }else {
+            visitBean.setLessThanTen(String.valueOf(0));
         }
         if (strings2.size()-strings1.size()>0){
             visitBean.setLessThanTwenty(String.valueOf(strings2.size()-strings1.size()));
+        }else {
+            visitBean.setLessThanTwenty(String.valueOf(0));
         }
         if (strings3.size()-strings2.size()>0){
             visitBean.setGressThanTwenty(String.valueOf(strings3.size()-strings2.size()));
+        }else {
+            visitBean.setGressThanTwenty(String.valueOf(0));
         }
         return E3Result.ok(visitBean);
     }

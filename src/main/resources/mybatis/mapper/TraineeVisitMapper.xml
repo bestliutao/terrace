@@ -14,10 +14,11 @@
     <result column="visitorAddress" property="visitoraddress" jdbcType="VARCHAR" />
     <result column="regDate" property="regdate" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <!-- 探访数量-->
-  <select id="visitNumber"  parameterType="java.lang.Integer" resultType="java.lang.String">
-    SELECT traineeCode FROM trainee_visit GROUP BY traineeCode HAVING COUNT(*) &lt;= #{number}
+  <select id="visitNumber"  parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT traineeCode FROM trainee_visit where dept_code=#{code} GROUP BY traineeCode HAVING COUNT(*) &lt;= #{number}
   </select>
 
 
@@ -81,7 +82,7 @@
   </sql>
   <sql id="Base_Column_List" >
     visitNo, traineeId, traineeCode, traineename, subordinateUnit, visitName, visitRelation, 
-    idCardNo, address, visitorAddress, regDate, update_time
+    idCardNo, address, visitorAddress, regDate, update_time, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TraineeVisitExample" >
     select
@@ -117,13 +118,13 @@
     insert into trainee_visit (visitNo, traineeId, traineeCode, 
       traineename, subordinateUnit, visitName, 
       visitRelation, idCardNo, address, 
-      visitorAddress, regDate, update_time
-      )
+      visitorAddress, regDate, update_time, 
+      dept_code)
     values (#{visitno,jdbcType=VARCHAR}, #{traineeid,jdbcType=INTEGER}, #{traineecode,jdbcType=VARCHAR}, 
       #{traineename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=VARCHAR}, #{visitname,jdbcType=VARCHAR}, 
       #{visitrelation,jdbcType=VARCHAR}, #{idcardno,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{visitoraddress,jdbcType=VARCHAR}, #{regdate,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{visitoraddress,jdbcType=VARCHAR}, #{regdate,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TraineeVisit" >
     insert into trainee_visit
@@ -164,6 +165,9 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="visitno != null" >
@@ -201,6 +205,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -249,6 +256,9 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -267,7 +277,8 @@
       address = #{record.address,jdbcType=VARCHAR},
       visitorAddress = #{record.visitoraddress,jdbcType=VARCHAR},
       regDate = #{record.regdate,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -308,6 +319,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where visitNo = #{visitno,jdbcType=VARCHAR}
   </update>
@@ -323,7 +337,8 @@
       address = #{address,jdbcType=VARCHAR},
       visitorAddress = #{visitoraddress,jdbcType=VARCHAR},
       regDate = #{regdate,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where visitNo = #{visitno,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -9,6 +9,8 @@ public class TbKeyman {
 
     private String userLevel;
 
+    private String deptCode;
+
     public String getUserId() {
         return userId;
     }
@@ -41,13 +43,11 @@ public class TbKeyman {
         this.userLevel = userLevel == null ? null : userLevel.trim();
     }
 
-    @Override
-    public String toString() {
-        return "TbKeyman{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userHazard='" + userHazard + '\'' +
-                ", userLevel='" + userLevel + '\'' +
-                '}';
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

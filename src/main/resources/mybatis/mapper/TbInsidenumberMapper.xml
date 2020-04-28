@@ -6,6 +6,7 @@
     <result column="totalNumber" property="totalnumber" jdbcType="VARCHAR" />
     <result column="entryNumber" property="entrynumber" jdbcType="VARCHAR" />
     <result column="outNumber" property="outnumber" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, totalNumber, entryNumber, outNumber
+    id, totalNumber, entryNumber, outNumber, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbInsidenumberExample" >
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbInsidenumber" >
     insert into tb_insidenumber (id, totalNumber, entryNumber, 
-      outNumber)
+      outNumber, dept_code)
     values (#{id,jdbcType=INTEGER}, #{totalnumber,jdbcType=VARCHAR}, #{entrynumber,jdbcType=VARCHAR}, 
-      #{outnumber,jdbcType=VARCHAR})
+      #{outnumber,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbInsidenumber" >
     insert into tb_insidenumber
@@ -119,6 +120,9 @@
       <if test="outnumber != null" >
         outNumber,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -132,6 +136,9 @@
       </if>
       <if test="outnumber != null" >
         #{outnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.outnumber != null" >
         outNumber = #{record.outnumber,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       totalNumber = #{record.totalnumber,jdbcType=VARCHAR},
       entryNumber = #{record.entrynumber,jdbcType=VARCHAR},
-      outNumber = #{record.outnumber,jdbcType=VARCHAR}
+      outNumber = #{record.outnumber,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="outnumber != null" >
         outNumber = #{outnumber,jdbcType=VARCHAR},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update tb_insidenumber
     set totalNumber = #{totalnumber,jdbcType=VARCHAR},
       entryNumber = #{entrynumber,jdbcType=VARCHAR},
-      outNumber = #{outnumber,jdbcType=VARCHAR}
+      outNumber = #{outnumber,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

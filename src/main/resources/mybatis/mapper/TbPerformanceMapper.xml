@@ -8,12 +8,11 @@
     <result column="performance_type" property="performanceType" jdbcType="VARCHAR" />
     <result column="performance_level" property="performanceLevel" jdbcType="VARCHAR" />
     <result column="performance_time" property="performanceTime" jdbcType="TIMESTAMP" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
-
   <select id="performanceNum" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
-    SELECT performance_type as title,COUNT(DISTINCT user_id) as number FROM tb_performance WHERE performance_time like CONCAT(#{performance_time}, '%') GROUP BY performance_type
+    SELECT performance_type as title,COUNT(DISTINCT user_id) as number FROM tb_performance WHERE performance_time like CONCAT(#{date}, '%') and dept_code=#{code} GROUP BY performance_type
   </select>
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -73,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    performance_id, user_id, user_name, performance_type, performance_level, performance_time
+    performance_id, user_id, user_name, performance_type, performance_level, performance_time, 
+    dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbPerformanceExample" >
     select
@@ -107,11 +107,11 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbPerformance" >
     insert into tb_performance (performance_id, user_id, user_name, 
-      performance_type, performance_level, performance_time
-      )
+      performance_type, performance_level, performance_time, 
+      dept_code)
     values (#{performanceId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{performanceType,jdbcType=VARCHAR}, #{performanceLevel,jdbcType=VARCHAR}, #{performanceTime,jdbcType=TIMESTAMP}
-      )
+      #{performanceType,jdbcType=VARCHAR}, #{performanceLevel,jdbcType=VARCHAR}, #{performanceTime,jdbcType=TIMESTAMP}, 
+      #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbPerformance" >
     insert into tb_performance
@@ -134,6 +134,9 @@
       <if test="performanceTime != null" >
         performance_time,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="performanceId != null" >
@@ -153,6 +156,9 @@
       </if>
       <if test="performanceTime != null" >
         #{performanceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -183,6 +189,9 @@
       <if test="record.performanceTime != null" >
         performance_time = #{record.performanceTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,7 +204,8 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       performance_type = #{record.performanceType,jdbcType=VARCHAR},
       performance_level = #{record.performanceLevel,jdbcType=VARCHAR},
-      performance_time = #{record.performanceTime,jdbcType=TIMESTAMP}
+      performance_time = #{record.performanceTime,jdbcType=TIMESTAMP},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,6 +228,9 @@
       <if test="performanceTime != null" >
         performance_time = #{performanceTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where performance_id = #{performanceId,jdbcType=INTEGER}
   </update>
@@ -227,7 +240,8 @@
       user_name = #{userName,jdbcType=VARCHAR},
       performance_type = #{performanceType,jdbcType=VARCHAR},
       performance_level = #{performanceLevel,jdbcType=VARCHAR},
-      performance_time = #{performanceTime,jdbcType=TIMESTAMP}
+      performance_time = #{performanceTime,jdbcType=TIMESTAMP},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where performance_id = #{performanceId,jdbcType=INTEGER}
   </update>
 </mapper>

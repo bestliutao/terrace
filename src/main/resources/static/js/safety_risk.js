@@ -124,31 +124,9 @@ $(document).ready(function() {
                     var userId = l[z - 1].userId;
                     var stage=l[z - 1].userHazard;
                     var userLevel = l[z - 1].userLevel;
-                    var imgsrc;
-                    $.ajax({
-                        type: "get",
-                        url: "/hazard/manPhoto?id="+userId,
-                        async: false,
-                        dataType: 'json',
-                        success: function(d) {
-                            if(d.status == 200) {
-                                var tableData = d.data;
-                                // console.log(tableData)
-                                if(tableData == null) {
-                                    imgsrc = '../img/photo_img.png'
-
-                                } else {
-                                    imgsrc = 'data:image/png;base64,' + tableData;
-
-                                }
-                                var t = carousel(userName,userId,stage,userLevel,imgsrc)
-                                container.append(t)
-                            } else {
-                                alert("数据为空");
-                            }
-                        }
-                    });
-
+                    var imgsrc="/photo/"+userId+".jpg";
+                    var t = carousel(userName,userId,stage,userLevel,imgsrc)
+                    container.append(t)
                     if(z == x) {
                         break
                     }
@@ -156,75 +134,10 @@ $(document).ready(function() {
                 $(".manlabbg").append(container);
             }
         } else {
-            alert("数据为空");
+            console.log("数据为空");
         }
     }, 'json')
-    function carousel(name,id,stage,level,src){
-        var divctr;
-        if(level == "A"){
-            divctr = $("<div class='keyPersonnel_item'> \
-					<div class='keyPersonnel_item_left'>\
-					<div class='zdry_img lightboder3'>\
-					<img src='"+src+"'/></div>\
-					<div class='info lightboder3'>\
-					<p>姓名:<span>"+name+"</span></p>\
-							<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
-					<p>风险分析：<span>"+stage+"</span></p>\
-					<p><a id='msgDetils'>详细信息</a></p></div>\
-					<div class='keyPersonnel_class red lightboder3'>\
-					<div class='keyPersonnel_class-text'>\
-					<p class='score'>"+level+"</p>\
-					<p class='v-desc'>风险等级</p>\
-					</div></div></div></div>")
-        }else if(level == "B"){
-            divctr = $("<div class='keyPersonnel_item'> \
-					<div class='keyPersonnel_item_left'>\
-					<div class='zdry_img lightboder3'>\
-					<img src='"+src+"'/></div>\
-					<div class='info lightboder3'>\
-					<p>姓名:<span>"+name+"</span></p>\
-					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
-					<p>风险分析：<span>"+stage+"</span></p>\
-					<p><a id='msgDetils'>详细信息</a></p></div>\
-					<div class='keyPersonnel_class yellow lightboder3'>\
-					<div class='keyPersonnel_class-text'>\
-					<p class='score'>"+level+"</p>\
-					<p class='v-desc'>风险等级</p>\
-					</div></div></div></div>")
-        }else if(level == "C"){
-            divctr = $("<div class='keyPersonnel_item'> \
-					<div class='keyPersonnel_item_left'>\
-					<div class='zdry_img lightboder3'>\
-					<img src='"+src+"'/></div>\
-					<div class='info lightboder3'>\
-					<p>姓名:<span>"+name+"</span></p>\
-					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
-					<p>风险分析：<span>"+stage+"</span></p>\
-					<p><a id='msgDetils'>详细信息</a></p></div>\
-					<div class='keyPersonnel_class blue lightboder3'>\
-					<div class='keyPersonnel_class-text'>\
-					<p class='score'>"+level+"</p>\
-					<p class='v-desc'>风险等级</p>\
-					</div></div></div></div>")
-        }
-        else if(level == "正常" || level == ''){
-            divctr = $("<div class='keyPersonnel_item'> \
-					<div class='keyPersonnel_item_left'>\
-					<div class='zdry_img lightboder3'>\
-					<img src='"+src+"'/></div>\
-					<div class='info lightboder3'>\
-					<p>姓名:<span>"+name+"</span></p>\
-					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
-					<p>风险分析：<span>"+stage+"</span></p>\
-					<p><a id='msgDetils'>详细信息</a></p></div>\
-					<div class='keyPersonnel_class green lightboder3'>\
-					<div class='keyPersonnel_class-text'>\
-					<p class='score middle'>正常</p>\
-					<p class='v-desc'>风险等级</p>\
-					</div></div></div></div>")
-        }
-        return divctr
-    }
+
     layui.use('carousel', function() {
         var carousel = layui.carousel;
         var $ = layui.jquery;
@@ -590,7 +503,7 @@ $(document).ready(function() {
                     console.log("player ERROR: " + vxgplayer('vxg_media_player0').error());
                 });
             } else {
-                alert("数据为空");
+                console.log("数据为空");
             }
         }, 'json')
     }
@@ -625,7 +538,7 @@ $(document).ready(function() {
                 }
 
             } else {
-                alert("数据为空");
+                console.log("数据为空");
             }
         }, 'json')
     }
@@ -847,3 +760,73 @@ $(document).ready(function() {
 	})
 	console.log(rsjzdb_selectchart)
 })
+function imgerror(img){
+    img.src="../img/photo_img.png";
+    img.onerror=null;   //控制不要一直跳动
+}
+function carousel(name,id,stage,level,src){
+    var divctr;
+    if(level == "A"){
+        divctr = $("<div class='keyPersonnel_item'> \
+					<div class='keyPersonnel_item_left'>\
+					<div class='zdry_img lightboder3'>\
+					<img src='"+src+"' onerror='imgerror(this)'/></div>\
+					<div class='info lightboder3'>\
+					<p>姓名:<span>"+name+"</span></p>\
+							<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
+					<p>风险分析：<span>"+stage+"</span></p>\
+					<p><a id='msgDetils'>详细信息</a></p></div>\
+					<div class='keyPersonnel_class red lightboder3'>\
+					<div class='keyPersonnel_class-text'>\
+					<p class='score'>"+level+"</p>\
+					<p class='v-desc'>风险等级</p>\
+					</div></div></div></div>")
+    }else if(level == "B"){
+        divctr = $("<div class='keyPersonnel_item'> \
+					<div class='keyPersonnel_item_left'>\
+					<div class='zdry_img lightboder3'>\
+					<img src='"+src+"' onerror='imgerror(this)'/></div>\
+					<div class='info lightboder3'>\
+					<p>姓名:<span>"+name+"</span></p>\
+					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
+					<p>风险分析：<span>"+stage+"</span></p>\
+					<p><a id='msgDetils'>详细信息</a></p></div>\
+					<div class='keyPersonnel_class yellow lightboder3'>\
+					<div class='keyPersonnel_class-text'>\
+					<p class='score'>"+level+"</p>\
+					<p class='v-desc'>风险等级</p>\
+					</div></div></div></div>")
+    }else if(level == "C"){
+        divctr = $("<div class='keyPersonnel_item'> \
+					<div class='keyPersonnel_item_left'>\
+					<div class='zdry_img lightboder3'>\
+					<img src='"+src+"' onerror='imgerror(this)'/></div>\
+					<div class='info lightboder3'>\
+					<p>姓名:<span>"+name+"</span></p>\
+					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
+					<p>风险分析：<span>"+stage+"</span></p>\
+					<p><a id='msgDetils'>详细信息</a></p></div>\
+					<div class='keyPersonnel_class blue lightboder3'>\
+					<div class='keyPersonnel_class-text'>\
+					<p class='score'>"+level+"</p>\
+					<p class='v-desc'>风险等级</p>\
+					</div></div></div></div>")
+    }
+    else if(level == "正常" || level == ''){
+        divctr = $("<div class='keyPersonnel_item'> \
+					<div class='keyPersonnel_item_left'>\
+					<div class='zdry_img lightboder3'>\
+					<img src='"+src+"' onerror='imgerror(this)'/></div>\
+					<div class='info lightboder3'>\
+					<p>姓名:<span>"+name+"</span></p>\
+					<p>编号:<span class='tr_msg_id'>"+id+"</span></p>\
+					<p>风险分析：<span>"+stage+"</span></p>\
+					<p><a id='msgDetils'>详细信息</a></p></div>\
+					<div class='keyPersonnel_class green lightboder3'>\
+					<div class='keyPersonnel_class-text'>\
+					<p class='score middle'>正常</p>\
+					<p class='v-desc'>风险等级</p>\
+					</div></div></div></div>")
+    }
+    return divctr
+}

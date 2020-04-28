@@ -25,61 +25,69 @@ public class HazardAnalysisCotraller {
     //危险性学员展示
     @ResponseBody
     @GetMapping("/hazard/studentShow")
-    public E3Result studentShow(String pageNo,String pageSize){
-        UserTable userTable = hazardAnalysiService.hazardStudentShow(pageNo, pageSize);
+    public E3Result studentShow(String pageNo,String pageSize,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = hazardAnalysiService.hazardStudentShow(pageNo, pageSize,dept);
         return E3Result.ok(userTable);
     }
 //    全部学员搜索
     @ResponseBody
     @GetMapping("/hazard/allStudentShow")
-    public E3Result allStudentShow(String pageNo,String pageSize,String value){
-        UserTable userTable = hazardAnalysiService.allStudentShow(pageNo, pageSize, value);
+    public E3Result allStudentShow(String pageNo,String pageSize,String value,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = hazardAnalysiService.allStudentShow(pageNo, pageSize, value,dept);
         return E3Result.ok(userTable);
     }
 //    外出人数统计
     @ResponseBody
     @GetMapping("/hazard/outTypeNum")
-    public E3Result outTypeNum(String date){
-        List<TitileNumBean> titileNumBeans = hazardAnalysiService.outNumStatistics(date);
+    public E3Result outTypeNum(String date,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        List<TitileNumBean> titileNumBeans = hazardAnalysiService.outNumStatistics(date,dept);
         return E3Result.ok(titileNumBeans);
     }
 //    消费金额统计
     @ResponseBody
     @GetMapping("/hazard/moneyNum")
-    public E3Result moneyNum(String date){
-        List<TitileNumBean> titileNumBeans = hazardAnalysiService.consumeMoneyNum(date);
+    public E3Result moneyNum(String date,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        List<TitileNumBean> titileNumBeans = hazardAnalysiService.consumeMoneyNum(date,dept);
         return E3Result.ok(titileNumBeans);
     }
 
     //人员危险性分析人数统计
     @ResponseBody
     @GetMapping("/hazard/peopleNum")
-    public E3Result peopleNum(String date){
-        List<TitileNumBean> titileNumBeans = hazardAnalysiService.hazardPeopleNum();
+    public E3Result peopleNum(String date,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        List<TitileNumBean> titileNumBeans = hazardAnalysiService.hazardPeopleNum(dept);
         return E3Result.ok(titileNumBeans);
     }
 
     //人员危险性细节页
     @ResponseBody
     @GetMapping("/hazard/detilsMan")
-    public E3Result detilsMan(String pageNo,String pageSize,String type){
-        UserTable userTable = hazardAnalysiService.hazardDetilsMan(pageNo, pageSize, type);
+    public E3Result detilsMan(String pageNo,String pageSize,String type,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = hazardAnalysiService.hazardDetilsMan(pageNo, pageSize, type,dept);
         return E3Result.ok(userTable);
     }
 
     //外出申请细节页
     @ResponseBody
-        @GetMapping("/hazard/outDetilsMan")
-    public E3Result outDetilsMan(String pageNo,String pageSize,String pageType){
-        UserTable userTable = hazardAnalysiService.outDetilsMan(pageNo, pageSize, pageType);
+    @GetMapping("/hazard/outDetilsMan")
+    public E3Result outDetilsMan(String pageNo,String pageSize,String pageType,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = hazardAnalysiService.outDetilsMan(pageNo, pageSize, pageType,dept);
         return E3Result.ok(userTable);
     }
 
     //人员消费细节页
     @ResponseBody
     @GetMapping("/hazard/consumeDetilsMan")
-    public E3Result consumeDetilsMan(String pageNo,String pageSize,String pageType){
-        UserTable userTable = hazardAnalysiService.consumeMoneyDetils(pageNo, pageSize, pageType);
+    public E3Result consumeDetilsMan(String pageNo,String pageSize,String pageType,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = hazardAnalysiService.consumeMoneyDetils(pageNo, pageSize, pageType,dept);
         return E3Result.ok(userTable);
     }
 
@@ -95,17 +103,24 @@ public class HazardAnalysisCotraller {
     //风险系数回显
     @ResponseBody
     @GetMapping("/hazard/modulus")
-    public E3Result modulus(String date){
-        TbModulus tbModulus = tbModulusMapper.selectByPrimaryKey(1);
-        return E3Result.ok(tbModulus);
+    public E3Result modulus(String date,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        TbModulusExample example = new TbModulusExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
+        List<TbModulus> tbModuluses = tbModulusMapper.selectByExample(example);
+        for (TbModulus tbModulus:tbModuluses){
+            return E3Result.ok(tbModulus);
+        }
+        return E3Result.build(400,"");
     }
 
     //风险系数更改
     @ResponseBody
     @GetMapping("/hazard/updateModulus")
     public E3Result updateModulus(String zs,String tt,String xx,String cs,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
         TbModulusExample example = new TbModulusExample();
-        example.createCriteria().andIdEqualTo(1);
+        example.createCriteria().andDeptCodeEqualTo(dept);
         TbModulus tbModulus = new TbModulus();
         tbModulus.setGetaway(Integer.valueOf(tt));
         tbModulus.setCommitmurder(Integer.valueOf(xx));
@@ -113,9 +128,9 @@ public class HazardAnalysisCotraller {
         tbModulus.setSuddendeath(Integer.valueOf(cs));
         tbModulusMapper.updateByExampleSelective(tbModulus,example);
 
-        TbModulus tbModulu = tbModulusMapper.selectByPrimaryKey(1);
-        session.setAttribute("modulus",tbModulu);
-        return E3Result.ok(tbModulus);
+//        TbModulus tbModulu = tbModulusMapper.selectByPrimaryKey(1);
+//        session.setAttribute("modulus",tbModulu);
+        return E3Result.ok();
     }
 
     //人员详细档案标签展示
@@ -138,8 +153,9 @@ public class HazardAnalysisCotraller {
     //探访次数统计
     @ResponseBody
     @GetMapping("/hazard/visitNumber")
-    public E3Result visitNumber(){
-        return hazardAnalysiService.visitNumber();
+    public E3Result visitNumber(HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        return hazardAnalysiService.visitNumber(dept);
     }
 
     //人员头像

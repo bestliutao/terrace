@@ -3,6 +3,7 @@
 <mapper namespace="cn.sznk.terrace.mapper.TbTraineeMapper" >
   <resultMap id="BaseResultMap" type="cn.sznk.terrace.bean.TbTrainee" >
     <id column="traineeCode" property="traineecode" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
     <result column="traineeName" property="traineename" jdbcType="VARCHAR" />
     <result column="traineeOldName" property="traineeoldname" jdbcType="VARCHAR" />
     <result column="traineeAlias" property="traineealias" jdbcType="VARCHAR" />
@@ -66,25 +67,27 @@
   <resultMap id="ResultMapWithBLOBs" type="cn.sznk.terrace.bean.TbTrainee" extends="BaseResultMap" >
     <result column="image" property="image" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <!--阶段人数-->
-  <select id="stageDistribution"  resultType="cn.sznk.terrace.bean.TitileNumBean">
+  <!--全省阶段人数-->
+  <select id="stageDistributionAll"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
     SELECT managePeriod as title,COUNT(*) as number FROM tb_trainee GROUP BY managePeriod
+  </select>
+  <!--阶段人数-->
+  <select id="stageDistribution"  parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
+    SELECT managePeriod as title,COUNT(*) as number FROM tb_trainee where dept_code=#{code} GROUP BY managePeriod
   </select>
   <!--模糊查人名-->
   <select id="findUserByUsername" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
-    select * from tb_trainee where traineename like CONCAT('%', #{traineename}, '%')
+    select * from tb_trainee where traineename like CONCAT('%', #{traineename}, '%') and dept_code=#{code}
   </select>
   <!--模糊查ID-->
   <select id="findUserByUserId" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
-    select * from tb_trainee where traineecode like CONCAT('%', #{traineecode}, '%')
+    select * from tb_trainee where traineecode like CONCAT('%', #{traineecode}, '%') and dept_code=#{code}
   </select>
 
   <!--查符合系数的危险性人员-->
   <select id="findHazardMan" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbTrainee">
-    SELECT * FROM tb_trainee where user_idioctonia&gt;=#{user_idioctonia} or user_getaway&gt;=#{user_getaway} or user_suddendeath&gt;=#{user_suddendeath} or user_wound&gt;=#{user_wound}
+    SELECT * FROM tb_trainee where  dept_code=#{code} and (user_idioctonia&gt;=#{user_idioctonia} or user_getaway&gt;=#{user_getaway} or user_suddendeath&gt;=#{user_suddendeath} or user_wound&gt;=#{user_wound})
   </select>
-
-
 
   <sql id="Example_Where_Clause" >
     <where >
@@ -145,8 +148,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    traineeCode, traineeName, traineeOldName, traineeAlias, sex, birthDate, nationType, 
-    educationDegree, idCardNo, nativePlace, isMarried, healthType, domicileLocation, 
+    traineeCode, dept_code, traineeName, traineeOldName, traineeAlias, sex, birthDate, 
+    nationType, educationDegree, idCardNo, nativePlace, isMarried, healthType, domicileLocation, 
     homeAddress, remark, deptCode, currentStatus, entryType, managePeriod, leaveDate, 
     startDate, endDate, dutyPolice, isAids, personnelSource, decisionNo, criminalRecord, 
     isThreetype, handlingAgency, otherHandlingAgency, roomId, roomNo, bedNo, deliveryDate, 
@@ -208,44 +211,44 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbTrainee" >
-    insert into tb_trainee (traineeCode, traineeName, traineeOldName, 
-      traineeAlias, sex, birthDate, 
-      nationType, educationDegree, idCardNo, 
-      nativePlace, isMarried, healthType, 
-      domicileLocation, homeAddress, remark, 
-      deptCode, currentStatus, entryType, 
-      managePeriod, leaveDate, startDate, 
-      endDate, dutyPolice, isAids, 
-      personnelSource, decisionNo, criminalRecord, 
-      isThreetype, handlingAgency, otherHandlingAgency, 
-      roomId, roomNo, bedNo, 
-      deliveryDate, recoveryDate, drugVariety, 
-      isKeyTrainee, isControlTrainee, guaranteePolice, 
-      origYear, origMonth, curriculumVitae, 
-      employmentSituation, isThreeFalse, disciplinaryAction, 
-      drugYears, runDate, controlTrainee2, 
-      smokingStyle, detoxificationSituation, 
+    insert into tb_trainee (traineeCode, dept_code, traineeName, 
+      traineeOldName, traineeAlias, sex, 
+      birthDate, nationType, educationDegree, 
+      idCardNo, nativePlace, isMarried, 
+      healthType, domicileLocation, homeAddress, 
+      remark, deptCode, currentStatus, 
+      entryType, managePeriod, leaveDate, 
+      startDate, endDate, dutyPolice, 
+      isAids, personnelSource, decisionNo, 
+      criminalRecord, isThreetype, handlingAgency, 
+      otherHandlingAgency, roomId, roomNo, 
+      bedNo, deliveryDate, recoveryDate, 
+      drugVariety, isKeyTrainee, isControlTrainee, 
+      guaranteePolice, origYear, origMonth, 
+      curriculumVitae, employmentSituation, isThreeFalse, 
+      disciplinaryAction, drugYears, runDate, 
+      controlTrainee2, smokingStyle, detoxificationSituation, 
       drugHistory, delayDate, reduceDate, 
       RemoveDate, user_grade, user_level, 
       user_idioctonia, user_wound, user_suddendeath, 
       user_getaway, image)
-    values (#{traineecode,jdbcType=VARCHAR}, #{traineename,jdbcType=VARCHAR}, #{traineeoldname,jdbcType=VARCHAR}, 
-      #{traineealias,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR}, 
-      #{nationtype,jdbcType=VARCHAR}, #{educationdegree,jdbcType=VARCHAR}, #{idcardno,jdbcType=VARCHAR}, 
-      #{nativeplace,jdbcType=VARCHAR}, #{ismarried,jdbcType=VARCHAR}, #{healthtype,jdbcType=VARCHAR}, 
-      #{domicilelocation,jdbcType=VARCHAR}, #{homeaddress,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{deptcode,jdbcType=VARCHAR}, #{currentstatus,jdbcType=VARCHAR}, #{entrytype,jdbcType=VARCHAR}, 
-      #{manageperiod,jdbcType=VARCHAR}, #{leavedate,jdbcType=VARCHAR}, #{startdate,jdbcType=VARCHAR}, 
-      #{enddate,jdbcType=VARCHAR}, #{dutypolice,jdbcType=VARCHAR}, #{isaids,jdbcType=VARCHAR}, 
-      #{personnelsource,jdbcType=VARCHAR}, #{decisionno,jdbcType=VARCHAR}, #{criminalrecord,jdbcType=VARCHAR}, 
-      #{isthreetype,jdbcType=VARCHAR}, #{handlingagency,jdbcType=VARCHAR}, #{otherhandlingagency,jdbcType=VARCHAR}, 
-      #{roomid,jdbcType=VARCHAR}, #{roomno,jdbcType=VARCHAR}, #{bedno,jdbcType=VARCHAR}, 
-      #{deliverydate,jdbcType=VARCHAR}, #{recoverydate,jdbcType=VARCHAR}, #{drugvariety,jdbcType=VARCHAR}, 
-      #{iskeytrainee,jdbcType=VARCHAR}, #{iscontroltrainee,jdbcType=VARCHAR}, #{guaranteepolice,jdbcType=VARCHAR}, 
-      #{origyear,jdbcType=DECIMAL}, #{origmonth,jdbcType=DECIMAL}, #{curriculumvitae,jdbcType=VARCHAR}, 
-      #{employmentsituation,jdbcType=VARCHAR}, #{isthreefalse,jdbcType=VARCHAR}, #{disciplinaryaction,jdbcType=VARCHAR}, 
-      #{drugyears,jdbcType=VARCHAR}, #{rundate,jdbcType=VARCHAR}, #{controltrainee2,jdbcType=VARCHAR}, 
-      #{smokingstyle,jdbcType=VARCHAR}, #{detoxificationsituation,jdbcType=VARCHAR}, 
+    values (#{traineecode,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{traineename,jdbcType=VARCHAR}, 
+      #{traineeoldname,jdbcType=VARCHAR}, #{traineealias,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthdate,jdbcType=VARCHAR}, #{nationtype,jdbcType=VARCHAR}, #{educationdegree,jdbcType=VARCHAR}, 
+      #{idcardno,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, #{ismarried,jdbcType=VARCHAR}, 
+      #{healthtype,jdbcType=VARCHAR}, #{domicilelocation,jdbcType=VARCHAR}, #{homeaddress,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deptcode,jdbcType=VARCHAR}, #{currentstatus,jdbcType=VARCHAR}, 
+      #{entrytype,jdbcType=VARCHAR}, #{manageperiod,jdbcType=VARCHAR}, #{leavedate,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{dutypolice,jdbcType=VARCHAR}, 
+      #{isaids,jdbcType=VARCHAR}, #{personnelsource,jdbcType=VARCHAR}, #{decisionno,jdbcType=VARCHAR}, 
+      #{criminalrecord,jdbcType=VARCHAR}, #{isthreetype,jdbcType=VARCHAR}, #{handlingagency,jdbcType=VARCHAR}, 
+      #{otherhandlingagency,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, #{roomno,jdbcType=VARCHAR}, 
+      #{bedno,jdbcType=VARCHAR}, #{deliverydate,jdbcType=VARCHAR}, #{recoverydate,jdbcType=VARCHAR}, 
+      #{drugvariety,jdbcType=VARCHAR}, #{iskeytrainee,jdbcType=VARCHAR}, #{iscontroltrainee,jdbcType=VARCHAR}, 
+      #{guaranteepolice,jdbcType=VARCHAR}, #{origyear,jdbcType=DECIMAL}, #{origmonth,jdbcType=DECIMAL}, 
+      #{curriculumvitae,jdbcType=VARCHAR}, #{employmentsituation,jdbcType=VARCHAR}, #{isthreefalse,jdbcType=VARCHAR}, 
+      #{disciplinaryaction,jdbcType=VARCHAR}, #{drugyears,jdbcType=VARCHAR}, #{rundate,jdbcType=VARCHAR}, 
+      #{controltrainee2,jdbcType=VARCHAR}, #{smokingstyle,jdbcType=VARCHAR}, #{detoxificationsituation,jdbcType=VARCHAR}, 
       #{drughistory,jdbcType=VARCHAR}, #{delaydate,jdbcType=VARCHAR}, #{reducedate,jdbcType=VARCHAR}, 
       #{removedate,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR}, 
       #{userIdioctonia,jdbcType=INTEGER}, #{userWound,jdbcType=INTEGER}, #{userSuddendeath,jdbcType=INTEGER}, 
@@ -256,6 +259,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="traineecode != null" >
         traineeCode,
+      </if>
+      <if test="deptCode != null" >
+        dept_code,
       </if>
       <if test="traineename != null" >
         traineeName,
@@ -441,6 +447,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="traineecode != null" >
         #{traineecode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
       <if test="traineename != null" >
         #{traineename,jdbcType=VARCHAR},
@@ -636,6 +645,9 @@
       <if test="record.traineecode != null" >
         traineeCode = #{record.traineecode,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.traineename != null" >
         traineeName = #{record.traineename,jdbcType=VARCHAR},
       </if>
@@ -824,6 +836,7 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update tb_trainee
     set traineeCode = #{record.traineecode,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR},
       traineeName = #{record.traineename,jdbcType=VARCHAR},
       traineeOldName = #{record.traineeoldname,jdbcType=VARCHAR},
       traineeAlias = #{record.traineealias,jdbcType=VARCHAR},
@@ -891,6 +904,7 @@
   <update id="updateByExample" parameterType="map" >
     update tb_trainee
     set traineeCode = #{record.traineecode,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR},
       traineeName = #{record.traineename,jdbcType=VARCHAR},
       traineeOldName = #{record.traineeoldname,jdbcType=VARCHAR},
       traineeAlias = #{record.traineealias,jdbcType=VARCHAR},
@@ -957,6 +971,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sznk.terrace.bean.TbTrainee" >
     update tb_trainee
     <set >
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
       <if test="traineename != null" >
         traineeName = #{traineename,jdbcType=VARCHAR},
       </if>
@@ -1142,7 +1159,8 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sznk.terrace.bean.TbTrainee" >
     update tb_trainee
-    set traineeName = #{traineename,jdbcType=VARCHAR},
+    set dept_code = #{deptCode,jdbcType=VARCHAR},
+      traineeName = #{traineename,jdbcType=VARCHAR},
       traineeOldName = #{traineeoldname,jdbcType=VARCHAR},
       traineeAlias = #{traineealias,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
@@ -1206,7 +1224,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sznk.terrace.bean.TbTrainee" >
     update tb_trainee
-    set traineeName = #{traineename,jdbcType=VARCHAR},
+    set dept_code = #{deptCode,jdbcType=VARCHAR},
+      traineeName = #{traineename,jdbcType=VARCHAR},
       traineeOldName = #{traineeoldname,jdbcType=VARCHAR},
       traineeAlias = #{traineealias,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},

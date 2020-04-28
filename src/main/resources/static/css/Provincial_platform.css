@@ -1,0 +1,521 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+html {
+	width: 100%;
+	
+	height: 100%;
+	margin: 0 auto;
+	min-width: 1920px;
+}
+body {
+	width: 100%;
+
+	min-width: 1920px;
+	background-image: url(../img/bg.png);
+	background-size: 100% 100%;
+	z-index: -99;position: absolute;display: block;width: 100%;
+	background-color: #020047;
+}
+/*左边*/
+.content_left{
+	float: left;
+	height: 861px;
+    width: 487px;
+    margin-left: 1%;
+    position: relative;
+}
+/*中间*/
+.content_man{
+	width: 884px;
+    margin: 0 16px;
+        height: 864px;
+    float: left;
+}
+/*右边*/
+.content_right{
+	float: left;
+    width: 487px;
+    height: 900px;
+}
+/*戒毒学员危险性分析标题行*/
+.xywxfx_titlt {
+	width: 90%;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 28px;
+}
+
+.xywxfx_center {
+	margin-bottom: 5px;
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	position: relative;
+    padding-top: 10px;
+}
+
+.xywxfx_center span {
+	/*width: 50%;*/
+	float: left;
+	display: block;
+	position: absolute;
+	color: #ffffff;
+	left: 20px;
+	font-size: 14px;
+	font-family: trends;
+}
+
+.xywxfx_center a {
+	/*width: 50%;*/
+	font-weight: bold;
+	text-decoration: underline;
+	display: block;
+	position: absolute;
+	right: 41px;
+	color: #098FC6;
+	font-family: trends;
+}
+/**/
+#xywxfx{
+	width: 100%;
+	height:250px;
+}
+.xyts_titlt {
+	width: 90%;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 28px;
+}
+
+.xyts_center {
+	margin-bottom: 5px;
+	width: 94%;
+	height: 28px;
+	line-height: 28px;
+
+	padding-top: 10px;
+	position: relative;
+}
+
+.xyts_center span {
+	/*width: 50%;*/
+	float: left;
+	display: block;
+	position: absolute;
+	color: #ffffff;
+	left:33px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.xyts_center a {
+	/*width: 50%;*/
+	font-weight: bold;
+	text-decoration: underline;
+	display: block;
+	position: absolute;
+	right: 2%;
+	color: #098FC6;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+}
+/*搜索框*/
+.search_div {
+	width: auto;
+	height: 38px;
+	display: flex;
+	position: absolute;
+	top: 356px;
+	left: 18px;
+}
+ input:placeholder {
+       /* placeholder颜色  */
+       color: #aab2bd;
+       /* placeholder字体大小  */
+       font-size: 10px !important;
+    }
+.search_input{
+	float: left;
+	padding-left: 10px;
+	line-height: 36px;
+	width: 342px;
+	height: 36px;
+	color: #ffffff;
+	font-size: 14px;
+	/*border-color: rgba(61, 215, 253, .75);
+	box-shadow: inset 0 0  8px rgba(61, 215, 243, .5);
+	-moz-box-shadow: inset 0 0 8px rgba(61, 215, 243, .5);
+	-webkit-box-shadow: inset 0 0 8px rgba(61, 215, 243, 3);*/
+	background-color: rgba(0,0,0,0);
+	outline: none;	
+	border: 1px solid rgba(61,215,253, .75);
+	box-shadow: inset 0 0  6px rgba(61,215,244, .5);
+	-webkit-box-shadow: inset 0 0 6px rgba(61,215,244, 3);
+}
+
+.qing{
+	float: left;
+	line-height: 38px;
+	text-decoration: none;
+	text-align: center;
+	color: #ffffff;
+	width: 74px;
+	display: inline-block;
+	vertical-align: top;
+	font-family: trends;
+	border: 1px solid rgba(61,215,253, .75);
+}
+/*列表框定位*/
+.wxxjd{
+	position: absolute;
+	top: 402px;
+	left: 18px;
+
+}
+/*右三*/
+.xyts{
+    width: 100%;
+    height: 225px;
+
+    position: relative;
+}
+.xywc,.xyxf{
+	
+}
+.xyts img{
+	width: 100%;
+	height: 225px;
+	z-index: -1;
+	position: absolute;
+	display: block;
+	*zoom: 1;
+}
+.right_under_h{
+	width: 100%;
+	height: 306px;
+	margin-top: 10px;
+	position: relative;
+}
+.right_under_h img{
+	width: 100%;
+	height: 306px;
+	z-index: -1;
+	position: absolute;
+	display: block;
+	*zoom: 1;
+}
+
+/*学员外出数据分布*/
+.xywc_titlt {
+	width: 90%;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 28px;
+}
+
+.xywc_center {
+	margin-bottom: 5px;
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	position: relative;
+	
+    padding-top: 10px;
+}
+
+.xywc_center span {
+	/*width: 50%;*/
+	line-height: 24px;
+	float: left;
+	display: block;
+	position: absolute;
+	color: #ffffff;
+	left:33px;
+	font-size: 14px;
+	font-family: trends;
+}
+
+.xywc_center a {
+	/*width: 50%;*/
+	font-weight: bold;
+	text-decoration: underline;
+	display: block;
+	position: absolute;
+	right: 19px;
+	color: #098FC6;
+	font-family: trends;
+}
+/**/
+
+/**/
+.wxxjd_titlt {
+	width: 100%;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 28px;
+}
+
+.wxxjd_center {
+	position: absolute;
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	top: 328px;
+
+}
+
+.wxxjd_center span {
+	/*width: 50%;*/
+	float: left;
+	display: block;
+	position: absolute;
+	color: #ffffff;
+	left: 20px;
+	font-size: 14px;
+	font-family: trends;
+}
+
+.wxxjd_center a {
+	/*width: 50%;*/
+	font-weight: bold;
+	text-decoration: underline;
+	display: block;
+	position: absolute;
+	right: 41px;
+	color: #098FC6;
+	font-family: trends;
+}
+.demo-class{
+	/*background-image: url(../img/consumption_bg.png);
+	background-size: 100% 100%;*/
+	background-color: #3dd7fd;
+}
+
+.fxxs{
+	width: 120px;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	line-height: 40px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #ffffff;
+	position: absolute;
+	right: 18px;
+	top: 24px;
+	cursor: pointer;
+}
+
+
+/*人员标签*/
+.xywc_center{
+	width: 100%;
+	height: 13px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 42px;
+	letter-spacing: 1px;
+	position: absolute;
+	
+	color: #ffffff;
+}
+#qsjzxntj{
+	position: absolute;
+	top: 41px;
+	left: 46px;
+}
+
+#qsjzxnzs{
+	position: absolute;
+	top: 32px;
+	
+}
+/*.active{
+
+	border: 5px solid #3dd7fd;
+}*/
+.tr_level_sc{
+	padding-top: 24px !important;
+}
+.tr_msg,.tr_level{
+	border-left: 1px solid rgba(61,215,253, .75) !important;
+}
+.setting_til{
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	margin-right: 11px;
+	font-family: PingFang-SC-Heavy;
+	font-size: 14px;
+	color: #ffffff;
+	margin-left: 38px;
+}
+.setting_tr{
+	margin-top: 17px;
+}
+#qsjzjdfb{
+	position: absolute;
+	top: 30px;
+}
+.tabtrdiv a{
+	cursor: pointer;
+}
+.content_1{
+ width: 884px;
+ height: 622px;
+ position: relative;
+}
+.content_2{
+ width: 884px;
+ height: 242px;
+ position: relative;
+ background-image: url(../img/xys.png);
+ background-repeat: no-repeat;
+ background-size: 100% 100%;
+}
+.ddry_content{
+	width: 100%;
+	height: 13px;
+	color: #fff;
+	padding-top: 37px;
+	font-family: TRENDS;
+}
+.ddry_content span{
+	display: block;
+	width: auto;
+	height: 13px;
+	margin-left: 17px;
+}
+#jzxntj {
+    position: absolute;
+    top: 42px;
+}
+#jzxnzs {
+    position: absolute;
+    top: 42px;
+}
+.ddxys_num {
+    width: 621px;
+    height: 36px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+.ddxys_title {
+    width: 621px;
+    height: 14px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.dqzrs, .zrlss, .jrrss {
+    flex: 1;
+    font-family: PingFang-SC-Heavy;
+    font-size: 48px;
+    font-weight: normal;
+    height: 36px;
+    line-height: 36px;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+}
+.ddxys_title span {
+    flex: 1;
+    font-family: PingFang-SC-Heavy;
+    font-size: 14px;
+    font-weight: normal;
+    height: 14px;
+    line-height: 14px;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+}
+
+#sbzt{
+	width: 294px;
+	height: 334px;
+
+	position: absolute;
+	top: 440px;
+	left: 88px;
+}
+#sbzt>div{
+	width: 294px;
+	height: 50%;	
+}
+#sbzt>div .mjsbdiv,.jksbdiv,.dwsbdiv,.xfsbdiv{
+	width: 110px;
+	height: 140px;
+	display: inline-block;
+
+}
+.dwsbdiv,.xfsbdiv{
+	margin-top: 27px;
+
+}
+#sbzt>div .mjsbdiv span,.jksbdiv span,.xfsbdiv span,.dwsbdiv span{
+	height: 29px;
+	width: 110px;
+	text-align: center;
+	line-height: 29px;
+	display: block;
+	font-family: PingFang-SC-Regular;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30px;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+#sbzt>div .mjsbdiv,.dwsbdiv{
+	float: right;
+}
+#jksb,#mjsb,#xfsb,#dwsb{
+	width: 110px;
+	height: 110px;
+
+}
+.map{
+	width: 732px;
+	height: 547px;
+	position: absolute;
+	top: 30px;
+	left: 45px;
+}
+.map_li{
+	width: 85px;
+	height: auto;
+	position: absolute;
+	bottom: 15px;
+	right: 42px;
+}
+.map_li ul li>a{
+	display: block;
+	width: 82px;
+	height: 28px;
+	margin-bottom: 11px;
+	font-family: TRENDS;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30px;
+	letter-spacing: 1px;
+	color: #ffffff;
+	text-align: center;
+}

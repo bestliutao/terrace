@@ -27,6 +27,8 @@ public class TraineeVisit {
 
     private Date updateTime;
 
+    private String deptCode;
+
     public String getVisitno() {
         return visitno;
     }
@@ -121,5 +123,13 @@ public class TraineeVisit {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

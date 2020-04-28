@@ -21,9 +21,9 @@ public class AbstinenceEfficacyServiceImpl implements AbstinenceEfficacyService 
     @Autowired
     private TbGrademonthMapper tbGrademonthMapper;
     //重点戒治人员
-    public UserTable keyStudent(String pageNo, String pageSize){
+    public UserTable keyStudent(String pageNo, String pageSize,String dept){
         TbTraineeExample example = new TbTraineeExample();
-        example.createCriteria().andUserGradeLessThan("60");
+        example.createCriteria().andUserGradeLessThan("60").andDeptCodeEqualTo(dept);
         List<TbTrainee> tbTrainees = tbTraineeMapper.selectByExample(example);
 
         List<Object> list = new ArrayList<>();
@@ -45,15 +45,56 @@ public class AbstinenceEfficacyServiceImpl implements AbstinenceEfficacyService 
         return userTable;
     }
     //奖惩情况人数统计
-    public List<TitileNumBean> performanceManNum(String date){
-        List<TitileNumBean> titileNumBeans = tbPerformanceMapper.performanceNum(date);
+    public List<TitileNumBean> performanceManNum(String date,String dept){
+        List<TitileNumBean> titileNumBeans = tbPerformanceMapper.performanceNum(date,dept);
+        if (titileNumBeans.size()<=0){
+            TitileNumBean titileNumBean1 = new TitileNumBean();
+            titileNumBean1.setTitle("严重警告");
+            titileNumBean1.setNumber("0");
+            titileNumBeans.add(titileNumBean1);
+
+            TitileNumBean titileNumBean2 = new TitileNumBean();
+            titileNumBean2.setTitle("减少期限");
+            titileNumBean2.setNumber("0");
+            titileNumBeans.add(titileNumBean2);
+
+            TitileNumBean titileNumBean3 = new TitileNumBean();
+            titileNumBean3.setTitle("嘉奖");
+            titileNumBean3.setNumber("0");
+            titileNumBeans.add(titileNumBean3);
+
+            TitileNumBean titileNumBean4 = new TitileNumBean();
+            titileNumBean4.setTitle("延迟期限");
+            titileNumBean4.setNumber("0");
+            titileNumBeans.add(titileNumBean4);
+
+            TitileNumBean titileNumBean5 = new TitileNumBean();
+            titileNumBean5.setTitle("表扬");
+            titileNumBean5.setNumber("0");
+            titileNumBeans.add(titileNumBean5);
+
+            TitileNumBean titileNumBean6 = new TitileNumBean();
+            titileNumBean6.setTitle("警告");
+            titileNumBean6.setNumber("0");
+            titileNumBeans.add(titileNumBean6);
+
+            TitileNumBean titileNumBean7 = new TitileNumBean();
+            titileNumBean7.setTitle("记功");
+            titileNumBean7.setNumber("0");
+            titileNumBeans.add(titileNumBean7);
+
+            TitileNumBean titileNumBean8 = new TitileNumBean();
+            titileNumBean8.setTitle("记过");
+            titileNumBean8.setNumber("0");
+            titileNumBeans.add(titileNumBean8);
+        }
         return  titileNumBeans;
     }
 
     //戒治下 奖惩详情页显示接口
-    public UserTable performanDetil(String pageNo, String pageSize,String type){
+    public UserTable performanDetil(String pageNo, String pageSize,String type,String dept){
         TbPerformanceExample example = new TbPerformanceExample();
-        example.createCriteria().andPerformanceTypeEqualTo(type);
+        example.createCriteria().andPerformanceTypeEqualTo(type).andDeptCodeEqualTo(dept);
         List<TbPerformance> tbPerformances = tbPerformanceMapper.selectByExample(example);
 
 
@@ -85,8 +126,8 @@ public class AbstinenceEfficacyServiceImpl implements AbstinenceEfficacyService 
     }
 
     //戒治阶段分布（人数）
-    public E3Result stageDistribution(){
-        List<TitileNumBean> titileNumBeans = tbTraineeMapper.stageDistribution();
+    public E3Result stageDistribution(String dept){
+        List<TitileNumBean> titileNumBeans = tbTraineeMapper.stageDistribution(dept);
         TitileNumBean titileNumBean = new TitileNumBean();
         titileNumBean.setTitle("生理脱毒期");
         titileNumBean.setNumber("0");

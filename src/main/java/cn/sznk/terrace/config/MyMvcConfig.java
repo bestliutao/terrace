@@ -34,6 +34,9 @@ public class MyMvcConfig implements WebMvcConfigurer  {
         registry.addViewController("/riskEquipemnt").setViewName("Equipment_exception_risk");
         registry.addViewController("/efficacy").setViewName("efficacy");
         registry.addViewController("/effectivenessDetails").setViewName("Effectiveness_analysis-Details");
+        registry.addViewController("/provincialPlatform").setViewName("Provincial_platform");
+        registry.addViewController("/provincialEquip").setViewName("Provincial_equipment");
+
 //        registry.addViewController("/efficacy").setViewName("efficacy");
     }
 

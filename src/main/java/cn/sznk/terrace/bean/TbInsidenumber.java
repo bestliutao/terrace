@@ -9,6 +9,8 @@ public class TbInsidenumber {
 
     private String outnumber;
 
+    private String deptCode;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class TbInsidenumber {
 
     public void setOutnumber(String outnumber) {
         this.outnumber = outnumber == null ? null : outnumber.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

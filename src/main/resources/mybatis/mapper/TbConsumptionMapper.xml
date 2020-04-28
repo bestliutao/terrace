@@ -7,14 +7,14 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="consumption_money" property="consumptionMoney" jdbcType="INTEGER" />
     <result column="consumption_time" property="consumptionTime" jdbcType="TIMESTAMP" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
-
-  <select id="consumptionNumber" resultType="java.lang.Integer">
-    SELECT COUNT(DISTINCT user_id) from tb_consumption where consumption_money &gt; #{ltMoney} and consumption_money &lt; #{gtMoney} and consumption_time like CONCAT(#{date}, '%')
+  <select id="consumptionNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(DISTINCT user_id) from tb_consumption where consumption_money &gt; #{ltMoney} and consumption_money &lt; #{gtMoney} and consumption_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
-  <select id="consumptionNumberTwo" resultType="java.lang.Integer">
-    SELECT COUNT(DISTINCT user_id) from tb_consumption where consumption_money &gt; #{ltMoney} and consumption_time like CONCAT(#{date}, '%')
+  <select id="consumptionNumberTwo" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(DISTINCT user_id) from tb_consumption where consumption_money &gt; #{ltMoney} and consumption_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
 
@@ -77,7 +77,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    consumption_id, user_id, user_name, consumption_money, consumption_time
+    consumption_id, user_id, user_name, consumption_money, consumption_time, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbConsumptionExample" >
     select
@@ -111,9 +111,11 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbConsumption" >
     insert into tb_consumption (consumption_id, user_id, user_name, 
-      consumption_money, consumption_time)
+      consumption_money, consumption_time, dept_code
+      )
     values (#{consumptionId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{consumptionMoney,jdbcType=INTEGER}, #{consumptionTime,jdbcType=TIMESTAMP})
+      #{consumptionMoney,jdbcType=INTEGER}, #{consumptionTime,jdbcType=TIMESTAMP}, #{deptCode,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbConsumption" >
     insert into tb_consumption
@@ -133,6 +135,9 @@
       <if test="consumptionTime != null" >
         consumption_time,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="consumptionId != null" >
@@ -149,6 +154,9 @@
       </if>
       <if test="consumptionTime != null" >
         #{consumptionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +184,9 @@
       <if test="record.consumptionTime != null" >
         consumption_time = #{record.consumptionTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -187,7 +198,8 @@
       user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       consumption_money = #{record.consumptionMoney,jdbcType=INTEGER},
-      consumption_time = #{record.consumptionTime,jdbcType=TIMESTAMP}
+      consumption_time = #{record.consumptionTime,jdbcType=TIMESTAMP},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,6 +219,9 @@
       <if test="consumptionTime != null" >
         consumption_time = #{consumptionTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where consumption_id = #{consumptionId,jdbcType=INTEGER}
   </update>
@@ -215,7 +230,8 @@
     set user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       consumption_money = #{consumptionMoney,jdbcType=INTEGER},
-      consumption_time = #{consumptionTime,jdbcType=TIMESTAMP}
+      consumption_time = #{consumptionTime,jdbcType=TIMESTAMP},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where consumption_id = #{consumptionId,jdbcType=INTEGER}
   </update>
 </mapper>

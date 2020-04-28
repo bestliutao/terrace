@@ -3,6 +3,8 @@ package cn.sznk.terrace.bean;
 public class TbGrademonth {
     private Integer id;
 
+    private String deptCode;
+
     private String statge;
 
     private String time;
@@ -33,6 +35,14 @@ public class TbGrademonth {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 
     public String getStatge() {

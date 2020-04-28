@@ -6,6 +6,7 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_hazard" property="userHazard" jdbcType="VARCHAR" />
     <result column="user_level" property="userLevel" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_hazard, user_level
+    user_id, user_name, user_hazard, user_level, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbKeymanExample" >
     select
@@ -90,9 +91,9 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbKeyman" >
     insert into tb_keyman (user_id, user_name, user_hazard, 
-      user_level)
+      user_level, dept_code)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userHazard,jdbcType=VARCHAR}, 
-      #{userLevel,jdbcType=VARCHAR})
+      #{userLevel,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbKeyman" >
     insert into tb_keyman
@@ -109,6 +110,9 @@
       <if test="userLevel != null" >
         user_level,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -122,6 +126,9 @@
       </if>
       <if test="userLevel != null" >
         #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.userLevel != null" >
         user_level = #{record.userLevel,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,7 +166,8 @@
     set user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_hazard = #{record.userHazard,jdbcType=VARCHAR},
-      user_level = #{record.userLevel,jdbcType=VARCHAR}
+      user_level = #{record.userLevel,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

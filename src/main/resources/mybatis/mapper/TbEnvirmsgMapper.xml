@@ -9,14 +9,15 @@
     <result column="envir_type" property="envirType" jdbcType="VARCHAR" />
     <result column="envir_time" property="envirTime" jdbcType="TIMESTAMP" />
     <result column="envir_status" property="envirStatus" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <!--根据日期查当天的异常设备个数-->
   <select id="todayBadEnvirNum" parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM tb_envirmsg where envir_time like CONCAT(#{envir_time}, '%')
+    SELECT COUNT(*) FROM tb_envirmsg where envir_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
   <!--根据日期查当天的异常设备信息-->
   <select id="todayBadEnvir" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TbEnvirmsg">
-    SELECT * FROM tb_envirmsg where envir_time like CONCAT(#{monitor_time}, '%')
+    SELECT * FROM tb_envirmsg where envir_time like CONCAT(#{date}, '%') and dept_code=#{code}
   </select>
 
   <sql id="Example_Where_Clause" >
@@ -78,7 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    envir_oid, envir_desc, envir_value, envir_level, envir_type, envir_time, envir_status
+    envir_oid, envir_desc, envir_value, envir_level, envir_type, envir_time, envir_status, 
+    dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbEnvirmsgExample" >
     select
@@ -113,10 +115,10 @@
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbEnvirmsg" >
     insert into tb_envirmsg (envir_oid, envir_desc, envir_value, 
       envir_level, envir_type, envir_time, 
-      envir_status)
+      envir_status, dept_code)
     values (#{envirOid,jdbcType=VARCHAR}, #{envirDesc,jdbcType=VARCHAR}, #{envirValue,jdbcType=VARCHAR}, 
       #{envirLevel,jdbcType=VARCHAR}, #{envirType,jdbcType=VARCHAR}, #{envirTime,jdbcType=TIMESTAMP}, 
-      #{envirStatus,jdbcType=VARCHAR})
+      #{envirStatus,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbEnvirmsg" >
     insert into tb_envirmsg
@@ -142,6 +144,9 @@
       <if test="envirStatus != null" >
         envir_status,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="envirOid != null" >
@@ -164,6 +169,9 @@
       </if>
       <if test="envirStatus != null" >
         #{envirStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -197,6 +205,9 @@
       <if test="record.envirStatus != null" >
         envir_status = #{record.envirStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +221,8 @@
       envir_level = #{record.envirLevel,jdbcType=VARCHAR},
       envir_type = #{record.envirType,jdbcType=VARCHAR},
       envir_time = #{record.envirTime,jdbcType=TIMESTAMP},
-      envir_status = #{record.envirStatus,jdbcType=VARCHAR}
+      envir_status = #{record.envirStatus,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -236,6 +248,9 @@
       <if test="envirStatus != null" >
         envir_status = #{envirStatus,jdbcType=VARCHAR},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where envir_oid = #{envirOid,jdbcType=VARCHAR}
   </update>
@@ -246,7 +261,8 @@
       envir_level = #{envirLevel,jdbcType=VARCHAR},
       envir_type = #{envirType,jdbcType=VARCHAR},
       envir_time = #{envirTime,jdbcType=TIMESTAMP},
-      envir_status = #{envirStatus,jdbcType=VARCHAR}
+      envir_status = #{envirStatus,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where envir_oid = #{envirOid,jdbcType=VARCHAR}
   </update>
 </mapper>

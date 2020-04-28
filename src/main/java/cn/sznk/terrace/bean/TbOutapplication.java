@@ -15,6 +15,8 @@ public class TbOutapplication {
 
     private String outType;
 
+    private String deptCode;
+
     public Integer getOutId() {
         return outId;
     }
@@ -61,5 +63,13 @@ public class TbOutapplication {
 
     public void setOutType(String outType) {
         this.outType = outType == null ? null : outType.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

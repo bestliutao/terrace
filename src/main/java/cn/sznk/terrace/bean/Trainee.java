@@ -2,86 +2,9 @@ package cn.sznk.terrace.bean;
 
 import java.util.Date;
 
-public class Trainee{
-    @Override
-    public String toString() {
-        return "Trainee{" +
-                "traineecode='" + traineecode + '\'' +
-                ", updateTime='" + updateTime + '\'' +
-                ", traineename='" + traineename + '\'' +
-                ", traineeoldname='" + traineeoldname + '\'' +
-                ", traineealias='" + traineealias + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthdate=" + birthdate +
-                ", nationtype='" + nationtype + '\'' +
-                ", educationdegree='" + educationdegree + '\'' +
-                ", idcardno='" + idcardno + '\'' +
-                ", nativeplace='" + nativeplace + '\'' +
-                ", ismarried='" + ismarried + '\'' +
-                ", healthtype='" + healthtype + '\'' +
-                ", domicilelocation='" + domicilelocation + '\'' +
-                ", homeaddress='" + homeaddress + '\'' +
-                ", remark='" + remark + '\'' +
-                ", deptcode='" + deptcode + '\'' +
-                ", currentstatus='" + currentstatus + '\'' +
-                ", entrytype='" + entrytype + '\'' +
-                ", manageperiod='" + manageperiod + '\'' +
-                ", leavedate=" + leavedate +
-                ", startdate=" + startdate +
-                ", enddate=" + enddate +
-                ", dutypolice='" + dutypolice + '\'' +
-                ", isaids='" + isaids + '\'' +
-                ", personnelsource='" + personnelsource + '\'' +
-                ", decisionno='" + decisionno + '\'' +
-                ", criminalrecord='" + criminalrecord + '\'' +
-                ", isthreetype='" + isthreetype + '\'' +
-                ", handlingagency='" + handlingagency + '\'' +
-                ", otherhandlingagency='" + otherhandlingagency + '\'' +
-                ", roomid=" + roomid +
-                ", roomno='" + roomno + '\'' +
-                ", bedno='" + bedno + '\'' +
-                ", deliverydate=" + deliverydate +
-                ", recoverydate=" + recoverydate +
-                ", drugvariety='" + drugvariety + '\'' +
-                ", iskeytrainee='" + iskeytrainee + '\'' +
-                ", iscontroltrainee='" + iscontroltrainee + '\'' +
-                ", guaranteepolice='" + guaranteepolice + '\'' +
-                ", origyear=" + origyear +
-                ", origmonth=" + origmonth +
-                ", curriculumvitae='" + curriculumvitae + '\'' +
-                ", employmentsituation='" + employmentsituation + '\'' +
-                ", isthreefalse='" + isthreefalse + '\'' +
-                ", disciplinaryaction='" + disciplinaryaction + '\'' +
-                ", drugyears='" + drugyears + '\'' +
-                ", rundate=" + rundate +
-                ", controltrainee2='" + controltrainee2 + '\'' +
-                ", smokingstyle='" + smokingstyle + '\'' +
-                ", detoxificationsituation='" + detoxificationsituation + '\'' +
-                ", drughistory='" + drughistory + '\'' +
-                ", delaydate='" + delaydate + '\'' +
-                ", reducedate='" + reducedate + '\'' +
-                ", removedate=" + removedate +
-                '}';
-    }
+public class Trainee extends TraineeKey {
+    private String deptCode;
 
-    public String getTraineecode() {
-        return traineecode;
-    }
-
-    public void setTraineecode(String traineecode) {
-        this.traineecode = traineecode;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    private String traineecode;
-    private String updateTime;
     private String traineename;
 
     private String traineeoldname;
@@ -187,6 +110,14 @@ public class Trainee{
     private String reducedate;
 
     private Date removedate;
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
+    }
 
     public String getTraineename() {
         return traineename;

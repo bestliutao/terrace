@@ -25,6 +25,8 @@ public class TbManlablel {
 
     private String level;
 
+    private String deptCode;
+
     public Integer getId() {
         return id;
     }
@@ -119,5 +121,13 @@ public class TbManlablel {
 
     public void setLevel(String level) {
         this.level = level == null ? null : level.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

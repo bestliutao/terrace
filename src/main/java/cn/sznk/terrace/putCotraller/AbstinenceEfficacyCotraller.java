@@ -36,23 +36,26 @@ public class AbstinenceEfficacyCotraller {
     //重点人员展示
     @ResponseBody
     @GetMapping("/abstinence/keyStudentShow")
-    public E3Result keyStudentShow(String pageNo, String pageSize){
-        UserTable userTable = abstinenceEfficacyService.keyStudent(pageNo,pageSize);
+    public E3Result keyStudentShow(String pageNo, String pageSize,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = abstinenceEfficacyService.keyStudent(pageNo,pageSize,dept);
         return E3Result.ok(userTable);
     }
 
     //奖惩人员统计
     @ResponseBody
     @GetMapping("/abstinence/performenceNum")
-    public E3Result performenceNumShow(String date){
-        List<TitileNumBean> titileNumBeans = abstinenceEfficacyService.performanceManNum(date);
+    public E3Result performenceNumShow(String date,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        List<TitileNumBean> titileNumBeans = abstinenceEfficacyService.performanceManNum(date,dept);
         return E3Result.ok(titileNumBeans);
     }
     //奖惩细节页
     @ResponseBody
     @GetMapping("/abstinence/performenceDetil")
-    public E3Result performenceDetilShow(String pageNo, String pageSize,String pageType){
-        UserTable userTable = abstinenceEfficacyService.performanDetil(pageNo, pageSize, pageType);
+    public E3Result performenceDetilShow(String pageNo, String pageSize,String pageType,HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        UserTable userTable = abstinenceEfficacyService.performanDetil(pageNo, pageSize, pageType,dept);
         return E3Result.ok(userTable);
     }
 
@@ -73,7 +76,8 @@ public class AbstinenceEfficacyCotraller {
     //戒治阶段分布（人数）
     @ResponseBody
     @GetMapping("/abstinence/stageDistribution")
-    public E3Result stageDistribution(){
-        return abstinenceEfficacyService.stageDistribution();
+    public E3Result stageDistribution(HttpSession session){
+        String dept=(String)session.getAttribute("deptCode");
+        return abstinenceEfficacyService.stageDistribution(dept);
     }
 }

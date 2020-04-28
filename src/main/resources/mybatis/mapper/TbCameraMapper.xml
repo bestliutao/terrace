@@ -9,6 +9,7 @@
     <result column="place" property="place" jdbcType="VARCHAR" />
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
     <result column="statu" property="statu" jdbcType="INTEGER" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, ip, brand, floor, place, sort_id, statu
+    id, ip, brand, floor, place, sort_id, statu, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbCameraExample" >
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbCamera" >
     insert into tb_camera (id, ip, brand, 
       floor, place, sort_id, 
-      statu)
+      statu, dept_code)
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER}, 
       #{floor,jdbcType=INTEGER}, #{place,jdbcType=VARCHAR}, #{sortId,jdbcType=INTEGER}, 
-      #{statu,jdbcType=INTEGER})
+      #{statu,jdbcType=INTEGER}, #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbCamera" >
     insert into tb_camera
@@ -133,6 +134,9 @@
       <if test="statu != null" >
         statu,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -155,6 +159,9 @@
       </if>
       <if test="statu != null" >
         #{statu,jdbcType=INTEGER},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.statu != null" >
         statu = #{record.statu,jdbcType=INTEGER},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       floor = #{record.floor,jdbcType=INTEGER},
       place = #{record.place,jdbcType=VARCHAR},
       sort_id = #{record.sortId,jdbcType=INTEGER},
-      statu = #{record.statu,jdbcType=INTEGER}
+      statu = #{record.statu,jdbcType=INTEGER},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="statu != null" >
         statu = #{statu,jdbcType=INTEGER},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -237,7 +251,8 @@
       floor = #{floor,jdbcType=INTEGER},
       place = #{place,jdbcType=VARCHAR},
       sort_id = #{sortId,jdbcType=INTEGER},
-      statu = #{statu,jdbcType=INTEGER}
+      statu = #{statu,jdbcType=INTEGER},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

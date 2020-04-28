@@ -3,11 +3,13 @@ package cn.sznk.terrace.bean;
 public class TbUser {
     private Integer id;
 
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
     private String userPassword;
+
+    private String deptCode;
 
     public Integer getId() {
         return id;
@@ -17,12 +19,12 @@ public class TbUser {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUserName() {
@@ -39,5 +41,13 @@ public class TbUser {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

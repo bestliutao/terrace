@@ -17,6 +17,8 @@ public class TbEnvirmsg {
 
     private String envirStatus;
 
+    private String deptCode;
+
     public String getEnvirOid() {
         return envirOid;
     }
@@ -71,5 +73,13 @@ public class TbEnvirmsg {
 
     public void setEnvirStatus(String envirStatus) {
         this.envirStatus = envirStatus == null ? null : envirStatus.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

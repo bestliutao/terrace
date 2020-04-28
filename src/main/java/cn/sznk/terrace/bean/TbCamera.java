@@ -15,6 +15,8 @@ public class TbCamera {
 
     private Integer statu;
 
+    private String deptCode;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class TbCamera {
 
     public void setStatu(Integer statu) {
         this.statu = statu;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

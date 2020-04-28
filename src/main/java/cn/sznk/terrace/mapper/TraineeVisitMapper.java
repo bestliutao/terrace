@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TraineeVisitMapper {
-    List<String> visitNumber(@Param("number")Integer number);
+    List<String> visitNumber(@Param("number") String number,@Param("code") String code);
+
     int countByExample(TraineeVisitExample example);
 
     int deleteByExample(TraineeVisitExample example);

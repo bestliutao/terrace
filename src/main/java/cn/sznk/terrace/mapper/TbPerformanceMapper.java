@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbPerformanceMapper {
-    List<TitileNumBean> performanceNum(String date);
+    List<TitileNumBean> performanceNum(@Param("date")String date,@Param("code")String code);
 
     int countByExample(TbPerformanceExample example);
 

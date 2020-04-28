@@ -12,12 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.misc.BASE64Decoder;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -43,8 +42,8 @@ public class GetBusinesData {
     /*
     * 获取学员信息
     * */
-    public String getTraineeData(){
-        String pString = "http://"+ip+":8081/business/allStudentList";
+    public String getTraineeData(String dept){
+        String pString = "http://"+ip+":8081/business/allStudentList?dept="+dept;
         int entryNumber=0,totalNumber=0,outNumber=0;
         if (httpGetData(pString)==null||httpGetData(pString).equals("")){
             return "400";
@@ -74,24 +73,50 @@ public class GetBusinesData {
                 }
             }
             TbTraineeExample example = new TbTraineeExample();
-            example.createCriteria().andCurrentstatusEqualTo("在所");
+            example.createCriteria().andCurrentstatusEqualTo("在所").andDeptCodeEqualTo(dept);
             List<TbTrainee> tbTrainees = tbTraineeMapper.selectByExample(example);
             totalNumber=tbTrainees.size();
-            TbInsidenumber tbInsidenumber = tbInsidenumberMapper.selectByPrimaryKey(1);
-            if (tbInsidenumber.getTotalnumber()==null){
-                tbInsidenumber.setTotalnumber("0");
-            }
-            if(Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber<0){
-                outNumber=0;
+
+            TbInsidenumberExample example1 = new TbInsidenumberExample();
+            example1.createCriteria().andDeptCodeEqualTo(dept);
+            List<TbInsidenumber> tbInsidenumbers = tbInsidenumberMapper.selectByExample(example1);
+            if (tbInsidenumbers.size()<=0){
+                for (TbInsidenumber tbInsidenumber:tbInsidenumbers){
+                    if (tbInsidenumber.getTotalnumber()==null){
+                        tbInsidenumber.setTotalnumber("0");
+                    }
+                    if(Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber<0){
+                        outNumber=0;
+                    }else {
+                        outNumber=Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber;
+                    }
+                }
+                TbInsidenumber tbInsidenumber1 = new TbInsidenumber();
+                tbInsidenumber1.setTotalnumber(String.valueOf(totalNumber));
+                tbInsidenumber1.setEntrynumber(String.valueOf(entryNumber));
+                tbInsidenumber1.setOutnumber(String.valueOf(outNumber));
+                tbInsidenumber1.setDeptCode(dept);
+                tbInsidenumber1.setId(null);
+                tbInsidenumberMapper.insertSelective(tbInsidenumber1);
             }else {
-                outNumber=Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber;
+                for (TbInsidenumber tbInsidenumber:tbInsidenumbers){
+                    if (tbInsidenumber.getTotalnumber()==null){
+                        tbInsidenumber.setTotalnumber("0");
+                    }
+                    if(Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber<0){
+                        outNumber=0;
+                    }else {
+                        outNumber=Integer.valueOf(tbInsidenumber.getTotalnumber())-totalNumber+entryNumber;
+                    }
+                    tbInsidenumber.setTotalnumber(String.valueOf(totalNumber));
+                    tbInsidenumber.setEntrynumber(String.valueOf(entryNumber));
+                    tbInsidenumber.setOutnumber(String.valueOf(outNumber));
+                    tbInsidenumber.setDeptCode(dept);
+                    tbInsidenumberMapper.updateByPrimaryKey(tbInsidenumber);
+                }
+
             }
-            TbInsidenumber tbInsidenumber1 = new TbInsidenumber();
-            tbInsidenumber1.setTotalnumber(String.valueOf(totalNumber));
-            tbInsidenumber1.setEntrynumber(String.valueOf(entryNumber));
-            tbInsidenumber1.setOutnumber(String.valueOf(outNumber));
-            tbInsidenumber1.setId(1);
-            tbInsidenumberMapper.updateByPrimaryKeySelective(tbInsidenumber1);
+
             return "200";
         }
 
@@ -116,20 +141,7 @@ public class GetBusinesData {
              String status = jsonObject.getString("status");
              if (status.equals("200")){
                  String data = jsonObject.getString("data");
-                 TbTraineeimage tbTraineeimage = tbTraineeimageMapper.selectByPrimaryKey(tbTrainee.getTraineecode());
-                 if (tbTraineeimage!=null){
-                     //更新
-                     TbTraineeimage tbTrainee1 = new TbTraineeimage();
-                     tbTrainee1.setTraineecode(tbTrainee.getTraineecode());
-                     tbTrainee1.setTraineeimage(data);
-                     tbTraineeimageMapper.updateByPrimaryKeySelective(tbTrainee1);
-                 }else {
-                     //插入
-                     TbTraineeimage tbTrainee1 = new TbTraineeimage();
-                     tbTrainee1.setTraineecode(tbTrainee.getTraineecode());
-                     tbTrainee1.setTraineeimage(data);
-                     tbTraineeimageMapper.insert(tbTrainee1);
-                 }
+                 GenerateImage(data,tbTrainee.getTraineecode());
              }
          }
          return "200";
@@ -254,6 +266,48 @@ public class GetBusinesData {
         }
         return "200";
     }
+
+
+    //base64字符串转化成图片
+    public static boolean GenerateImage(String imgStr,String code)
+    {   //对字节数组字符串进行Base64解码并生成图片
+        if (imgStr == null) //图像数据为空
+            return false;
+        BASE64Decoder decoder = new BASE64Decoder();
+        try
+        {
+            //Base64解码
+            byte[] b = decoder.decodeBuffer(imgStr);
+            for(int i=0;i<b.length;++i)
+            {
+                if(b[i]<0)
+                {//调整异常数据
+                    b[i]+=256;
+                }
+            }
+            //生成目录
+            File path=new File(ResourceUtils.getURL("classpath:").getPath());
+            if(!path.exists()){
+                path=new File("");
+            }
+            //如果上传目录为/static/images/upload/,则可以如下获取
+            File upload=new File(path.getAbsolutePath(),"static/photo");
+            if(!upload.exists()) {
+                upload.mkdirs();
+            }
+            //生成jpeg图片
+            OutputStream out = new FileOutputStream(upload.getAbsolutePath()+"\\"+code+".jpg");
+            out.write(b);
+            out.flush();
+            out.close();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
 
     public String httpGetData(String path) {
         StringBuffer document = null ;

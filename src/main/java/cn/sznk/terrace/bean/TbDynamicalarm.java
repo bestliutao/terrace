@@ -21,6 +21,8 @@ public class TbDynamicalarm {
 
     private Integer alarmType;
 
+    private String deptCode;
+
     public Integer getAlarmId() {
         return alarmId;
     }
@@ -91,5 +93,13 @@ public class TbDynamicalarm {
 
     public void setAlarmType(Integer alarmType) {
         this.alarmType = alarmType;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

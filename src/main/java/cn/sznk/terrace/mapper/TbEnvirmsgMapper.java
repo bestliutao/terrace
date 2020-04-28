@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbEnvirmsgMapper {
-    List<TbEnvirmsg> todayBadEnvir(String date);
+    List<TbEnvirmsg> todayBadEnvir(@Param("date")String date,@Param("code")String code);
 
-    int todayBadEnvirNum(String time);
+    int todayBadEnvirNum(@Param("date")String date,@Param("code")String code);
 
     int countByExample(TbEnvirmsgExample example);
 

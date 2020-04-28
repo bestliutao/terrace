@@ -101,23 +101,19 @@ $(document).ready(function() {
 
     var id = $('#number').text();
 	//头像显示
-    $.ajax({
-        type: "get",
-        url: "/hazard/manPhoto?id="+id,
-        async: true,
-        dataType: 'json',
-        success: function (d) {
-            var tableData = d.data;
-            // console.log(tableData)
-            if(tableData == null) {
-                var imgsrc = '../img/photo_img.png'
-                $('#photo').attr('src',imgsrc);
-            } else {
-                var imgsrc = 'data:image/png;base64,' + tableData;
-                $('#photo').attr('src',imgsrc);
-            }
+    var imgsrc = '/photo/'+id+'.jpg';
+    CheckImgExists(imgsrc);
+    function CheckImgExists(imgurl) {
+        var ImgObj = new Image(); //判断图片是否存在
+        ImgObj.src = imgurl;
+        //没有图片，则返回-1
+        if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+            $('#photo').attr('src',imgsrc);
+        } else {
+            $('#photo').attr('src',"../img/photo_img.png");
         }
-    });
+    }
+
     // //标签跳转
     $(document).on('click', '#bj', function() {
         var name = $('#name').text();

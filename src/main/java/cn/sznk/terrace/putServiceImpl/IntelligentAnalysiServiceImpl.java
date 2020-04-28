@@ -23,24 +23,24 @@ public class IntelligentAnalysiServiceImpl implements IntelligentAnalysiService 
     private TbInsidenumberMapper tbInsidenumberMapper;
 
     //当天警情数量
-    public int todayPoliceNum(String date){
-        int todayPoliceNum = tbDynamicalarmMapper.findTodayPoliceNum(date);
+    public int todayPoliceNum(String date,String dept){
+        int todayPoliceNum = tbDynamicalarmMapper.findTodayPoliceNum(date,dept);
         return todayPoliceNum;
     }
     //当天未处理的设备警情数量
-    public int todayEquipmentPoliceNum(String date){
-        int i = tbDynamicalarmMapper.equipmentPolice(date);
+    public int todayEquipmentPoliceNum(String date,String dept){
+        int i = tbDynamicalarmMapper.equipmentPolice(date,dept);
         return i;
     }
     //当天未处理的设备警情数量
-    public int todayPeoplePoliceNum(String date){
-        int i = tbDynamicalarmMapper.peoplePolice(date);
+    public int todayPeoplePoliceNum(String date,String dept){
+        int i = tbDynamicalarmMapper.peoplePolice(date,dept);
         return i;
     }
 
     //当天未处理的警情
-    public UserTable todayUntreatedPolice(String pageNo,String pageSize,String date){
-        List<TbDynamicalarm> untreatedPolice = tbDynamicalarmMapper.findUntreatedPolice(date);
+    public UserTable todayUntreatedPolice(String pageNo,String pageSize,String date,String dept){
+        List<TbDynamicalarm> untreatedPolice = tbDynamicalarmMapper.findUntreatedPolice(date,dept);
 
         List<Object> list = new ArrayList<>();
         UserTable userTable = new UserTable();
@@ -62,7 +62,7 @@ public class IntelligentAnalysiServiceImpl implements IntelligentAnalysiService 
         return userTable;
     }
     //7天警情分布
-    public List<TitileNumBean> policeDistribution(String date){
+    public List<TitileNumBean> policeDistribution(String date,String dept){
         List<TitileNumBean> titileNumBeans = new ArrayList<>();
         String[] dd=date.split("-");
         String ltTime=date;
@@ -75,35 +75,35 @@ public class IntelligentAnalysiServiceImpl implements IntelligentAnalysiService 
 //        System.out.println(gtTime+"  "+date);
         TitileNumBean titileNumBean = new TitileNumBean();
         titileNumBean.setTitle("一大队");
-        titileNumBean.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"一大队")));
+        titileNumBean.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"一大队",dept)));
         titileNumBeans.add(titileNumBean);
 
         TitileNumBean titileNumBean1 = new TitileNumBean();
         titileNumBean1.setTitle("二大队");
-        titileNumBean1.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"二大队")));
+        titileNumBean1.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"二大队",dept)));
         titileNumBeans.add(titileNumBean1);
 
         TitileNumBean titileNumBean2 = new TitileNumBean();
         titileNumBean2.setTitle("三大队");
-        titileNumBean2.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"三大队")));
+        titileNumBean2.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"三大队",dept)));
         titileNumBeans.add(titileNumBean2);
 
         TitileNumBean titileNumBean3 = new TitileNumBean();
         titileNumBean3.setTitle("四大队");
-        titileNumBean3.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"四大队")));
+        titileNumBean3.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"四大队",dept)));
         titileNumBeans.add(titileNumBean3);
 
         TitileNumBean titileNumBean4 = new TitileNumBean();
         titileNumBean4.setTitle("五大队");
-        titileNumBean4.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"五大队")));
+        titileNumBean4.setNumber(String.valueOf(tbDynamicalarmMapper.findPoliceDistribution(ltTime,gtTime,"五大队",dept)));
         titileNumBeans.add(titileNumBean4);
         return titileNumBeans;
     }
 
     //警情细节页
-    public UserTable policeDetils(String pageNo, String pageSize, String group){
+    public UserTable policeDetils(String pageNo, String pageSize, String group,String dept){
        TbDynamicalarmExample example = new TbDynamicalarmExample();
-       example.createCriteria().andAlarmGroupEqualTo(group);
+       example.createCriteria().andAlarmGroupEqualTo(group).andDeptCodeEqualTo(dept);
         List<TbDynamicalarm> tbDynamicalarms = tbDynamicalarmMapper.selectByExample(example);
 
         List<Object> list = new ArrayList<>();
@@ -126,8 +126,14 @@ public class IntelligentAnalysiServiceImpl implements IntelligentAnalysiService 
     }
 
     //所内人数接口
-    public E3Result inSideChange(){
-        TbInsidenumber tbInsidenumber = tbInsidenumberMapper.selectByPrimaryKey(1);
-        return E3Result.ok(tbInsidenumber);
+    public E3Result inSideChange(String dept){
+        TbInsidenumberExample example = new TbInsidenumberExample();
+        example.createCriteria().andDeptCodeEqualTo(dept);
+        List<TbInsidenumber> tbInsidenumbers = tbInsidenumberMapper.selectByExample(example);
+
+        for (TbInsidenumber tbInsidenumber:tbInsidenumbers){
+            return E3Result.ok(tbInsidenumber);
+        }
+        return E3Result.build(400,"");
     }
 }

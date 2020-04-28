@@ -15,6 +15,8 @@ public class TbPerformance {
 
     private Date performanceTime;
 
+    private String deptCode;
+
     public Integer getPerformanceId() {
         return performanceId;
     }
@@ -61,5 +63,13 @@ public class TbPerformance {
 
     public void setPerformanceTime(Date performanceTime) {
         this.performanceTime = performanceTime;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

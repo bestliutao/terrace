@@ -8,10 +8,10 @@
     <result column="out_level" property="outLevel" jdbcType="VARCHAR" />
     <result column="out_time" property="outTime" jdbcType="TIMESTAMP" />
     <result column="out_type" property="outType" jdbcType="VARCHAR" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
   </resultMap>
-
   <select id="outTypeNumberCensus" parameterType="java.lang.String" resultType="cn.sznk.terrace.bean.TitileNumBean">
-    SELECT out_type as title,COUNT(DISTINCT user_id) as number FROM tb_outapplication WHERE out_time like CONCAT(#{out_time}, '%') GROUP BY out_type
+    SELECT out_type as title,COUNT(DISTINCT user_id) as number FROM tb_outapplication WHERE out_time like CONCAT(#{date}, '%') and dept_code=#{code} GROUP BY out_type
   </select>
 
   <sql id="Example_Where_Clause" >
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    out_id, user_id, user_name, out_level, out_time, out_type
+    out_id, user_id, user_name, out_level, out_time, out_type, dept_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sznk.terrace.bean.TbOutapplicationExample" >
     select
@@ -107,11 +107,11 @@
   </delete>
   <insert id="insert" parameterType="cn.sznk.terrace.bean.TbOutapplication" >
     insert into tb_outapplication (out_id, user_id, user_name, 
-      out_level, out_time, out_type
-      )
+      out_level, out_time, out_type, 
+      dept_code)
     values (#{outId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{outLevel,jdbcType=VARCHAR}, #{outTime,jdbcType=TIMESTAMP}, #{outType,jdbcType=VARCHAR}
-      )
+      #{outLevel,jdbcType=VARCHAR}, #{outTime,jdbcType=TIMESTAMP}, #{outType,jdbcType=VARCHAR}, 
+      #{deptCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sznk.terrace.bean.TbOutapplication" >
     insert into tb_outapplication
@@ -134,6 +134,9 @@
       <if test="outType != null" >
         out_type,
       </if>
+      <if test="deptCode != null" >
+        dept_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="outId != null" >
@@ -153,6 +156,9 @@
       </if>
       <if test="outType != null" >
         #{outType,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -183,6 +189,9 @@
       <if test="record.outType != null" >
         out_type = #{record.outType,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptCode != null" >
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,7 +204,8 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       out_level = #{record.outLevel,jdbcType=VARCHAR},
       out_time = #{record.outTime,jdbcType=TIMESTAMP},
-      out_type = #{record.outType,jdbcType=VARCHAR}
+      out_type = #{record.outType,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,6 +228,9 @@
       <if test="outType != null" >
         out_type = #{outType,jdbcType=VARCHAR},
       </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where out_id = #{outId,jdbcType=INTEGER}
   </update>
@@ -227,7 +240,8 @@
       user_name = #{userName,jdbcType=VARCHAR},
       out_level = #{outLevel,jdbcType=VARCHAR},
       out_time = #{outTime,jdbcType=TIMESTAMP},
-      out_type = #{outType,jdbcType=VARCHAR}
+      out_type = #{outType,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR}
     where out_id = #{outId,jdbcType=INTEGER}
   </update>
 </mapper>

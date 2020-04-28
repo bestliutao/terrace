@@ -1,74 +1,9 @@
 package cn.sznk.terrace.bean;
 
 public class TbTrainee {
-    @Override
-    public String toString() {
-        return "TbTrainee{" +
-                "traineecode='" + traineecode + '\'' +
-                ", traineename='" + traineename + '\'' +
-                ", traineeoldname='" + traineeoldname + '\'' +
-                ", traineealias='" + traineealias + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthdate='" + birthdate + '\'' +
-                ", nationtype='" + nationtype + '\'' +
-                ", educationdegree='" + educationdegree + '\'' +
-                ", idcardno='" + idcardno + '\'' +
-                ", nativeplace='" + nativeplace + '\'' +
-                ", ismarried='" + ismarried + '\'' +
-                ", healthtype='" + healthtype + '\'' +
-                ", domicilelocation='" + domicilelocation + '\'' +
-                ", homeaddress='" + homeaddress + '\'' +
-                ", remark='" + remark + '\'' +
-                ", deptcode='" + deptcode + '\'' +
-                ", currentstatus='" + currentstatus + '\'' +
-                ", entrytype='" + entrytype + '\'' +
-                ", manageperiod='" + manageperiod + '\'' +
-                ", leavedate='" + leavedate + '\'' +
-                ", startdate='" + startdate + '\'' +
-                ", enddate='" + enddate + '\'' +
-                ", dutypolice='" + dutypolice + '\'' +
-                ", isaids='" + isaids + '\'' +
-                ", personnelsource='" + personnelsource + '\'' +
-                ", decisionno='" + decisionno + '\'' +
-                ", criminalrecord='" + criminalrecord + '\'' +
-                ", isthreetype='" + isthreetype + '\'' +
-                ", handlingagency='" + handlingagency + '\'' +
-                ", otherhandlingagency='" + otherhandlingagency + '\'' +
-                ", roomid='" + roomid + '\'' +
-                ", roomno='" + roomno + '\'' +
-                ", bedno='" + bedno + '\'' +
-                ", deliverydate='" + deliverydate + '\'' +
-                ", recoverydate='" + recoverydate + '\'' +
-                ", drugvariety='" + drugvariety + '\'' +
-                ", iskeytrainee='" + iskeytrainee + '\'' +
-                ", iscontroltrainee='" + iscontroltrainee + '\'' +
-                ", guaranteepolice='" + guaranteepolice + '\'' +
-                ", origyear=" + origyear +
-                ", origmonth=" + origmonth +
-                ", curriculumvitae='" + curriculumvitae + '\'' +
-                ", employmentsituation='" + employmentsituation + '\'' +
-                ", isthreefalse='" + isthreefalse + '\'' +
-                ", disciplinaryaction='" + disciplinaryaction + '\'' +
-                ", drugyears='" + drugyears + '\'' +
-                ", rundate='" + rundate + '\'' +
-                ", controltrainee2='" + controltrainee2 + '\'' +
-                ", smokingstyle='" + smokingstyle + '\'' +
-                ", detoxificationsituation='" + detoxificationsituation + '\'' +
-                ", drughistory='" + drughistory + '\'' +
-                ", delaydate='" + delaydate + '\'' +
-                ", reducedate='" + reducedate + '\'' +
-                ", removedate='" + removedate + '\'' +
-                ", userGrade='" + userGrade + '\'' +
-                ", userLevel='" + userLevel + '\'' +
-                ", userIdioctonia=" + userIdioctonia +
-                ", userWound=" + userWound +
-                ", userSuddendeath=" + userSuddendeath +
-                ", userGetaway=" + userGetaway +
-                ", image='" + image + '\'' +
-                '}';
-    }
-
     private String traineecode;
+
+    private String deptCode;
 
     private String traineename;
 
@@ -196,6 +131,14 @@ public class TbTrainee {
 
     public void setTraineecode(String traineecode) {
         this.traineecode = traineecode == null ? null : traineecode.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 
     public String getTraineename() {

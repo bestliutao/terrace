@@ -17,6 +17,8 @@ public class TbMonitorabnormal {
 
     private String monitorType;
 
+    private String deptCode;
+
     public String getMonitorIp() {
         return monitorIp;
     }
@@ -71,5 +73,13 @@ public class TbMonitorabnormal {
 
     public void setMonitorType(String monitorType) {
         this.monitorType = monitorType == null ? null : monitorType.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 }

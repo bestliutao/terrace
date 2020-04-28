@@ -9,25 +9,26 @@ import java.util.List;
 
 public interface TbGrademonthMapper {
     //扣分最多
-    List<TbGrademonth> deductPointsMore(@Param("statge")String statge,@Param("time")String time,@Param("gtGrade")String gtGrade,@Param("ltGrade")String ltGrade);
-    List<TbGrademonth> deductPointsMoreOne(@Param("statge")String statge,@Param("time")String time);
-    List<TbGrademonth> deductPointsMoreTwo(@Param("time")String time,@Param("gtGrade")String gtGrade,@Param("ltGrade")String ltGrade);
-    List<TbGrademonth> deductPointsMoreThree(@Param("time")String time);
+    List<TbGrademonth> deductPointsMore(@Param("statge") String statge, @Param("time") String time, @Param("gtGrade") String gtGrade, @Param("ltGrade") String ltGrade,@Param("code") String code);
+    List<TbGrademonth> deductPointsMoreOne(@Param("statge") String statge, @Param("time") String time,@Param("code") String code);
+    List<TbGrademonth> deductPointsMoreTwo(@Param("time") String time, @Param("gtGrade") String gtGrade, @Param("ltGrade") String ltGrade,@Param("code") String code);
+    List<TbGrademonth> deductPointsMoreThree(@Param("time") String time,@Param("code") String code);
 
 
     //加分最多
-    List<TbGrademonth> bonusPointsMore(@Param("statge")String statge,@Param("time")String time,@Param("gtGrade")String gtGrade,@Param("ltGrade")String ltGrade);
-    List<TbGrademonth> bonusPointsMoreTwo(@Param("time")String time,@Param("gtGrade")String gtGrade,@Param("ltGrade")String ltGrade);
-    List<TbGrademonth> bonusPointsMoreOne(@Param("statge")String statge,@Param("time")String time);
-    List<TbGrademonth> bonusPointsMoreThree(@Param("time")String time);
+    List<TbGrademonth> bonusPointsMore(@Param("statge") String statge, @Param("time") String time, @Param("gtGrade") String gtGrade, @Param("ltGrade") String ltGrade,@Param("code") String code);
+    List<TbGrademonth> bonusPointsMoreTwo(@Param("time") String time, @Param("gtGrade") String gtGrade, @Param("ltGrade") String ltGrade,@Param("code") String code);
+    List<TbGrademonth> bonusPointsMoreOne(@Param("statge") String statge, @Param("time") String time,@Param("code") String code);
+    List<TbGrademonth> bonusPointsMoreThree(@Param("time") String time,@Param("code") String code);
 
 
-    String sixMonthOther(@Param("time") String time, @Param("statge") String statge);
-    String sixMonth(String time);
+    String sixMonthOther(@Param("time") String time, @Param("statge") String statge,@Param("code") String code);
+    String sixMonth(@Param("time")String time,@Param("code") String code);
 
     //分段人数
-    List<TitileNumBean> gradeMonthOne(String time);
-    List<TitileNumBean> gradeMonthTwo(@Param("ltGrade") String ltGrade, @Param("gtGrade") String gtGrade, @Param("time") String time);
+    List<TitileNumBean> gradeMonthOne(@Param("time")String time,@Param("code") String code);
+    List<TitileNumBean> gradeMonthTwo(@Param("ltGrade") String ltGrade, @Param("gtGrade") String gtGrade, @Param("time") String time,@Param("code") String code);
+
 
 
     int countByExample(TbGrademonthExample example);
